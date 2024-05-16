@@ -21,7 +21,7 @@ function myAutoloader($class){
 //Lorsque on met dans l'url /login par exemple
 //On récupère dans le fichier Routes.yaml le controller et l'action associée
 //On fait une instance du controller ex: $controller = new Security();
-//Et on appel l'action associée ex : $controller->login();
+//Et on appelle l'action associée ex : $controller->login();
 //Si je décide de remplacer dans le fichier routes.yaml /login par /se-connecter tout doit fonctionner
 //Attention pensez à effectuer un maximum de vérification et d'afficher les erreurs s'il y en a, exemple le fichier Routes.yaml n'existe pas
 // ou autre exemple le controller Security ne possède pas d'acion login
@@ -51,9 +51,13 @@ if(empty($listOfRoutes[$uri])) {
     die("Page 404");
 }
 
-if(empty($listOfRoutes[$uri]["Controller"]) || empty($listOfRoutes[$uri]["Action"]) ) {
+if(empty($listOfRoutes[$uri]["Controller"]) || 
+    empty($listOfRoutes[$uri]["Action"]) || 
+    empty($listOfRoutes[$uri]["Security"]) || 
+    empty($listOfRoutes[$uri]["Role"])) 
+    {
     header("Internal Server Error", true, 500);
-    die("Le fichier routes.yml ne contient pas de controller ou d'action pour l'uri :".$uri);
+    die("Le fichier routes.yml ne contient pas de controller, d'action, de sécurité ou de role pour l'uri :".$uri);
 }
 
 $controller = $listOfRoutes[$uri]["Controller"];
@@ -61,7 +65,15 @@ $action = $listOfRoutes[$uri]["Action"];
 $security = $listOfRoutes[$uri]["Security"];
 $role = $listOfRoutes[$uri]["Role"];
 
+echo $security;
+echo $role;
+
 // Est-ce que la route necessite que l'user soit connecté ?
+
+if($security === false) {
+    die("Security on False");
+}
+echo "Security on True";
 
 
 // Est-ce qu'il y a besoin d'un rôle pour accéder à la route ?
@@ -85,16 +97,11 @@ if( !method_exists($controller, $action) ){
 }
 
 if( !method_exists($controller, $security) ){
-    die("La methode ".$security." n'existe pas dans le controller ".$controller);
+    echo "La methode ".$security." n'existe pas dans le controller ".$controller;
 }
 
 if( !method_exists($controller, $role) ){
     die("La methode ".$role." n'existe pas dans le controller ".$controller);
 }
+$objetController->$security();
 $objetController->$action();
-
-
-
-
-
-

@@ -7,8 +7,8 @@
 /login:
   Controller: "Security"
   Action: "login"
-  Security: "False"
-  Role: "Visitor"
+  Security: "True"
+  Role: "Guest"
 
 /register:
   Controller: "Security"
@@ -26,18 +26,18 @@
   Controller: "User"
   Action: "add"
   Security: "True"
-  Role: "Guest"
+  Role: "Admin"
 
 /del-utilisateur:
   Controller: "User"
   Action: "delete"
-  Security: "True"
+  Security: True
   Role: "Guest"
 
 /show-utilisateur:
   Controller: "User"
   Action: "show"
-  Security: "True"
+  Security: True
   Role: "Guest"
 
 /list-utilisateurs:
@@ -45,7 +45,6 @@
   Action: "list"
   Security: "True"
   Role: "Guest"
-  # A chercher dans index.php
 
 /maj-utilisateurs:
   Controller: "User"

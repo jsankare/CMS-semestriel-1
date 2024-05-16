@@ -7,7 +7,6 @@ use App\Models\User;
 
 class Security{
 
-
     public function login(): void
     {
         //Je vérifie que l'utilisateur n'est pas connecté sinon j'affiche un message
