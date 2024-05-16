@@ -1,0 +1,54 @@
+/:
+  Controller: "Main"
+  Action: "home"
+  Security: "True"
+  Role: "Guest"
+
+/login:
+  Controller: "Security"
+  Action: "login"
+  Security: "False"
+  Role: "Visitor"
+
+/register:
+  Controller: "Security"
+  Action: "register"
+  Security: "True"
+  Role: "Guest"
+
+/logout:
+  Controller: "Security"
+  Action: "logout"
+  Security: "True"
+  Role: "Guest"
+
+/ajout-utilisateur:
+  Controller: "User"
+  Action: "add"
+  Security: "True"
+  Role: "Guest"
+
+/del-utilisateur:
+  Controller: "User"
+  Action: "delete"
+  Security: "True"
+  Role: "Guest"
+
+/show-utilisateur:
+  Controller: "User"
+  Action: "show"
+  Security: "True"
+  Role: "Guest"
+
+/list-utilisateurs:
+  Controller: "User"
+  Action: "list"
+  Security: "True"
+  Role: "Guest"
+  # A chercher dans index.php
+
+/maj-utilisateurs:
+  Controller: "User"
+  Action: "edit"
+  Security: "True"
+  Role: "Guest"
