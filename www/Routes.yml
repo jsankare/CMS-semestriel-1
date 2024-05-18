@@ -1,37 +1,37 @@
 /:
   Controller: "Main"
   Action: "home"
-  Security: "True"
+  Security: true
   Role: "Guest"
 
 /login:
   Controller: "Security"
   Action: "login"
-  Security: "True"
+  Security: true
   Role: "Guest"
 
 /register:
   Controller: "Security"
   Action: "register"
-  Security: "True"
+  Security: true
   Role: "Guest"
 
 /logout:
   Controller: "Security"
   Action: "logout"
-  Security: "True"
+  Security: true
   Role: "Guest"
 
 /ajout-utilisateur:
   Controller: "User"
   Action: "add"
-  Security: "True"
+  Security: true
   Role: "Admin"
 
 /del-utilisateur:
   Controller: "User"
   Action: "delete"
-  Security: True
+  Security: true
   Role: "Guest"
 
 /show-utilisateur:
@@ -43,11 +43,71 @@
 /list-utilisateurs:
   Controller: "User"
   Action: "list"
-  Security: "True"
+  Security: true
   Role: "Guest"
 
 /maj-utilisateurs:
   Controller: "User"
   Action: "edit"
-  Security: "True"
+  Security: true
+  Role: "Guest"
+
+/ajout-page:
+  Controller: "User"
+  Action: "add"
+  Security: true
+  Role: "Admin"
+
+/del-page:
+  Controller: "User"
+  Action: "delete"
+  Security: true
+  Role: "Guest"
+
+/show-page:
+  Controller: "User"
+  Action: "show"
+  Security: True
+  Role: "Guest"
+
+/list-page:
+  Controller: "User"
+  Action: "list"
+  Security: true
+  Role: "Guest"
+
+/maj-page:
+  Controller: "User"
+  Action: "edit"
+  Security: true
+  Role: "Guest"
+
+/ajout-article:
+  Controller: "User"
+  Action: "add"
+  Security: true
+  Role: "Admin"
+
+/del-article:
+  Controller: "User"
+  Action: "delete"
+  Security: true
+  Role: "Guest"
+
+/show-article:
+  Controller: "User"
+  Action: "show"
+  Security: True
+  Role: "Guest"
+
+/list-article:
+  Controller: "User"
+  Action: "list"
+  Security: true
+  Role: "Guest"
+
+/maj-article:
+  Controller: "User"
+  Action: "edit"
+  Security: true
   Role: "Guest"

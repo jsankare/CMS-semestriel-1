@@ -111,6 +111,12 @@ class User extends SQL
         $this->status = $status;
     }
 
+    public function findOneByEmail(string $email) {
+        $sql = "SELECT * FROM {$this->table} WHERE email = :email";
 
-
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([":email" => $email]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
+        return $queryPrepared->fetch();
+    }
 }

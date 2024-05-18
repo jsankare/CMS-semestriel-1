@@ -2,7 +2,7 @@
 namespace App\Controller;
 use App\Core\Form;
 use App\Core\Security as Auth;
-use App\Core\View;
+use App\Core\View; // Ici tu as l'import
 use App\Models\User;
 
 class Security{
@@ -11,21 +11,13 @@ class Security{
     {
         //Je vérifie que l'utilisateur n'est pas connecté sinon j'affiche un message
 
-        /*
-        $security = new Auth();
-        if($security->isLogged()){
-            echo "Vous êtes déjà connecté";
-        }else{
-            echo "Se connecter";
-        }
-        */
 
         $form = new Form("Login");
-        if( $form->isSubmitted() && $form->isValid() )
-        {
-
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $user = (new User())->findOneByEmail($_POST["email"]);
+            var_dump($user);
         }
-        $view = new View("Security/login");
+        $view = new View("Security/login"); // instantiation
         $view->assign("form", $form->build());
         $view->render();
 
@@ -36,9 +28,8 @@ class Security{
 
         $form = new Form("Register");
 
-        if( $form->isSubmitted() && $form->isValid() )
-        {
-            $user = new User();
+        if( $form->isSubmitted() && $form->isValid() ) {
+            $user = new User(); // Initialisation d'un nouveau User
             $user->setFirstname($_POST["firstname"]);
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);

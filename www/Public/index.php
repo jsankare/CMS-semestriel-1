@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Core\Security;
+
 //Notre Autoloader
 spl_autoload_register("App\myAutoloader");
 
@@ -62,18 +64,46 @@ if(empty($listOfRoutes[$uri]["Controller"]) ||
 
 $controller = $listOfRoutes[$uri]["Controller"];
 $action = $listOfRoutes[$uri]["Action"];
-$security = $listOfRoutes[$uri]["Security"];
 $role = $listOfRoutes[$uri]["Role"];
 
-echo $security;
 echo $role;
 
-// Est-ce que la route necessite que l'user soit connecté ?
 
-if($security === false) {
-    die("Security on False");
-}
-echo "Security on True";
+// instantiate Core/security
+$securityGuard = new Security(); // maintenant regarde le constructor de security dans app/core donc
+// // oui pas le controller la c'est pas lié au controller ce qu'on fait Nope, c'est quoi un constructor?
+// Ok le constructor class Security a une fonction isLogged qui renvoie un boolean, par defaut false
+// Bah c'est le truc juste au dessus des classes ?en gros dans le constructor tu as des classes et tu peux les reutiliser pour
+// ca c'ets le namespace et des uses // c'est l'ensemble des classes présentes ? // nope
+// // Si tu la vois rien c'est le constructor par défaut, regarde le View
+// public function __construct // Yup, c'est cette fonction la qui est appellé quand tu fais un new Class
+// Donc il faut un constructor dans security // non parce que la a l'heure actuelle il a besoin de rien initialiser (pas de propriété)
+// Bah jcomprend rien alors si il faut rien nul part mdr, c'est juste que si tu n'as pas de constructor c'est un ne"w
+// sans argument genre new Security() rien besoin de mettre dans les parenthèse // ok donc là je suis bien il m'a fait un nouveau security
+// yes maintenant tu peux utliser les fonctions
+// Genre la tu peux vérifier si le user est connecté et est ce que ta route a besoin que tu sois logged in
+// $security sera egal a ce que je lui ai foutu dans mon toutes.yml ? a putain j'avais pas vu ton nom de variable
+// en vrai check juste le role, Guest = not logged, Admin = logged ou un boolean needAuthentication a la place de role
+// Comme ça tu peux vérifier grace a ton guard si tu match les pré requis de ta route, je vais me faire chauffer ma gamelle j'arrive
+// bonap // TY
+
+echo $securityGuard->isLogged();
+
+// je check ce que ça me rend en fait tu te rends plus compte mais les new et mon cul c'est hyper confusant c'est pas un mot mais on scomprend c'est lié a rien c'est gratos
+//no soucis je te referais un cours // ty // en gros class = moule , instance = gateau ok? ouais
+// Donc maintenant dans ta tu lui donnes des fonction que tu peux appeler, et bah du coup ton instance possede c'est methodes
+// // pas clair trop le bordel, je repartirais d'un cours vraiment basique je pense
+
+// en vrai après $securityGuard mets juste -> voila je lui assigne la fonction ? non tu utilise la fonction que tu as défini dans la classe
+// ok donc dans mon $securityGuard j'utilise la fonction isLogged() | Dans ou Pour mon $securityGuard? pas clair ta question
+// Je fais passer ma value de $securityGuard dans la fonction isLogged() ? non la method is logged te retourne quelque chose bool
+// yes poiur le moment tout le temps false il faudra que tu modifie la method poru savoir si tu es bien loggedIn
+//ok donc ça jle fais dans mon islogged() dans la classe
+
+//if($security === false) {
+//    die("Security on False");
+//}
+//echo "Security on True";
 
 
 // Est-ce qu'il y a besoin d'un rôle pour accéder à la route ?
@@ -96,12 +126,5 @@ if( !method_exists($controller, $action) ){
     die("La methode ".$action." n'existe pas dans le controller ".$controller);
 }
 
-if( !method_exists($controller, $security) ){
-    echo "La methode ".$security." n'existe pas dans le controller ".$controller;
-}
-
-if( !method_exists($controller, $role) ){
-    die("La methode ".$role." n'existe pas dans le controller ".$controller);
-}
-$objetController->$security();
 $objetController->$action();
+
