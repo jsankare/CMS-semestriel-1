@@ -66,7 +66,7 @@ $controller = $listOfRoutes[$uri]["Controller"];
 $action = $listOfRoutes[$uri]["Action"];
 $role = $listOfRoutes[$uri]["Role"];
 
-echo $role;
+// echo $role;
 
 
 // instantiate Core/security

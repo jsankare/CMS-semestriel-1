@@ -11,11 +11,16 @@ class Security{
     {
         //Je vérifie que l'utilisateur n'est pas connecté sinon j'affiche un message
 
-
         $form = new Form("Login");
         if( $form->isSubmitted() && $form->isValid() ) {
             $user = (new User())->findOneByEmail($_POST["email"]);
-            var_dump($user);
+            if ($user) {
+                // var_dump($user);
+                // Accede au password de l'user
+                echo $user->getPassword();
+            } else {
+                echo "User not found.";
+            }
         }
         $view = new View("Security/login"); // instantiation
         $view->assign("form", $form->build());
@@ -45,25 +50,4 @@ class Security{
     {
         echo "Se déconnecter";
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
