@@ -13,11 +13,13 @@ class Security{
 
         $form = new Form("Login");
         if( $form->isSubmitted() && $form->isValid() ) {
+            // Met toutes les infos du user correspondant dans une variable
             $user = (new User())->findOneByEmail($_POST["email"]);
             if ($user) {
-                // var_dump($user);
-                // Accede au password de l'user
-                echo $user->getPassword();
+                // Compare le password saisi par l'user et celui correspondant au mail en DB
+                if (password_verify($_POST["password"], $user->getPassword())) {
+                    echo "Login successful!";
+                }
             } else {
                 echo "User not found.";
             }
