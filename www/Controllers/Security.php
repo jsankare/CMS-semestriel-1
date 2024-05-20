@@ -36,12 +36,18 @@ class Security{
         $form = new Form("Register");
 
         if( $form->isSubmitted() && $form->isValid() ) {
+            $dbUser = (new User())->findOneByEmail($_POST["email"]);
+            if ($dbUser) {
+                echo "User déjà register";
+                exit;
+            }
             $user = new User(); // Initialisation d'un nouveau User
             $user->setFirstname($_POST["firstname"]);
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
             $user->save();
+            echo "Register successful";
         }
 
         $view = new View("Security/register");
