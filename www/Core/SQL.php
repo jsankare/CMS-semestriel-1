@@ -6,13 +6,13 @@ use PDO;
 
 class SQL
 {
-    private $pdo;
-    private $table;
+    protected PDO $pdo;
+    protected string $table;
 
     public function __construct()
     {
         try{
-            $this->pdo = new PDO("mysql:host=postgres;dbname=esgi;port=5433","esgi","esgipwd");
+            $this->pdo = new PDO("pgsql:host=postgres;dbname=esgi;port=5432","esgi","esgipwd");
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
@@ -23,7 +23,7 @@ class SQL
 
     public function save()
     {
-        //Vous ne devez ecrire en dure le nom de la table ou des colonnes à inserer en bdd
+        //Vous ne devez ecrire en dur le nom de la table ou des colonnes à inserer en bdd
         $columnsAll = get_object_vars($this);
         $columnsToDelete = get_class_vars(get_class());
         $columns = array_diff_key($columnsAll, $columnsToDelete);
