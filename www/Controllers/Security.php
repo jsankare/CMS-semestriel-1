@@ -78,21 +78,19 @@ class Security{
         }
     }
 
-//    public function profile(): void
-//    {
-//        session_start();
-//
-//        if (isset($_SESSION['user_id'])) {
-//            $user = (new User())->find($_SESSION['user_id']);
-//            if ($user) {
-//                $view = new View("Security/profile");
-//                $view->assign("user", $user);
-//                $view->render();
-//            } else {
-//                echo "Utilisateur non trouvé.";
-//            }
-//        } else {
-//            echo "Vous devez vous connecter pour accéder à cette page.";
-//        }
-//    }
+    public function profile(): void
+    {
+        session_start();
+
+        if (isset($_SESSION['user_id'])) {
+            $user = (new User())->findOneById($_SESSION['user_id']);
+            if ($user) {
+                echo "Welcome, " . $user->getFirstname() . " " . $user->getLastname() . "!";
+            } else {
+                echo "User not found.";
+            }
+        } else {
+            echo "You need to log in to access this page.";
+        }
+    }
 }

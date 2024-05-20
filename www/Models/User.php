@@ -119,4 +119,13 @@ class User extends SQL
         $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
         return $queryPrepared->fetch();
     }
+
+    public function findOneById(int $id) {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([":id" => $id]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
+        return $queryPrepared->fetch();
+    }
 }
