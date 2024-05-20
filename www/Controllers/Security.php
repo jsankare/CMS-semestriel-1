@@ -65,9 +65,17 @@ class Security{
     }
     public function logout(): void
     {
-        // retire le user ID de la session pour logout
-        unset($_SESSION['userId']);
-        echo "Vous êtes deconnecté";
+        // Start session
+        session_start();
+
+        // Check if the user is logged in
+        if (isset($_SESSION['user_id'])) {
+            // Unset the user ID from the session to logout
+            unset($_SESSION['user_id']);
+            echo "Vous êtes déconnecté";
+        } else {
+            echo "Vous n'êtes pas connecté.";
+        }
     }
 
     public function profile(): void

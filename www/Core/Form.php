@@ -65,7 +65,7 @@ class Form
 
         // Bouton de deconnection
         if (isset($_SESSION['user_id'])) {
-            $html .= "<form action='logout.php' method='POST'>";
+            $html .= "<form action='logout' method='POST'>";
             $html .= "<button type='submit'>Se deconnecter</button>";
             $html .= "</form>";
         }
