@@ -22,6 +22,13 @@
   Security: true
   Role: "Guest"
 
+#Ajout de route pour voir le profil
+/profile:
+  Controller: "Security"
+  Action: "profile"
+  Security: true
+  Role: "User"
+
 /ajout-utilisateur:
   Controller: "User"
   Action: "add"

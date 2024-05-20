@@ -2,7 +2,7 @@
 namespace App\Controller;
 use App\Core\Form;
 use App\Core\Security as Auth;
-use App\Core\View; // Ici tu as l'import
+use App\Core\View;
 use App\Models\User;
 
 class Security{
@@ -78,19 +78,21 @@ class Security{
         }
     }
 
-    public function profile(): void
-    {
-        // Start session
-        session_start();
-
-        // Check if user is logged in (user ID is stored in session)
-        if (isset($_SESSION['user_id'])) {
-            // User is logged in
-            echo "Welcome, you are logged in!";
-        } else {
-            // User is not logged in
-            echo "You need to log in to access this page.";
-            // You can redirect the user to the login page if needed
-        }
-    }
+//    public function profile(): void
+//    {
+//        session_start();
+//
+//        if (isset($_SESSION['user_id'])) {
+//            $user = (new User())->find($_SESSION['user_id']);
+//            if ($user) {
+//                $view = new View("Security/profile");
+//                $view->assign("user", $user);
+//                $view->render();
+//            } else {
+//                echo "Utilisateur non trouvé.";
+//            }
+//        } else {
+//            echo "Vous devez vous connecter pour accéder à cette page.";
+//        }
+//    }
 }
