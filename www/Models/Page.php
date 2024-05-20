@@ -39,7 +39,7 @@ class Page extends SQL
      */
     public function setTitle(string $title): void
     {
-        $this->title = $title;
+        $this->title = strtolower(trim($title));
     }
 
     /**
