@@ -20,6 +20,7 @@ SET TIME ZONE 'UTC';
 -- Structure de la table `esgi_user`
 --
 
+DROP TABLE IF EXISTS public.esgi_user;
 CREATE TABLE public.esgi_user (
                                   id SERIAL PRIMARY KEY,
                                   firstname VARCHAR(50) NOT NULL,
@@ -27,6 +28,15 @@ CREATE TABLE public.esgi_user (
                                   email VARCHAR(320) NOT NULL,
                                   password VARCHAR(255) NOT NULL,
                                   status SMALLINT NOT NULL,
+                                  date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                  date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS public.esgi_page;
+CREATE TABLE public.esgi_page (
+                                  id SERIAL PRIMARY KEY,
+                                  title VARCHAR(50) NOT NULL,
+                                  content VARCHAR(255) NOT NULL,
                                   date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                   date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
