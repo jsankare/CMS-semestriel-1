@@ -9,10 +9,13 @@ class Security{
 
     public function login(): void
     {
-        //Je vérifie que l'utilisateur n'est pas connecté sinon j'affiche un message
-
-        // Debut de session
+        // Debut de session -- Toujours au tout début avant toute logique
         session_start();
+
+        //Je vérifie que l'utilisateur n'est pas connecté sinon j'affiche un message
+        if(isset($_SESSION['user_id'])) {
+            echo "Vous êtes déjà connecté";
+        }
 
         $form = new Form("Login");
         if( $form->isSubmitted() && $form->isValid() ) {
@@ -24,7 +27,7 @@ class Security{
                     // on store le user ID dans la session
                     $_SESSION['user_id'] = $user->getId();
                     echo $_SESSION['user_id'];
-                    echo "Login successful!";
+                    echo " Login successful!";
                 }
             } else {
                 echo "Invalid email or password";
@@ -64,7 +67,7 @@ class Security{
     {
         // retire le user ID de la session pour logout
         unset($_SESSION['userId']);
-        echo "Se déconnecter";
+        echo "Vous êtes deconnecté";
     }
 
     public function profile(): void
