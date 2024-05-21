@@ -22,20 +22,19 @@ class Form
 
     public function build(): string
     {
-
         $html = "";
 
         if (!empty($this->errors)) {
+            $html .= "<ul>";
             foreach ($this->errors as $error) {
                 $html .= "<li>" . $error . "</li>";
             }
+            $html .= "</ul>";
         }
-
 
         $html .= "<form action='" . $this->config["config"]["action"] . "' method='" . $this->config["config"]["method"] . "'>";
 
         foreach ($this->config["inputs"] as $name => $input) {
-
             if (isset($input["label"])) {
                 $html .= "
                 <label
@@ -43,32 +42,49 @@ class Form
                     for='{$name}'>
                     {$input["label"]}
                 </label>
-            ";
-            };
+                ";
+            }
 
-            $html .= "    
+            if ($input["type"] == "checkbox") {
+                $html .= "
+                <div class='checkbox-wrapper-19'>
+                    <input 
+                        type='checkbox' 
+                        class='input input--{$name}' 
+                        id='{$name}' 
+                        name='{$name}'";
+                if (isset($input["required"]) && $input["required"]) {
+                    $html .= " required";
+                }
+                $html .= ">
+                    <label for='{$name}' class='check-box'></label>
+                </div>
+                ";
+            } else {
+                $html .= "    
                 <input 
                     class='input input--{$name}'
                     type='{$input["type"]}' 
                     name='{$name}'";
-            if (isset($input["placeholder"])) {
-                $html .= "placeholder='{$input["placeholder"]}'";
-            };
-            if (isset($input["required"]) && $input["required"]) {
-                $html .= "required";
-            };
-            $html .= "
-                ><br>
-            ";
+                if (isset($input["placeholder"])) {
+                    $html .= " placeholder='{$input["placeholder"]}'";
+                }
+                if (isset($input["required"]) && $input["required"]) {
+                    $html .= " required";
+                }
+                $html .= ">
+                <br>
+                ";
+            }
         }
-        
+
         $html .= "<input class='input--submit' type='submit' value='" . htmlentities($this->config["config"]["submit"]) . "'>";
         $html .= "</form>";
 
-        // Bouton de deconnection
+        // Bouton de déconnexion
         if (isset($_SESSION['user_id'])) {
-            $html .= "<form action='logout' method='POST'>";
-            $html .= "<button type='submit'>Se deconnecter</button>";
+            $html .= "<form class='logout--form' action='logout' method='POST'>";
+            $html .= "<button class='input--submit logout--form--button' type='submit'>Se déconnecter</button>";
             $html .= "</form>";
         }
 

@@ -12,20 +12,38 @@ form {
   padding: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-form .input {
+
+.logout--form {
+  height: fit-content;
+  width: max-content;
+  min-height: min-content;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.input {
   border-radius: 1000rem;
   height: 2rem;
   min-height: max-content;
   width: 50%;
-  padding: 5px;
-  border: none;
+  padding: 0.25rem 1rem;
+  border: 3px solid transparent;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  transition: 0.1s ease-in-out;
 }
-form .input--acceptTos {
-  width: max-content;
-  height: max-content;
+.input:focus {
+  outline-width: 0;
+  border: 3px solid black;
 }
-form .input--submit {
+.input::placeholder {
+  color: darkgrey;
+}
+.input--acceptTos {
+  width: 1rem;
+  height: 1rem;
+}
+.input--submit {
   width: 220px;
   height: 50px;
   border: none;
@@ -38,7 +56,7 @@ form .input--submit {
   border-radius: 10px;
   transition: 0.25s ease-in-out;
 }
-form .input--submit:hover {
+.input--submit:hover {
   background-color: seagreen;
 }
 
