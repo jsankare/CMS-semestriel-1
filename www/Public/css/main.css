@@ -1,17 +1,63 @@
-/* Error: Can't find stylesheet to import.
- *   ,
- * 1 | @import "components/form";
- *   |         ^^^^^^^^^^^^^^^^^
- *   '
- *   www/Public/scss/main.scss 1:9  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"components/form\";\a   \2502          ^^^^^^^^^^^^^^^^^\a   \2575 \a   www/Public/scss/main.scss 1:9  root stylesheet";
+form {
+  border-radius: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  max-width: 30rem;
+  height: 100%;
+  min-height: 25rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
+
+.logout--form {
+  height: fit-content;
+  width: max-content;
+  min-height: min-content;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.input {
+  border-radius: 1000rem;
+  height: 2rem;
+  min-height: max-content;
+  width: 50%;
+  padding: 0.25rem 1rem;
+  border: 3px solid transparent;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  transition: 0.1s ease-in-out;
+}
+.input:focus {
+  outline-width: 0;
+  border: 3px solid black;
+}
+.input::placeholder {
+  color: darkgrey;
+}
+.input--acceptTos {
+  width: 1rem;
+  height: 1rem;
+}
+.input--submit {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  transition: 0.25s ease-in-out;
+}
+.input--submit:hover {
+  background-color: seagreen;
+}
+
+/*# sourceMappingURL=main.css.map */
