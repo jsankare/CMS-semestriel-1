@@ -33,6 +33,20 @@ function myAutoloader($class){
 //Contenu du mail copier coller le contenu du fichier index.php et la liste des membres du groupe
 //A envoyer avant 13 le 01/03/2024-
 
+//Ajout de la partie HTML
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css"> <!-- Lien vers le fichier CSS -->
+    <title>Home</title>
+</head>
+<body>
+
+<?php
+
 //http://localhost/login
 $uri = $_SERVER["REQUEST_URI"];
 if(strlen($uri) > 1)
@@ -84,8 +98,7 @@ $securityGuard = new Security(); // maintenant regarde le constructor de securit
 // Genre la tu peux vérifier si le user est connecté et est ce que ta route a besoin que tu sois logged in
 // $security sera egal a ce que je lui ai foutu dans mon toutes.yml ? a putain j'avais pas vu ton nom de variable
 // en vrai check juste le role, Guest = not logged, Admin = logged ou un boolean needAuthentication a la place de role
-// Comme ça tu peux vérifier grace a ton guard si tu match les pré requis de ta route, je vais me faire chauffer ma gamelle j'arrive
-// bonap // TY
+// Comme ça tu peux vérifier grace a ton guard si tu match les pré requis de ta route
 
 echo $securityGuard->isLogged();
 

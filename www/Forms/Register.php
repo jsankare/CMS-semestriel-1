@@ -53,7 +53,7 @@ class Register
                     "type"=>"checkbox",
                     "required"=>true,
                     "error"=>"La case doit être cochée",
-                    "label"=>"J'accepte les conditions d&#39;utilisation"
+                    "label"=>"J&apos;accepte les conditions d&#39;utilisation"
                 ],
             ]
 

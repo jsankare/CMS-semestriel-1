@@ -1,0 +1,47 @@
+form {
+  border-radius: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  max-width: 30rem;
+  height: 100%;
+  min-height: 25rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+  .input {
+    border-radius: 1000rem;
+    height: 2rem;
+    min-height: max-content;
+    width: 50%;
+    padding: 5px;
+    border: none;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+
+    &--acceptTos {
+      width: max-content;
+      height: max-content;
+    }
+
+    &--submit {
+      width: 220px;
+      height: 50px;
+      border: none;
+      outline: none;
+      color: #fff;
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+      transition: 0.25s ease-in-out;
+    }
+
+    &--submit:hover {
+    background-color: seagreen;
+    }
+  }
+}

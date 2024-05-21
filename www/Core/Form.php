@@ -39,6 +39,7 @@ class Form
             if (isset($input["label"])) {
                 $html .= "
                 <label
+                    class='label label--{$name}'
                     for='{$name}'>
                     {$input["label"]}
                 </label>
@@ -47,6 +48,7 @@ class Form
 
             $html .= "    
                 <input 
+                    class='input input--{$name}'
                     type='{$input["type"]}' 
                     name='{$name}'";
             if (isset($input["placeholder"])) {
@@ -60,7 +62,7 @@ class Form
             ";
         }
         
-        $html .= "<input type='submit' value='" . htmlentities($this->config["config"]["submit"]) . "'>";
+        $html .= "<input class='input--submit' type='submit' value='" . htmlentities($this->config["config"]["submit"]) . "'>";
         $html .= "</form>";
 
         // Bouton de deconnection
