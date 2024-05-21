@@ -154,7 +154,6 @@ class Form
 
         }
 
-
         if (empty($this->errors)) {
             return true;
         } else {

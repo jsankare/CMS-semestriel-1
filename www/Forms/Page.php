@@ -9,7 +9,7 @@ class Page
             "config"=>[
                 "action"=>"",
                 "method"=>"POST",
-                "submit"=>"Ajouter"
+                "submit"=>"Créer une page"
             ],
             "inputs"=>[
                 "title"=>[

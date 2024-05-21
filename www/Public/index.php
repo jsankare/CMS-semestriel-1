@@ -4,6 +4,8 @@ namespace App;
 
 use App\Core\Security;
 
+session_start(); // Débute la session, toujours en haut du fichier
+
 //Notre Autoloader
 spl_autoload_register("App\myAutoloader");
 
@@ -18,7 +20,6 @@ function myAutoloader($class){
         include "../Models/".$class.".php";
     }
 }
-
 
 //Lorsque on met dans l'url /login par exemple
 //On récupère dans le fichier Routes.yaml le controller et l'action associée
