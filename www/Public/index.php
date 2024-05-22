@@ -4,6 +4,8 @@ namespace App;
 
 use App\Core\Security;
 
+session_start(); // Débute la session, toujours en haut du fichier
+
 //Notre Autoloader
 spl_autoload_register("App\myAutoloader");
 
@@ -19,7 +21,6 @@ function myAutoloader($class){
     }
 }
 
-
 //Lorsque on met dans l'url /login par exemple
 //On récupère dans le fichier Routes.yaml le controller et l'action associée
 //On fait une instance du controller ex: $controller = new Security();
@@ -33,21 +34,7 @@ function myAutoloader($class){
 //Contenu du mail copier coller le contenu du fichier index.php et la liste des membres du groupe
 //A envoyer avant 13 le 01/03/2024-
 
-//Ajout de la partie HTML
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css"> <!-- Lien vers le fichier CSS -->
-    <title>Home</title>
-</head>
-<body>
 
-<?php
-
-//http://localhost/login
 $uri = $_SERVER["REQUEST_URI"];
 if(strlen($uri) > 1)
     $uri = rtrim($uri, "/");
@@ -64,14 +51,16 @@ if(file_exists("../Routes.yml")) {
 
 if(empty($listOfRoutes[$uri])) {
     header("Status 404 Not Found", true, 404);
-    die("Page 404");
+    die("PageForm 404");
 }
 
-if(empty($listOfRoutes[$uri]["Controller"]) || 
-    empty($listOfRoutes[$uri]["Action"]) || 
-    empty($listOfRoutes[$uri]["Security"]) || 
-    empty($listOfRoutes[$uri]["Role"])) 
-    {
+// !isset() pour les bool, empty() considere vide si bool:false
+if(
+    empty($listOfRoutes[$uri]["Controller"]) ||
+    empty($listOfRoutes[$uri]["Action"]) ||
+    !isset($listOfRoutes[$uri]["Security"]) ||
+    empty($listOfRoutes[$uri]["Role"])
+) {
     header("Internal Server Error", true, 500);
     die("Le fichier routes.yml ne contient pas de controller, d'action, de sécurité ou de role pour l'uri :".$uri);
 }
@@ -79,23 +68,17 @@ if(empty($listOfRoutes[$uri]["Controller"]) ||
 $controller = $listOfRoutes[$uri]["Controller"];
 $action = $listOfRoutes[$uri]["Action"];
 $role = $listOfRoutes[$uri]["Role"];
-
-// echo $role;
-
+$isProtected = $listOfRoutes[$uri]["Security"];
 
 // instantiate Core/security
 $securityGuard = new Security();
 
-echo $securityGuard->isLogged();
-
-//if($security === false) {
-//    die("Security on False");
-//}
-//echo "Security on True";
-
+if($isProtected && !$securityGuard->isLogged()) {
+    echo 'Vous devez être connecté pour voir cetet page';
+    die();
+}
 
 // Est-ce qu'il y a besoin d'un rôle pour accéder à la route ?
-
 
 //include "../Controllers/".$controller.".php";
 if(!file_exists("../Controllers/".$controller.".php")){
@@ -115,4 +98,3 @@ if( !method_exists($controller, $action) ){
 }
 
 $objetController->$action();
-

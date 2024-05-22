@@ -9,6 +9,7 @@ class Page extends SQL
     private ?int $id=null;
     protected string $title;
     protected string $content;
+//    protected int $creator_id;
 
     /**
      * @return int
@@ -56,5 +57,14 @@ class Page extends SQL
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    public function findOneByTitle(string $title) {
+        $sql = "SELECT * FROM {$this->table} WHERE title = :title";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([":title" => $title]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        return $queryPrepared->fetch();
     }
 }

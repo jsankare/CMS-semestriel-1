@@ -1,6 +1,6 @@
 <?php
 namespace App\Forms;
-class Login
+class LoginForm
 {
 
     public static function getConfig(): array
@@ -30,6 +30,4 @@ class Login
 
         ];
     }
-
-
 }

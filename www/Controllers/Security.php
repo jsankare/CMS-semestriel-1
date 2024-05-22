@@ -1,22 +1,16 @@
 <?php
 namespace App\Controller;
 use App\Core\Form;
-use App\Core\Security as Auth;
+// use App\Core\Security as Auth;
 use App\Core\View;
 use App\Models\User;
+use App\Models\Page;
 
-class Security{
+class Security
+{
 
     public function login(): void
     {
-        // Debut de session -- Toujours au tout début avant toute logique
-        session_start();
-
-        //Je vérifie que l'utilisateur n'est pas connecté sinon j'affiche un message
-        if(isset($_SESSION['user_id'])) {
-            echo "Vous êtes déjà connecté";
-        }
-
         $form = new Form("Login");
         if( $form->isSubmitted() && $form->isValid() ) {
             // Met toutes les infos du user correspondant dans une variable
@@ -26,8 +20,7 @@ class Security{
                 if (password_verify($_POST["password"], $user->getPassword())) {
                     // on store le user ID dans la session
                     $_SESSION['user_id'] = $user->getId();
-                    echo $_SESSION['user_id'];
-                    echo " Login successful!";
+                    header('Location: http://localhost/profile');
                 }
             } else {
                 echo "Invalid email or password";
@@ -41,8 +34,7 @@ class Security{
     }
     public function register(): void
     {
-
-        $form = new Form("Register");
+        $form = new Form("Register"); // Crée un formulaire
 
         if( $form->isSubmitted() && $form->isValid() ) {
             $dbUser = (new User())->findOneByEmail($_POST["email"]);
@@ -56,41 +48,45 @@ class Security{
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
             $user->save();
-            echo "Register successful";
+            header('Location: http://localhost/login');
         }
 
-        $view = new View("Security/register");
-        $view->assign("form", $form->build());
-        $view->render();
+        $view = new View("Security/register"); // Création de la vue (page HTML)
+        $view->assign("form", $form->build()); // Passe le form à la vue
+        $view->render(); // Render de la page HTML
     }
     public function logout(): void
     {
-        // Start session
-        session_start();
-
-        // Check if the user is logged in
-        if (isset($_SESSION['user_id'])) {
-            // Unset the user ID from the session to logout
-            unset($_SESSION['user_id']);
-            echo "Vous êtes déconnecté";
-        } else {
-            echo "Vous n'êtes pas connecté.";
-        }
+        unset($_SESSION['user_id']);
+        header('Location: http://localhost/login');
     }
 
     public function profile(): void
     {
-        session_start();
+        $user = (new User())->findOneById($_SESSION['user_id']);
 
-        if (isset($_SESSION['user_id'])) {
-            $user = (new User())->findOneById($_SESSION['user_id']);
-            if ($user) {
-                echo "Welcome, " . $user->getFirstname() . " " . $user->getLastname() . "!";
-            } else {
-                echo "User not found.";
-            }
-        } else {
-            echo "You need to log in to access this page.";
+        if (!$user) {
+            echo 'erreur user not found';
+            die;
         }
+
+        $form = new Form("Page");
+
+        if( $form->isSubmitted() && $form->isValid()) {
+            $dbPage = (new Page())->findOneByTitle($_POST["title"]);
+            if ($dbPage) {
+                echo "Ce nom de page est déjà pris";
+                exit;
+            }
+            $page = new Page();
+            $page->setTitle($_POST["title"]);
+            $page->setContent($_POST["content"]);
+            $page->save();
+        }
+
+        $view = new View("Security/profile");
+        $view->assign('authUser', $user); // Le nom authUser c'est juste une référence entre ici et la vue
+        $view->assign('form', $form->build());
+        $view->render();
     }
 }

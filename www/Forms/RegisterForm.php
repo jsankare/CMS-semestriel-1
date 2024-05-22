@@ -1,8 +1,7 @@
 <?php
 namespace App\Forms;
-class Register
+class RegisterForm
 {
-
     public static function getConfig(): array
     {
         return [
