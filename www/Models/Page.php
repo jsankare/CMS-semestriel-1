@@ -9,6 +9,7 @@ class Page extends SQL
     private ?int $id=null;
     protected string $title;
     protected string $content;
+//    protected int $user_id;
 
     /**
      * @return int

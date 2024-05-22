@@ -1,19 +1,19 @@
 /:
   Controller: "Main"
   Action: "home"
-  Security: true
+  Security: false
   Role: "Guest"
 
 /login:
   Controller: "Security"
   Action: "login"
-  Security: true
+  Security: false
   Role: "Guest"
 
 /register:
   Controller: "Security"
   Action: "register"
-  Security: true
+  Security: false
   Role: "Guest"
 
 /logout:

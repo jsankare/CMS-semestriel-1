@@ -11,12 +11,6 @@ class Security
 
     public function login(): void
     {
-
-        //Je vérifie que l'utilisateur n'est pas connecté sinon j'effectue une redirection
-        if(isset($_SESSION['user_id'])) {
-            header('Location: http://localhost/profile');
-        }
-
         $form = new Form("Login");
         if( $form->isSubmitted() && $form->isValid() ) {
             // Met toutes les infos du user correspondant dans une variable
@@ -40,7 +34,6 @@ class Security
     }
     public function register(): void
     {
-
         $form = new Form("Register"); // Crée un formulaire
 
         if( $form->isSubmitted() && $form->isValid() ) {
@@ -55,55 +48,41 @@ class Security
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
             $user->save();
-            echo "Register successful";
+            header('Location: http://localhost/login');
         }
+
         $view = new View("Security/register"); // Création de la vue (page HTML)
         $view->assign("form", $form->build()); // Passe le form à la vue
         $view->render(); // Render de la page HTML
     }
     public function logout(): void
     {
-
-        // Check if the user is logged in
-        if (isset($_SESSION['user_id'])) {
-            // Unset the user ID from the session to logout
-            unset($_SESSION['user_id']);
-            header('Location: http://localhost/login');
-        } else {
-            echo "Vous n'êtes pas connecté.";
-        }
+        unset($_SESSION['user_id']);
+        header('Location: http://localhost/login');
     }
 
     public function profile(): void
     {
-        if (isset($_SESSION['user_id'])) {
-           $user = (new User())->findOneById($_SESSION['user_id']);
-            if ($user) {
-                $form = new Form("Page");
+        $user = (new User())->findOneById($_SESSION['user_id']);
 
-                $view = new View("Security/profile");
-                $view->assign('authUser', $user); // Le nom authUser c'est juste une référence entre ici et la vue
-                $view->assign('form', $form->build());
-
-                if( $form->isSubmitted() && $form->isValid()) {
-                    // Mettre un check pour vérifier si le nom de la page existe pas deja
-                    echo "1";
-                    $page = new Page();
-                    echo "2";
-                    $page->setTitle($_POST["title"]);
-                    echo "3";
-                    $page->setContent($_POST["content"]);
-                    echo "4";
-                    $page->save();
-                    echo "isallgood";
-                }
-
-                $view->render();
-            } else {
-               echo "Erreur, utilisateur non trouvé";
-          }
-        } else {
-            echo "Vous devez être connecté pour voir cette page";
+        if (!$user) {
+            echo 'erreur user not found';
+            die;
         }
+
+        $form = new Form("Page");
+
+        if( $form->isSubmitted() && $form->isValid()) {
+            // Mettre un check pour vérifier si le nom de la page existe pas deja
+            $page = new Page();
+            $page->setTitle($_POST["title"]);
+            $page->setContent($_POST["content"]);
+            $page->save();
+        }
+
+        $view = new View("Security/profile");
+        $view->assign('authUser', $user); // Le nom authUser c'est juste une référence entre ici et la vue
+        $view->assign('form', $form->build());
+        $view->render();
     }
 }

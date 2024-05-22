@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-use App\Forms\Register;
+use App\Forms\RegisterForm;
 
 class Form
 {
@@ -11,11 +11,11 @@ class Form
 
     public function __construct(string $name)
     {
-        if (!file_exists("../Forms/" . $name . ".php")) {
-            die("Le form " . $name . ".php n'existe pas dans le dossier ../Forms");
+        if (!file_exists("../Forms/${name}Form.php")) {
+            die("Le form " . $name . "Form.php n'existe pas dans le dossier ../Forms");
         }
-        include "../Forms/" . $name . ".php";
-        $name = "App\\Forms\\" . $name;
+        include "../Forms/${name}Form.php";
+        $name = "App\\Forms\\${name}Form";
         $this->config = $name::getConfig();
 
     }
@@ -48,10 +48,10 @@ class Form
             if ($input["type"] == "checkbox") {
                 $html .= "
                 <div class='checkbox-wrapper-19'>
-                    <input 
-                        type='checkbox' 
-                        class='input input--{$name}' 
-                        id='{$name}' 
+                    <input
+                        type='checkbox'
+                        class='input input--{$name}'
+                        id='{$name}'
                         name='{$name}'";
                 if (isset($input["required"]) && $input["required"]) {
                     $html .= " required";
@@ -61,10 +61,10 @@ class Form
                 </div>
                 ";
             } else {
-                $html .= "    
-                <input 
+                $html .= "
+                <input
                     class='input input--{$name}'
-                    type='{$input["type"]}' 
+                    type='{$input["type"]}'
                     name='{$name}'";
                 if (isset($input["placeholder"])) {
                     $html .= " placeholder='{$input["placeholder"]}'";
@@ -80,13 +80,6 @@ class Form
 
         $html .= "<input class='input--submit' type='submit' value='" . htmlentities($this->config["config"]["submit"]) . "'>";
         $html .= "</form>";
-
-        // Bouton de déconnexion
-        if (isset($_SESSION['user_id'])) {
-            $html .= "<form class='logout--form' action='logout' method='POST'>";
-            $html .= "<button class='input--submit logout--form--button' type='submit'>Se déconnecter</button>";
-            $html .= "</form>";
-        }
 
         return $html;
     }

@@ -18,12 +18,13 @@ class SQL
         }
 
         $classChild = get_called_class();
+        // Mettre le _esgi en .env
         $this->table = "esgi_".strtolower(str_replace("App\\Models\\","",$classChild));
     }
 
     public function save()
     {
-        //Vous ne devez ecrire en dur le nom de la table ou des colonnes à inserer en bdd
+        //Ne pas ecrire en dur le nom de la table ou des colonnes à inserer en bdd
         $columnsAll = get_object_vars($this);
         $columnsToDelete = get_class_vars(get_class());
         $columns = array_diff_key($columnsAll, $columnsToDelete);
@@ -33,7 +34,7 @@ class SQL
         VALUES (:". implode(',:', array_keys($columns) ) .")";
         }else{
 
-            //UPDATE esgi_user SET firstname=:firstname, lastname=:lastname WHERE id=1
+            // UPDATE esgi_user SET firstname=:firstname, lastname=:lastname WHERE id=1
             foreach ( $columns as $column=>$value){
                 $sqlUpdate[] = $column."=:".$column;
             }
@@ -44,5 +45,4 @@ class SQL
         $queryPrepared->execute($columns);
 
     }
-
 }
