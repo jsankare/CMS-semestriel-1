@@ -56,10 +56,16 @@ class Form
                 if (isset($input["required"]) && $input["required"]) {
                     $html .= " required";
                 }
-                $html .= ">
-                    <label for='{$name}' class='check-box'></label>
-                </div>
-                ";
+                $html .= "><label for='{$name}' class='check-box'></label></div>";
+            } elseif ($input["type"] == "textarea") {
+                $html .= "<textarea class='input input--{$name}' id='{$name}' name='{$name}'";
+                if (isset($input["placeholder"])) {
+                    $html .= " placeholder='" . htmlspecialchars($input["placeholder"]) . "'";
+                }
+                if (isset($input["required"]) && $input["required"]) {
+                    $html .= " required";
+                }
+                $html .= "></textarea>";
             } else {
                 $html .= "
                 <input
@@ -155,4 +161,3 @@ class Form
     }
 
 }
-
