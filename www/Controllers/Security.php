@@ -73,7 +73,11 @@ class Security
         $form = new Form("Page");
 
         if( $form->isSubmitted() && $form->isValid()) {
-            // Mettre un check pour vérifier si le nom de la page existe pas deja
+            $dbPage = (new Page())->findOneByTitle($_POST["title"]);
+            if ($dbPage) {
+                echo "Ce nom de page est déjà pris";
+                exit;
+            }
             $page = new Page();
             $page->setTitle($_POST["title"]);
             $page->setContent($_POST["content"]);

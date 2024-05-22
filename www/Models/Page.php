@@ -58,4 +58,13 @@ class Page extends SQL
     {
         $this->content = $content;
     }
+
+    public function findOneByTitle(string $title) {
+        $sql = "SELECT * FROM {$this->table} WHERE title = :title";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([":title" => $title]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        return $queryPrepared->fetch();
+    }
 }
