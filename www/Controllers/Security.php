@@ -87,9 +87,13 @@ class Security
 
                 if( $form->isSubmitted() && $form->isValid()) {
                     // Mettre un check pour vérifier si le nom de la page existe pas deja
+                    echo "1";
                     $page = new Page();
+                    echo "2";
                     $page->setTitle($_POST["title"]);
-                    $page->setContent($_POST["description"]);
+                    echo "3";
+                    $page->setContent($_POST["content"]);
+                    echo "4";
                     $page->save();
                     echo "isallgood";
                 }

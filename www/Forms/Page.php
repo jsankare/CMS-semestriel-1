@@ -20,7 +20,7 @@ class Page
                     "required"=>true,
                     "error"=>"Le titre de la page doit faire entre 2 et 50 caractères"
                 ],
-                "description"=>[
+                "content"=>[
                     "type"=>"text-area",
                     "placeholder"=>"Entrez ici une description de la page",
                     "required"=>true,
