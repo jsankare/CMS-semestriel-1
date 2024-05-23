@@ -154,10 +154,6 @@ class Form
             }
         }
 
-        if (empty($this->errors)) {
-            return true;
-        } else {
-            return false;
-        }
+        return empty($this->errors); // If true return true
     }
 }

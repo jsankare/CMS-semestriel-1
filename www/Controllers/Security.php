@@ -5,6 +5,7 @@ use App\Core\Form;
 use App\Core\View;
 use App\Models\User;
 use App\Models\Page;
+use App\Models\Article;
 
 class Security
 {
@@ -70,9 +71,10 @@ class Security
             die;
         }
 
-        $form = new Form("Page");
+        $pageForm = new Form("Page");
+        $articleForm = new Form("Article");
 
-        if( $form->isSubmitted() && $form->isValid()) {
+        if( $pageForm->isSubmitted() && $pageForm->isValid()) {
             $dbPage = (new Page())->findOneByTitle($_POST["title"]);
             if ($dbPage) {
                 echo "Ce nom de page est déjà pris";
@@ -85,9 +87,24 @@ class Security
             $page->save();
         }
 
+        if( $articleForm->isSubmitted() && $articleForm->isValid()) {
+            $dbArticle = (new Article())->findOneByTitle($_POST["title"]);
+            if ($dbArticle) {
+                echo "Ce nom d'article est déjà pris";
+                exit;
+            }
+            $article = new Article();
+            $article->setTitle($_POST["title"]);
+            $article->setDescription($_POST["description"]);
+            $article->setContent($_POST["content"]);
+            $article->setCreatorId($user->getId());
+            $article->save();
+        }
+
         $view = new View("Security/profile");
         $view->assign('authUser', $user); // Le nom authUser c'est juste une référence entre ici et la vue
-        $view->assign('form', $form->build());
+        $view->assign('pageForm', $pageForm->build());
+        $view->assign('articleForm', $articleForm->build());
         $view->render();
     }
 }
