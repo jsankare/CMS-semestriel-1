@@ -37,8 +37,8 @@ CREATE TABLE public.esgi_page (
     id SERIAL PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
     content VARCHAR(255) NOT NULL,
---     creator_id INT NOT NULL,
---     CONSTRAINT fk_user FOREIGN KEY (creator_id) REFERENCES public.esgi_user(id),
+    creator_id INT NOT NULL,
+    CONSTRAINT fk_user FOREIGN KEY (creator_id) REFERENCES public.esgi_user(id),
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
