@@ -20,7 +20,7 @@ SET TIME ZONE 'UTC';
 -- Structure de la table `esgi_user`
 --
 
-DROP TABLE IF EXISTS public.esgi_user;
+DROP TABLE IF EXISTS public.esgi_user CASCADE;
 CREATE TABLE public.esgi_user (
     id SERIAL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
@@ -32,13 +32,27 @@ CREATE TABLE public.esgi_user (
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS public.esgi_page;
+DROP TABLE IF EXISTS public.esgi_page CASCADE;
 CREATE TABLE public.esgi_page (
     id SERIAL PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
     content VARCHAR(255) NOT NULL,
     creator_id INT NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY (creator_id) REFERENCES public.esgi_user(id),
+    date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS public.esgi_article CASCADE;
+CREATE TABLE public.esgi_article (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(50),
+    content VARCHAR NOT NULL,
+    creator_id INT NOT NULL,
+    anchor_page INT NOT NULL,
+    CONSTRAINT fk_user FOREIGN KEY (creator_id) REFERENCES public.esgi_user(id),
+    CONSTRAINT fk_page FOREIGN KEY (anchor_page) REFERENCES public.esgi_page(id),
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
