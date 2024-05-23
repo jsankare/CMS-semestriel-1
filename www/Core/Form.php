@@ -17,7 +17,6 @@ class Form
         include "../Forms/${name}Form.php";
         $name = "App\\Forms\\${name}Form";
         $this->config = $name::getConfig();
-
     }
 
     public function build(): string
@@ -35,6 +34,8 @@ class Form
         $html .= "<form action='" . $this->config["config"]["action"] . "' method='" . $this->config["config"]["method"] . "'>";
 
         foreach ($this->config["inputs"] as $name => $input) {
+            $html .= "<div class='input--wrapper'>";
+
             if (isset($input["label"])) {
                 $html .= "
                 <label
@@ -56,10 +57,16 @@ class Form
                 if (isset($input["required"]) && $input["required"]) {
                     $html .= " required";
                 }
-                $html .= ">
-                    <label for='{$name}' class='check-box'></label>
-                </div>
-                ";
+                $html .= "><label for='{$name}' class='check-box'></label></div>";
+            } elseif ($input["type"] == "textarea") {
+                $html .= "<textarea class='input input--{$name}' id='{$name}' name='{$name}'";
+                if (isset($input["placeholder"])) {
+                    $html .= " placeholder='" . htmlspecialchars($input["placeholder"]) . "'";
+                }
+                if (isset($input["required"]) && $input["required"]) {
+                    $html .= " required";
+                }
+                $html .= "></textarea>";
             } else {
                 $html .= "
                 <input
@@ -76,6 +83,8 @@ class Form
                 <br>
                 ";
             }
+
+            $html .= "</div>";  // Close the input--wrapper div
         }
 
         $html .= "<input class='input--submit' type='submit' value='" . htmlentities($this->config["config"]["submit"]) . "'>";
@@ -143,8 +152,6 @@ class Form
                     $this->errors[] = $this->config["inputs"][$name]["error"];
                 }
             }
-
-
         }
 
         if (empty($this->errors)) {
@@ -153,6 +160,4 @@ class Form
             return false;
         }
     }
-
 }
-

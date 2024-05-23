@@ -81,6 +81,7 @@ class Security
             $page = new Page();
             $page->setTitle($_POST["title"]);
             $page->setContent($_POST["content"]);
+            $page->setCreatorId($user->getId()); // Ajout id du createur
             $page->save();
         }
 

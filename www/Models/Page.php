@@ -9,7 +9,7 @@ class Page extends SQL
     private ?int $id=null;
     protected string $title;
     protected string $content;
-//    protected int $creator_id;
+    protected int $creator_id;
 
     /**
      * @return int
@@ -57,6 +57,22 @@ class Page extends SQL
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreatorId(): int
+    {
+        return $this->creator_id;
+    }
+
+    /**
+     * @param int $creator_id
+     */
+    public function setCreatorId(int $creator_id): void
+    {
+        $this->creator_id = $creator_id;
     }
 
     public function findOneByTitle(string $title) {

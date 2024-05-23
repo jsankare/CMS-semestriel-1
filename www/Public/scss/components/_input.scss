@@ -1,5 +1,5 @@
 .input {
-  border-radius: 1000rem;
+  border-radius: 1rem;
   height: 2rem;
   min-height: max-content;
   width: 50%;
@@ -7,6 +7,15 @@
   border: 3px solid transparent;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
   transition: 0.1s ease-in-out;
+
+  &--wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 
   &:focus {
     outline-width: 0;
@@ -32,11 +41,20 @@
     cursor: pointer;
     position: relative;
     z-index: 0;
-    border-radius: 10px;
+    border-radius: 1rem;
     transition: 0.25s ease-in-out;
   }
 
   &--submit:hover {
     background-color: seagreen;
   }
+
+  &--content {
+    border-radius: 1rem;
+    min-height: 5rem;
+  }
+}
+
+.label {
+  font-size: 1.25rem;
 }
