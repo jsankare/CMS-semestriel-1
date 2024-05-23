@@ -23,7 +23,7 @@ form {
 }
 
 .input {
-  border-radius: 1rem;
+  border-radius: 1000rem;
   height: 2rem;
   min-height: max-content;
   width: 50%;
@@ -31,14 +31,6 @@ form {
   border: 3px solid transparent;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
   transition: 0.1s ease-in-out;
-}
-.input--wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
 }
 .input:focus {
   outline-width: 0;
@@ -61,19 +53,11 @@ form {
   cursor: pointer;
   position: relative;
   z-index: 0;
-  border-radius: 1rem;
+  border-radius: 10px;
   transition: 0.25s ease-in-out;
 }
 .input--submit:hover {
   background-color: seagreen;
-}
-.input--content {
-  border-radius: 1rem;
-  min-height: 5rem;
-}
-
-.label {
-  font-size: 1.25rem;
 }
 
 /*# sourceMappingURL=main.css.map */
