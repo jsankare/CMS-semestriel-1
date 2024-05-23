@@ -108,7 +108,7 @@ class Form
     {
         //Est-ce que j'ai exactement le meme nb de champs
         if (count($this->config["inputs"]) != count($_POST)) {
-            $this->errors[] = "Tentative de Hack";
+            $this->errors[] = "Tentative de Hack, le compte n'est pas bon";
         }
 
         foreach ($_POST as $name => $dataSent) {
