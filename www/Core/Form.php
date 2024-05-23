@@ -17,7 +17,6 @@ class Form
         include "../Forms/${name}Form.php";
         $name = "App\\Forms\\${name}Form";
         $this->config = $name::getConfig();
-
     }
 
     public function build(): string
@@ -35,6 +34,8 @@ class Form
         $html .= "<form action='" . $this->config["config"]["action"] . "' method='" . $this->config["config"]["method"] . "'>";
 
         foreach ($this->config["inputs"] as $name => $input) {
+            $html .= "<div class='input--wrapper'>";
+
             if (isset($input["label"])) {
                 $html .= "
                 <label
@@ -82,6 +83,8 @@ class Form
                 <br>
                 ";
             }
+
+            $html .= "</div>";  // Close the input--wrapper div
         }
 
         $html .= "<input class='input--submit' type='submit' value='" . htmlentities($this->config["config"]["submit"]) . "'>";
@@ -149,8 +152,6 @@ class Form
                     $this->errors[] = $this->config["inputs"][$name]["error"];
                 }
             }
-
-
         }
 
         if (empty($this->errors)) {
@@ -159,5 +160,4 @@ class Form
             return false;
         }
     }
-
 }
