@@ -9,18 +9,26 @@
     <body>
         <main class="mainBack" >
             <aside class="navbar" >
-                <a href="/dashboard">dashboard</a>
-                <h3>Barre de navigation</h3>
+                <a class="navbar--logo__link" href="/dashboard">
+                    <img class="navbar--logo__picture" src="/assets/logo.svg">
+                </a>
+                <h3>Navigation</h3>
+                <section>
+                    <h4>Dashboard</h4>
+                    <ul class="navbar--list">
+                        <li class="navbar--list__line"><a href="/dashboard">Aller au dashboard</a></li>
+                    </ul>
+                </section>
                 <section>
                     <h4>Pages</h4>
-                    <ul>
-                        <li><a href="/page/create">Créer une page</a></li>
+                    <ul class="navbar--list">
+                        <li class="navbar--list__line"><a href="/page/create">Créer une page</a></li>
                     </ul>
                 </section>
                 <section>
                     <h4>Articles</h4>
-                    <ul>
-                        <li><a href="/article/create">Créer un article</a></li>
+                    <ul class="navbar--list">
+                        <li class="navbar--list__line"><a href="/article/create">Créer un article</a></li>
                     </ul>
                 </section>
             </aside>
