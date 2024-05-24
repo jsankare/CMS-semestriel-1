@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "sass --watch www/Public/scss/main.scss www/Public/css/main.css"
+    "watch": "sass --watch www/Public/scss/main.scss www/Public/css/main.css",
+    "watchback": "sass --watch www/Public/scss/back.scss www/Public/css/back.css",
+    "watchfront": "sass --watch www/Public/scss/front.scss www/Public/css/front.css"
   },
   "author": "",
   "license": "ISC",

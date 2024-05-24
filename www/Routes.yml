@@ -23,8 +23,8 @@
   Role: "Guest"
 
 /dashboard:
-  controller: "Dashboard"
-  Action: "Show"
+  Controller: "DashboardController"
+  Action: "show"
   Security: true
   Role: "Admin"
 
@@ -64,7 +64,7 @@
   Security: true
   Role: "Guest"
 
-/ajout-page:
+/page/create:
   Controller: PageController
   Action: "add"
   Security: true
