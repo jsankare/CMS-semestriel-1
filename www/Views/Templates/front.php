@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>Ceci est mon front</title>
         <meta name="description" content="Super site avec une magnifique intégration">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
         <h1>Template Front - CMS</h1>

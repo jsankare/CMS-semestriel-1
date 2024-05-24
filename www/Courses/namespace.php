@@ -19,8 +19,8 @@ class User {
 //--------------------------
 
 namespace App;
-use App\Controller\User;
+use App\Controller\UserController;
 use App\Core\User as UserCore;
 
-new User();
+new UserController();
 new UserCore();

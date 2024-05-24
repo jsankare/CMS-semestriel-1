@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-class User
+class UserController
 {
 
     public function delete(): void

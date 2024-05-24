@@ -1,13 +1,13 @@
 <?php
 namespace App\Controller;
 use App\Core\View;
-class Main
+class MainController
 {
     public function home()
     {
-        //Appeler un template Front et la vue Main/Home
-        $view = new View("Main/home", "Back");
-        //$view->setView("Main/Home");
+        //Appeler un template Front et la vue MainController/Home
+        $view = new View("MainController/home", "Back");
+        //$view->setView("MainController/Home");
         //$view->setTemplate("Front");
         $view->render();
     }

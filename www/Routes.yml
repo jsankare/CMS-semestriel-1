@@ -1,5 +1,5 @@
 /:
-  Controller: "Main"
+  Controller: "MainController"
   Action: "home"
   Security: false
   Role: "Guest"
@@ -22,99 +22,104 @@
   Security: true
   Role: "Guest"
 
-#Ajout de route pour voir le profil
+/dashboard:
+  controller: "Dashboard"
+  Action: "Show"
+  Security: true
+  Role: "Admin"
+
 /profile:
   Controller: "Security"
   Action: "profile"
   Security: true
-  Role: "User"
+  Role: "UserController"
 
 /ajout-utilisateur:
-  Controller: "User"
+  Controller: "UserController"
   Action: "add"
   Security: true
   Role: "Admin"
 
 /del-utilisateur:
-  Controller: "User"
+  Controller: "UserController"
   Action: "delete"
   Security: true
   Role: "Guest"
 
 /show-utilisateur:
-  Controller: "User"
+  Controller: "UserController"
   Action: "show"
   Security: True
   Role: "Guest"
 
 /list-utilisateurs:
-  Controller: "User"
+  Controller: "UserController"
   Action: "list"
   Security: true
   Role: "Guest"
 
 /maj-utilisateurs:
-  Controller: "User"
+  Controller: "UserController"
   Action: "edit"
   Security: true
   Role: "Guest"
 
 /ajout-page:
-  Controller: "User"
+  Controller: PageController
   Action: "add"
   Security: true
   Role: "Admin"
 
 /del-page:
-  Controller: "User"
+  Controller: "UserController"
   Action: "delete"
   Security: true
   Role: "Guest"
 
 /show-page:
-  Controller: "User"
+  Controller: "UserController"
   Action: "show"
   Security: True
   Role: "Guest"
 
 /list-page:
-  Controller: "User"
+  Controller: "UserController"
   Action: "list"
   Security: true
   Role: "Guest"
 
 /maj-page:
-  Controller: "User"
+  Controller: "UserController"
   Action: "edit"
   Security: true
   Role: "Guest"
 
-/ajout-article:
-  Controller: "User"
+/article/create:
+  Controller: "ArticleController"
   Action: "add"
   Security: true
   Role: "Admin"
 
-/del-article:
-  Controller: "User"
+/article/delete:
+  Controller: "UserController"
   Action: "delete"
   Security: true
   Role: "Guest"
 
 /show-article:
-  Controller: "User"
+  Controller: "UserController"
   Action: "show"
   Security: True
   Role: "Guest"
 
 /list-article:
-  Controller: "User"
+  Controller: "UserController"
   Action: "list"
   Security: true
   Role: "Guest"
 
 /maj-article:
-  Controller: "User"
+  Controller: "UserController"
   Action: "edit"
   Security: true
   Role: "Guest"

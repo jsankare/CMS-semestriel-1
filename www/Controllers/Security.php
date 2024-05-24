@@ -4,7 +4,7 @@ use App\Core\Form;
 // use App\Core\Security as Auth;
 use App\Core\View;
 use App\Models\User;
-use App\Models\Page;
+use App\Models\Article;
 
 class Security
 {
@@ -42,7 +42,7 @@ class Security
                 echo "Un user existe déjà avec cette adresse email";
                 exit;
             }
-            $user = new User(); // Initialisation d'un nouveau User
+            $user = new User(); // Initialisation d'un nouveau UserController
             $user->setFirstname($_POST["firstname"]);
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
@@ -70,24 +70,9 @@ class Security
             die;
         }
 
-        $form = new Form("Page");
-
-        if( $form->isSubmitted() && $form->isValid()) {
-            $dbPage = (new Page())->findOneByTitle($_POST["title"]);
-            if ($dbPage) {
-                echo "Ce nom de page est déjà pris";
-                exit;
-            }
-            $page = new Page();
-            $page->setTitle($_POST["title"]);
-            $page->setContent($_POST["content"]);
-            $page->setCreatorId($user->getId()); // Ajout id du createur
-            $page->save();
-        }
-
-        $view = new View("Security/profile");
-        $view->assign('authUser', $user); // Le nom authUser c'est juste une référence entre ici et la vue
-        $view->assign('form', $form->build());
+        echo'Page profile';
+        $view = new View("Security/profile", "front");
+        $view->assign("authUser", $user);
         $view->render();
     }
 }
