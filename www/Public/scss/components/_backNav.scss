@@ -20,6 +20,14 @@
       width: 100%;
       max-width: 5rem;
       transform: rotatey(180deg);
+      border: 0px solid black;
+      border-radius: 1000rem;
+      transition: padding 0.3s ease-in-out, border 0.1s ease-in-out 0.2s;
+      &:hover {
+        border: 1px solid black;
+        border-radius: 1000rem;
+        padding: 0.5rem;
+      }
     }
   }
   &--list {
