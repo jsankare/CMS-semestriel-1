@@ -4,7 +4,6 @@ use App\Core\Form;
 // use App\Core\Security as Auth;
 use App\Core\View;
 use App\Models\User;
-use App\Models\Page;
 use App\Models\Article;
 
 class Security
@@ -43,7 +42,7 @@ class Security
                 echo "Un user existe déjà avec cette adresse email";
                 exit;
             }
-            $user = new User(); // Initialisation d'un nouveau User
+            $user = new User(); // Initialisation d'un nouveau UserController
             $user->setFirstname($_POST["firstname"]);
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
@@ -71,40 +70,9 @@ class Security
             die;
         }
 
-        $pageForm = new Form("Page");
-        $articleForm = new Form("Article");
-
-        if( $pageForm->isSubmitted() && $pageForm->isValid()) {
-            $dbPage = (new Page())->findOneByTitle($_POST["title"]);
-            if ($dbPage) {
-                echo "Ce nom de page est déjà pris";
-                exit;
-            }
-            $page = new Page();
-            $page->setTitle($_POST["title"]);
-            $page->setContent($_POST["content"]);
-            $page->setCreatorId($user->getId()); // Ajout id du createur
-            $page->save();
-        }
-
-        if( $articleForm->isSubmitted() && $articleForm->isValid()) {
-            $dbArticle = (new Article())->findOneByTitle($_POST["title"]);
-            if ($dbArticle) {
-                echo "Ce nom d'article est déjà pris";
-                exit;
-            }
-            $article = new Article();
-            $article->setTitle($_POST["title"]);
-            $article->setDescription($_POST["description"]);
-            $article->setContent($_POST["content"]);
-            $article->setCreatorId($user->getId());
-            $article->save();
-        }
-
-        $view = new View("Security/profile");
-        $view->assign('authUser', $user); // Le nom authUser c'est juste une référence entre ici et la vue
-        $view->assign('pageForm', $pageForm->build());
-        $view->assign('articleForm', $articleForm->build());
+        echo'Page profile';
+        $view = new View("Security/profile", "front");
+        $view->assign("authUser", $user);
         $view->render();
     }
 }
