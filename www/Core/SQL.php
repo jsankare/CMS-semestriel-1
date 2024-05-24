@@ -45,4 +45,5 @@ class SQL
         $queryPrepared->execute($columns);
 
     }
+
 }
