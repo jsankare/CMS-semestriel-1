@@ -8,6 +8,7 @@
     </head>
     <body>
         <h1>Template Back - CMS</h1>
+        <h2>Working on nav</h2>
         <!-- intégration de la vue -->
         <?php include "../Views/".$this->view.".php";?>
     </body>
