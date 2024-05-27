@@ -17,6 +17,7 @@
                     <ul class="navbar--list__links">
                         <li class="navbar--list__link"><a href="/dashboard">Aller au dashboard</a></li>
                         <li class="navbar--list__link"><a href="/page/home">Pages</a></li>
+                        <li class="navbar--list__link"><a href="/article/home">Articles</a></li>
                         <li class="navbar--list__link"><a href="/article/create">Créer un article</a></li>
                     </ul>
                 </section>
