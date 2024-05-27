@@ -100,4 +100,13 @@ class Article extends SQL
         $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Article');
         return $queryPrepared->fetch();
     }
+
+    public function findAll() {
+        $sql = "SELECT * FROM {$this->table}";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Article');
+        return $queryPrepared->fetchAll();
+    }
 }

@@ -52,7 +52,14 @@ class ArticleController
 
     public function list(): void
     {
+        $user = (new User())->findOneById($_SESSION['user_id']);
 
+        $articleModel = new Article();
+        $articles = $articleModel->findAll();
+
+        $view = new View("article/home", "back");
+        $view->assign('articles', $articles);
+        $view->render();
     }
 
 }

@@ -112,8 +112,8 @@
   Security: True
   Role: "Guest"
 
-/list-article:
-  Controller: "UserController"
+/article/home:
+  Controller: "ArticleController"
   Action: "list"
   Security: true
   Role: "Guest"
