@@ -289,7 +289,7 @@ ul li a {
   min-width: 1.5rem;
 }
 .page--wrapper {
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -313,6 +313,7 @@ ul li a {
 }
 .page--wrapper__unit {
   width: 100%;
+  max-width: 80%;
   display: grid;
   gap: 1rem;
   grid-template-columns: 2fr 4fr 1fr;
