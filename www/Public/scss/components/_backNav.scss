@@ -8,9 +8,9 @@
   height: 100vh;
   position: fixed;
   padding: 1rem;
-  margin: 0;
   width: 100%;
   max-width: 15rem;
+  gap: 1.5rem;
 
   &--logo {
     &__link {
@@ -31,12 +31,16 @@
     }
   }
   &--list {
-    margin-left: 1.5rem;
-  }
-
-  &--list::before {
-    position: absolute;
-    left: 0.5rem;
-    content: url("/assets/arrow-right.svg");
+    &__links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-left: 1.5rem;
+    }
+    &__link::before {
+      position: absolute;
+      left: 0.5rem;
+      content: url("/assets/arrow-right.svg");
+    }
   }
 }
