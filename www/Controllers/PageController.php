@@ -50,7 +50,14 @@ class PageController
 
     public function list(): void
     {
+        $user = (new User())->findOneById($_SESSION['user_id']);
 
+        $pageModel = new Page();
+        $pages = $pageModel->findAll();
+
+        $view = new View("Page/home", "back");
+        $view->assign('pages', $pages);
+        $view->render();
     }
 
 }

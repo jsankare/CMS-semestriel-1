@@ -26,6 +26,7 @@ class PageForm
                     "placeholder"=>"Entrez ici une description de la page",
                     "label"=>"Description",
                     "required"=>true,
+                    "max"=>255,
                     "error"=>"La description de la page ne peut pas faire plus de 255 caractères"
                 ]
             ]

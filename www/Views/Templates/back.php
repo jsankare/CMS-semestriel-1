@@ -13,22 +13,11 @@
                     <img class="navbar--logo__picture" src="/assets/logo.svg">
                 </a>
                 <h3>Navigation</h3>
-                <section>
-                    <h4>Dashboard</h4>
-                    <ul class="navbar--list navbar--list__dashboard">
-                        <li class="navbar--list__line"><a href="/dashboard">Aller au dashboard</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h4>Pages</h4>
-                    <ul class="navbar--list navbar--list__pages">
-                        <li class="navbar--list__line"><a href="/page/create">Créer une page</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h4>Articles</h4>
-                    <ul class="navbar--list navbar--list__articles">
-                        <li class="navbar--list__line"><a href="/article/create">Créer un article</a></li>
+                <section class="navbar--list" >
+                    <ul class="navbar--list__links">
+                        <li class="navbar--list__link"><a href="/dashboard">Aller au dashboard</a></li>
+                        <li class="navbar--list__link"><a href="/page/home">Pages</a></li>
+                        <li class="navbar--list__link"><a href="/article/create">Créer un article</a></li>
                     </ul>
                 </section>
             </aside>

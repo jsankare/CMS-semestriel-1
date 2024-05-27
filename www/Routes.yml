@@ -64,6 +64,12 @@
   Security: true
   Role: "Guest"
 
+/page/home:
+  Controller: "PageController"
+  Action: "list"
+  Security: true
+  Role: "Admin"
+
 /page/create:
   Controller: PageController
   Action: "add"
@@ -80,12 +86,6 @@
   Controller: "UserController"
   Action: "show"
   Security: True
-  Role: "Guest"
-
-/list-page:
-  Controller: "UserController"
-  Action: "list"
-  Security: true
   Role: "Guest"
 
 /maj-page:
