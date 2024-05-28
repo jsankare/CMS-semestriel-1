@@ -40,11 +40,11 @@
   Security: true
   Role: "Admin"
 
-/del-utilisateur:
+/users/delete:
   Controller: "UserController"
   Action: "delete"
   Security: true
-  Role: "Guest"
+  Role: "Admin"
 
 /show-utilisateur:
   Controller: "UserController"

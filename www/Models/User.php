@@ -137,4 +137,13 @@ class User extends SQL
         $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
         return $queryPrepared->fetchAll();
     }
+
+    public function delete(): void
+    {
+        if (!empty($this->getId())) {
+            $sql = "DELETE FROM {$this->table} WHERE id = :id";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([':id' => $this->getId()]);
+        }
+    }
 }

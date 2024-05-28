@@ -9,7 +9,20 @@ class UserController
 
     public function delete(): void
     {
+        if (isset($_GET['id'])) {
+            $userId = intval($_GET['id']);
+            $user = (new User())->findOneById($userId);
 
+            if ($user) {
+                $user->delete();
+                header('Location: /users/home');
+                exit();
+            } else {
+                echo "Utilisateur non trouvé";
+            }
+        } else {
+            echo "ID utilisateur non spécifié";
+        }
     }
     public function show(): void
     {
