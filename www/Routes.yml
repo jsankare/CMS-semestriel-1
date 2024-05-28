@@ -44,7 +44,7 @@
   Controller: "UserController"
   Action: "delete"
   Security: true
-  Role: "Guest"
+  Role: "Admin"
 
 /show-utilisateur:
   Controller: "UserController"
