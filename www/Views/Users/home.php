@@ -23,7 +23,7 @@
                     <li>
                         <h3>Status</h3><p><?php echo htmlspecialchars($user->getStatus()); ?></p>
                     </li>
-                    <a href="/del-utilisateur?id=<?php echo $user->getId(); ?>" ><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur" ></a>
+                    <a href="/users/delete?id=<?php echo $user->getId(); ?>" ><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur" ></a>
                 </div>
                 <?php endforeach; ?>
             </section>
