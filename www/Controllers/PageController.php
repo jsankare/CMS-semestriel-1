@@ -9,11 +9,6 @@ use App\Core\View;
 class PageController
 {
 
-    public function delete(): void
-    {
-
-    }
-
     public function show(): void
     {
 
@@ -59,6 +54,24 @@ class PageController
         $view = new View("Page/home", "back");
         $view->assign('pages', $pages);
         $view->render();
+    }
+
+    public function delete(): void
+    {
+        if (isset($_GET['id'])) {
+            $pageId = intval($_GET['id']);
+            $page = (new Page())->findOneById($pageId);
+
+            if ($page) {
+                $page->delete();
+                header('Location: /page/home');
+                exit();
+            } else {
+                echo "Page non trouvée";
+            }
+        } else {
+            echo "ID page non spécifié";
+        }
     }
 
 }

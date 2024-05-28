@@ -76,11 +76,11 @@
   Security: true
   Role: "Admin"
 
-/del-page:
+/page/delete:
   Controller: PageController
   Action: "delete"
   Security: true
-  Role: "Guest"
+  Role: "Admin"
 
 /show-page:
   Controller: PageController
@@ -104,7 +104,7 @@
   Controller: ArticleController
   Action: "delete"
   Security: true
-  Role: "Guest"
+  Role: "Admin"
 
 /show-article:
   Controller: ArticleController
@@ -122,4 +122,4 @@
   Controller: ArticleController
   Action: "edit"
   Security: true
-  Role: "Guest"
+  Role: "Admin"

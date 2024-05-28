@@ -14,7 +14,7 @@
                 <li>
                     <h3>Description de page</h3><p><?php echo htmlspecialchars($page->getContent()); ?></p>
                 </li>
-                <img class="page--icon page--icon__trash" src="/assets/trash.svg" >
+                <a href="/page/delete?id=<?php echo $page->getId(); ?>"><img class="page--icon page--icon__trash" src="/assets/trash.svg" ></a>
             </div>
             <?php endforeach; ?>
             </section>

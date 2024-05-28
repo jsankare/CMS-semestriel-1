@@ -84,6 +84,15 @@ class Page extends SQL
         return $queryPrepared->fetch();
     }
 
+    public function findOneById(string $id) {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([":id" => $id]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        return $queryPrepared->fetch();
+    }
+
     public function findAll() {
         $sql = "SELECT * FROM {$this->table}";
 
@@ -93,4 +102,12 @@ class Page extends SQL
         return $queryPrepared->fetchAll();
     }
 
+    public function delete(): void
+    {
+        if (!empty($this->getId())) {
+            $sql = "DELETE FROM {$this->table} WHERE id = :id";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([':id' => $this->getId()]);
+        }
+    }
 }
