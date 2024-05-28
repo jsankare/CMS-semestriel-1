@@ -26,6 +26,7 @@ class PageController
 
     public function add(): void
     {
+
         $user = (new User())->findOneById($_SESSION['user_id']);
         $pageForm = new Form("Page");
 

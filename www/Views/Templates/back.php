@@ -16,9 +16,9 @@
                 <section class="navbar--list" >
                     <ul class="navbar--list__links">
                         <li class="navbar--list__link"><a href="/dashboard">Aller au dashboard</a></li>
+                        <li class="navbar--list__link"><a href="/users/home">Utilisateurs</a></li>
                         <li class="navbar--list__link"><a href="/page/home">Pages</a></li>
                         <li class="navbar--list__link"><a href="/article/home">Articles</a></li>
-                        <li class="navbar--list__link"><a href="/users/home">Utilisateurs</a></li>
                     </ul>
                 </section>
             </aside>
