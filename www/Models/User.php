@@ -128,4 +128,13 @@ class User extends SQL
         $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
         return $queryPrepared->fetch();
     }
+
+    public function findAll() {
+        $sql = "SELECT * FROM {$this->table}";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\User');
+        return $queryPrepared->fetchAll();
+    }
 }

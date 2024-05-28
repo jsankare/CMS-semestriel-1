@@ -34,7 +34,7 @@
   Security: true
   Role: "UserController"
 
-/ajout-utilisateur:
+/users/create:
   Controller: "UserController"
   Action: "add"
   Security: true
@@ -52,11 +52,11 @@
   Security: True
   Role: "Guest"
 
-/list-utilisateurs:
+/users/home:
   Controller: "UserController"
   Action: "list"
   Security: true
-  Role: "Guest"
+  Role: "Admin"
 
 /maj-utilisateurs:
   Controller: "UserController"
