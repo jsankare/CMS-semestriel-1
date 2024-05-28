@@ -118,7 +118,7 @@
   Security: true
   Role: "Guest"
 
-/maj-article:
+/article/edit:
   Controller: ArticleController
   Action: "edit"
   Security: true

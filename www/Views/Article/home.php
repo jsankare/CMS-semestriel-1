@@ -21,7 +21,8 @@
                         <h3>Contenu</h3><p class="article--content__value" ><?php echo htmlspecialchars($article->getContent()); ?></p>
                     </li>
                 </div>
-                <a href="/article/delete?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__trash" src="/assets/trash.svg" ></a>
+                <a class="article--icon__link" href="/article/delete?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__trash" src="/assets/trash.svg" ></a>
+                <a class="article--icon__link" href="/article/edit?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__update" src="/assets/update.svg" ></a>
             </div>
             <?php endforeach; ?>
             </section>
