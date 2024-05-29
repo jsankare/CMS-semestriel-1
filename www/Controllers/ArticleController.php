@@ -97,7 +97,7 @@ class ArticleController
                 $view->assign('articleForm', $articleForm->build());
                 $view->render();
             } else {
-                echo "Article non trouvé";
+                echo "Article non trouvé !";
             }
         } else {
             echo "ID article non spécifié";
