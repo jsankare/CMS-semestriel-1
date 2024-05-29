@@ -100,7 +100,7 @@ class ArticleController
                 echo "Article non trouvé !";
             }
         } else {
-            echo "ID article non spécifié";
+            echo "ID article non spécifié !";
         }
     }
 
