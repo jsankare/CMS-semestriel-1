@@ -582,6 +582,12 @@ form {
   border-radius: 1000rem;
   padding: 0.5rem;
 }
+.navbar--list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .navbar--list__links {
   display: flex;
   flex-direction: column;

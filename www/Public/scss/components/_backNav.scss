@@ -31,6 +31,10 @@
     }
   }
   &--list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &__links {
       display: flex;
       flex-direction: column;

@@ -3,7 +3,7 @@ namespace App\Forms;
 class PageForm
 {
 
-    public static function getConfig(): array
+    public static function getConfig(array $data = []): array
     {
         return [
             "config"=>[
@@ -19,7 +19,8 @@ class PageForm
                     "placeholder"=>"Titre de la page",
                     "label"=>"Titre",
                     "required"=>true,
-                    "error"=>"Le titre de la page doit faire entre 2 et 50 caractères"
+                    "error"=>"Le titre de la page doit faire entre 2 et 50 caractères",
+                    "value" => $data['title'] ?? ''
                 ],
                 "content"=>[
                     "type"=>"textarea",
@@ -27,7 +28,8 @@ class PageForm
                     "label"=>"Description",
                     "required"=>true,
                     "max"=>255,
-                    "error"=>"La description de la page ne peut pas faire plus de 255 caractères"
+                    "error"=>"La description de la page ne peut pas faire plus de 255 caractères",
+                    "value" => $data['title'] ?? ''
                 ]
             ]
 
