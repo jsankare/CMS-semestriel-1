@@ -11,10 +11,5 @@ class MainController
         //$view->setTemplate("Front");
         $view->render();
     }
-    public function logout()
-    {
-        //Déconnexion
-        //Redirection
-    }
 
 }

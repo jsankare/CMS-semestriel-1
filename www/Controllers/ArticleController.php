@@ -11,17 +11,7 @@ use App\Models\User;
 class ArticleController
 {
 
-    public function delete(): void
-    {
-
-    }
-
     public function show(): void
-    {
-
-    }
-
-    public function edit(): void
     {
 
     }
@@ -52,7 +42,6 @@ class ArticleController
 
     public function list(): void
     {
-        $user = (new User())->findOneById($_SESSION['user_id']);
 
         $articleModel = new Article();
         $articles = $articleModel->findAll();
@@ -61,5 +50,59 @@ class ArticleController
         $view->assign('articles', $articles);
         $view->render();
     }
+
+    public function delete(): void
+    {
+        if (isset($_GET['id'])) {
+            $articleId = intval($_GET['id']);
+            $article = (new Article())->findOneById($articleId);
+
+            if ($article) {
+                $article->delete();
+                header('Location: /article/home');
+                exit();
+            } else {
+                echo "Article non trouvé";
+            }
+        } else {
+            echo "ID article non spécifié";
+        }
+    }
+
+    public function edit(): void
+    {
+        if (isset($_GET['id'])) {
+            $articleId = intval($_GET['id']);
+            $article = (new Article())->findOneById($articleId);
+
+            if ($article) {
+                $articleForm = new Form("Article");
+                $articleForm->setValues([
+                    'title' => $article->getTitle(),
+                    'description' => $article->getDescription(),
+                    'content' => $article->getContent()
+                ]);
+
+                if ($articleForm->isSubmitted() && $articleForm->isValid()) {
+                    $article->setTitle($_POST['title']);
+                    $article->setDescription($_POST['description']);
+                    $article->setContent($_POST['content']);
+                    $article->save();
+
+                    header('Location: /article/home');
+                    exit();
+                }
+
+                $view = new View("Article/edit", "back");
+                $view->assign('articleForm', $articleForm->build());
+                $view->render();
+            } else {
+                echo "Article non trouvé !";
+            }
+        } else {
+            echo "ID article non spécifié !";
+        }
+    }
+
 
 }

@@ -7,15 +7,17 @@
         <?php if (!empty($pages)): ?>
             <section class="page--wrapper__close" >
             <?php foreach ($pages as $page): ?>
-            <div class="page--wrapper__unit" >
-                <li>
-                    <h3>Nom de page</h3><p><?php echo htmlspecialchars($page->getTitle()); ?></p>
-                </li>
-                <li>
-                    <h3>Description de page</h3><p><?php echo htmlspecialchars($page->getContent()); ?></p>
-                </li>
-                <img class="page--icon page--icon__trash" src="/assets/trash.svg" >
-            </div>
+
+                <div class="page--wrapper__unit" >
+                    <li>
+                        <h3>Titre</h3><p><?php echo htmlspecialchars($page->getTitle()); ?></p>
+                    </li>
+                    <li>
+                        <h3>Description</h3><p><?php echo htmlspecialchars($page->getContent()); ?></p>
+                    </li>
+                    <a class="page--icon__link" href="/page/update?id=<?php echo $page->getId(); ?>"><img class="page--icon page--icon__update" src="/assets/update.svg" ></a>
+                    <a class="page--icon__link" href="/page/delete?id=<?php echo $page->getId(); ?>"><img class="page--icon page--icon__trash" src="/assets/trash.svg" ></a>
+                </div>
             <?php endforeach; ?>
             </section>
         <?php else: ?>

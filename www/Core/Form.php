@@ -8,6 +8,7 @@ class Form
 {
     private $config;
     private $errors = [];
+    private $values = [];
 
     public function __construct(string $name)
     {
@@ -17,6 +18,15 @@ class Form
         include "../Forms/${name}Form.php";
         $name = "App\\Forms\\${name}Form";
         $this->config = $name::getConfig();
+    }
+
+    public function setValues(array $values): void
+    {
+        foreach ($values as $key => $value) {
+            if (isset($this->config["inputs"][$key])) {
+                $this->config["inputs"][$key]['value'] = $value;
+            }
+        }
     }
 
     public function build(): string
@@ -66,7 +76,11 @@ class Form
                 if (isset($input["required"]) && $input["required"]) {
                     $html .= " required";
                 }
-                $html .= "></textarea>";
+                $html .= ">";
+                if (isset($input["value"])) {
+                    $html .= htmlspecialchars($input["value"]);
+                }
+                $html .= "</textarea>";
             } else {
                 $html .= "
                 <input
@@ -78,6 +92,9 @@ class Form
                 }
                 if (isset($input["required"]) && $input["required"]) {
                     $html .= " required";
+                }
+                if (isset($input["value"])) {
+                    $html .= " value='" . htmlspecialchars($input["value"]) . "'";
                 }
                 $html .= ">
                 <br>
@@ -157,3 +174,4 @@ class Form
         return empty($this->errors); // If true return true
     }
 }
+

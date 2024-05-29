@@ -101,6 +101,15 @@ class Article extends SQL
         return $queryPrepared->fetch();
     }
 
+    public function findOneById(string $id) {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([":id" => $id]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Article');
+        return $queryPrepared->fetch();
+    }
+
     public function findAll() {
         $sql = "SELECT * FROM {$this->table}";
 
@@ -108,5 +117,39 @@ class Article extends SQL
         $queryPrepared->execute();
         $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Article');
         return $queryPrepared->fetchAll();
+    }
+
+    public function delete(): void
+    {
+        if (!empty($this->getId())) {
+            $sql = "DELETE FROM {$this->table} WHERE id = :id";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([':id' => $this->getId()]);
+        }
+    }
+
+    public function save(): void
+    {
+        if (!empty($this->getId())) {
+            $sql = "UPDATE {$this->table} SET title = :title, content = :content, description = :description, creator_id = :creator_id WHERE id = :id";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([
+                ':title' => $this->getTitle(),
+                ':content' => $this->getContent(),
+                ':description' => $this->getDescription(),
+                ':creator_id' => $this->getCreatorId(),
+                ':id' => $this->getId(),
+            ]);
+        } else {
+            $sql = "INSERT INTO {$this->table} (title, content, description, creator_id) VALUES (:title, :content, :description, :creator_id)";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([
+                ':title' => $this->getTitle(),
+                ':content' => $this->getContent(),
+                ':description' => $this->getDescription(),
+                ':creator_id' => $this->getCreatorId(),
+            ]);
+            $this->id = $this->pdo->lastInsertId();
+        }
     }
 }
