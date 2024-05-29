@@ -20,6 +20,9 @@
                         <li class="navbar--list__link"><a href="/page/home">Pages</a></li>
                         <li class="navbar--list__link"><a href="/article/home">Articles</a></li>
                     </ul>
+                    <ul class="navbar--list__links">
+                        <li class="navbar--list__link"><a href="/logout">Se déconnecter</a></li>
+                    </ul>
                 </section>
             </aside>
             <section class="content" >
