@@ -7,24 +7,28 @@
         <?php if (!empty($users)): ?>
             <section class="user--wrapper__close" >
                 <?php foreach ($users as $user): ?>
-                <div class="user--wrapper__unit" >
-                    <li>
-                        <h3>Id utilisateur</h3><p><?php echo htmlspecialchars($user->getId()); ?></p>
-                    </li>
-                    <li>
-                        <h3>Prénom</h3><p><?php echo htmlspecialchars($user->getFirstName()); ?></p>
-                    </li>
-                    <li>
-                        <h3>Nom</h3><p><?php echo htmlspecialchars($user->getLastName()); ?></p>
-                    </li>
-                    <li>
-                        <h3>Email</h3><p><?php echo htmlspecialchars($user->getEmail()); ?></p>
-                    </li>
-                    <li>
-                        <h3>Status</h3><p><?php echo htmlspecialchars($user->getStatus()); ?></p>
-                    </li>
-                    <a href="/users/delete?id=<?php echo $user->getId(); ?>" ><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur" ></a>
-                </div>
+                    <div class="user--wrapper__unit" >
+                        <li>
+                            <h3>Id utilisateur</h3><p><?php echo htmlspecialchars($user->getId()); ?></p>
+                        </li>
+                        <li>
+                            <h3>Prénom</h3><p><?php echo htmlspecialchars($user->getFirstName()); ?></p>
+                        </li>
+                        <li>
+                            <h3>Nom</h3><p><?php echo htmlspecialchars($user->getLastName()); ?></p>
+                        </li>
+                        <li>
+                            <h3>Email</h3><p><?php echo htmlspecialchars($user->getEmail()); ?></p>
+                        </li>
+                        <li>
+                            <h3>Status</h3><p><?php echo htmlspecialchars($user->getStatus()); ?></p>
+                        </li>
+                        <div>
+                            <a href="/users/edit?id=<?php echo $user->getId(); ?>" ><img class="user--icon user--icon__edit" src="/assets/update.svg" alt="Modifier utilisateur" ></a>
+                            <a href="/users/delete?id=<?php echo $user->getId(); ?>" ><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur" ></a>
+                        </div>
+                    </div>
+
                 <?php endforeach; ?>
             </section>
         <?php else: ?>

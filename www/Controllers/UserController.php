@@ -28,10 +28,7 @@ class UserController
     {
         echo "Affichage d'un user";
     }
-    public function edit(): void
-    {
 
-    }
     public function add(): void
     {
         $user = (new User())->findOneById($_SESSION['user_id']);
@@ -66,5 +63,42 @@ class UserController
         $view->assign('users', $users);
         $view->render();
     }
+
+    public function edit(): void
+    {
+        if (isset($_GET['id'])) {
+            $userId = intval($_GET['id']);
+            $user = (new User())->findOneById($userId);
+
+            if ($user) {
+                $userForm = new Form("User");
+                $userForm->setValues([
+                    'firstname' => $user->getFirstname(),
+                    'lastname' => $user->getLastname(),
+                    'email' => $user->getEmail(),
+                ]);
+
+                if ($userForm->isSubmitted() && $userForm->isValid()) {
+                    $user->setFirstname($_POST["firstname"]);
+                    $user->setLastname($_POST["lastname"]);
+                    $user->setEmail($_POST["email"]);
+                    $user->setPassword($_POST["password"]);
+                    $user->save();
+
+                    header('Location: /users/home');
+                    exit();
+                }
+
+                $view = new View("Users/edit", "back");
+                $view->assign('userForm', $userForm->build());
+                $view->render();
+            } else {
+                echo "User non trouvé !";
+            }
+        } else {
+            echo "ID user non spécifié !";
+        }
+    }
+
 
 }

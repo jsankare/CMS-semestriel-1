@@ -58,7 +58,7 @@
   Security: true
   Role: "Admin"
 
-/maj-utilisateurs:
+/users/edit:
   Controller: UserController
   Action: "edit"
   Security: true
@@ -88,7 +88,7 @@
   Security: True
   Role: "Guest"
 
-/maj-page:
+/page/edit:
   Controller: PageController
   Action: "edit"
   Security: true
