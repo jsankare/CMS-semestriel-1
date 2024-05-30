@@ -8,6 +8,7 @@ class Page extends SQL
 {
     private ?int $id=null;
     protected string $title;
+    protected string $description;
     protected string $content;
     protected int $creator_id;
 
@@ -41,6 +42,22 @@ class Page extends SQL
     public function setTitle(string $title): void
     {
         $this->title = strtolower(trim($title));
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     /**
@@ -114,19 +131,21 @@ class Page extends SQL
     public function save(): void
     {
         if (!empty($this->getId())) {
-            $sql = "UPDATE {$this->table} SET title = :title, content = :content, creator_id = :creator_id WHERE id = :id";
+            $sql = "UPDATE {$this->table} SET title = :title, description = :description, content = :content, creator_id = :creator_id WHERE id = :id";
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute([
                 ':title' => $this->getTitle(),
+                ':description' => $this->getDescription(),
                 ':content' => $this->getContent(),
                 ':creator_id' => $this->getCreatorId(),
                 ':id' => $this->getId(),
             ]);
         } else {
-            $sql = "INSERT INTO {$this->table} (title, content, creator_id) VALUES (:title, :content, :creator_id)";
+            $sql = "INSERT INTO {$this->table} (title, description, content, creator_id) VALUES (:title, :description, :content, :creator_id)";
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute([
                 ':title' => $this->getTitle(),
+                ':description' => $this->getDescription(),
                 ':content' => $this->getContent(),
                 ':creator_id' => $this->getCreatorId(),
             ]);

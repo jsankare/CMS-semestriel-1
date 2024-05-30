@@ -28,6 +28,7 @@ class PageController
             }
             $page = new Page();
             $page->setTitle($_POST["title"]);
+            $page->setDescription($_POST["description"]);
             $page->setContent($_POST["content"]);
             $page->setCreatorId($user->getId());
             $page->save();
@@ -79,11 +80,13 @@ class PageController
                 $pageForm = new Form("Page");
                 $pageForm->setValues([
                     'title' => $page->getTitle(),
+                    'description' => $page->getDescription(),
                     'content' => $page->getContent()
                 ]);
 
                 if ($pageForm->isSubmitted() && $pageForm->isValid()) {
                     $page->setTitle($_POST['title']);
+                    $page->setDescription($_POST['description']);
                     $page->setContent($_POST['content']);
                     $page->save();
 

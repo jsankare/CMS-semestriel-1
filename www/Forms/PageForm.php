@@ -22,13 +22,20 @@ class PageForm
                     "error"=>"Le titre de la page doit faire entre 2 et 50 caractères",
                     "value" => $data['title'] ?? ''
                 ],
+                "description" => [
+                    "type" => "textarea",
+                    "max" => 50,
+                    "placeholder" => "Description de la page",
+                    "label" => "Description",
+                    "required" => false,
+                    "error" => "La description ne peut pas faire plus de 50 caractères",
+                    "value" => $data['description'] ?? ''
+                ],
                 "content"=>[
                     "type"=>"textarea",
-                    "placeholder"=>"Entrez ici une description de la page",
-                    "label"=>"Description",
+                    "placeholder"=>"Entrez ici le contenu de la page de la page",
+                    "label"=>"Contenu",
                     "required"=>true,
-                    "max"=>255,
-                    "error"=>"La description de la page ne peut pas faire plus de 255 caractères",
                     "value" => $data['title'] ?? ''
                 ]
             ]
