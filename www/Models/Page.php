@@ -110,4 +110,27 @@ class Page extends SQL
             $queryPrepared->execute([':id' => $this->getId()]);
         }
     }
+
+    public function save(): void
+    {
+        if (!empty($this->getId())) {
+            $sql = "UPDATE {$this->table} SET title = :title, content = :content, creator_id = :creator_id WHERE id = :id";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([
+                ':title' => $this->getTitle(),
+                ':content' => $this->getContent(),
+                ':creator_id' => $this->getCreatorId(),
+                ':id' => $this->getId(),
+            ]);
+        } else {
+            $sql = "INSERT INTO {$this->table} (title, content, creator_id) VALUES (:title, :content, :creator_id)";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([
+                ':title' => $this->getTitle(),
+                ':content' => $this->getContent(),
+                ':creator_id' => $this->getCreatorId(),
+            ]);
+            $this->id = $this->pdo->lastInsertId();
+        }
+    }
 }

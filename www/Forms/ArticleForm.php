@@ -9,7 +9,7 @@ class ArticleForm
             "config" => [
                 "action" => "",
                 "method" => "POST",
-                "submit" => "Enregistrer"
+                "submit" => "Enregistrer mon article"
             ],
             "inputs" => [
                 "title" => [

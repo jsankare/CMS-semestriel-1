@@ -9,7 +9,7 @@ class PageForm
             "config"=>[
                 "action"=>"",
                 "method"=>"POST",
-                "submit"=>"Créer une page"
+                "submit"=>"Enregister ma page"
             ],
             "inputs"=>[
                 "title"=>[
