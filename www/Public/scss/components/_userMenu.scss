@@ -16,16 +16,14 @@
     min-width: 1.5rem;
   }
   &--wrapper {
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2.5rem;
-    &__separator {
-      width: 80%;
-      height: 1px;
-      background-color: black;
+    ul {
+      width: 100%;
     }
     &__close {
       border-radius: 1rem;
@@ -39,10 +37,10 @@
     }
     &__unit {
       width: 100%;
-      max-width: 90%;
+      max-width: 95%;
       display: grid;
       gap: 1rem;
-      grid-template-columns: 2fr 2fr 2fr;
+      grid-template-columns: 1fr 1fr 1fr;
       justify-content: center;
       align-items: center;
       text-align: center;
