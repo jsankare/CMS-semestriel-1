@@ -5,6 +5,11 @@
     </section>
     <ul>
         <?php if (!empty($pages)): ?>
+            <?php
+            usort($pages, function($a, $b) {
+                return $a->getId() <=> $b->getId();
+            });
+            ?>
             <section class="page--wrapper__close" >
             <?php foreach ($pages as $page): ?>
 
