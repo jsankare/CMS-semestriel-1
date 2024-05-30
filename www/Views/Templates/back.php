@@ -12,7 +12,7 @@
                 <a class="navbar--logo__link" href="/dashboard">
                     <img class="navbar--logo__picture" src="/assets/logo.svg">
                 </a>
-                <h3>Bonjour <?php echo $user->getFirstName(); ?></h3>
+<!--                <h3>Bonjour --><?php //echo $user->getFirstName(); ?><!--</h3>-->
                 <section class="navbar--list" >
                     <ul class="navbar--list__links">
                         <li class="navbar--list__link"><a href="/dashboard">Aller au dashboard</a></li>

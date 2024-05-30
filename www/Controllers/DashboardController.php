@@ -2,15 +2,11 @@
 namespace App\Controller;
 
 use App\Core\View;
+use App\Models\Page;
 use App\Models\User;
 
 class DashboardController
 {
-
-    public function delete(): void
-    {
-
-    }
 
     public function show(): void
     {
@@ -21,9 +17,12 @@ class DashboardController
         } else {
             $currentUser = null;
         }
+        $pageModel = new Page();
+        $pages = $pageModel->findAll();
 
         $view = new View("Main/dashboard", "back");
         $view->assign('user', $currentUser);
+        $view->assign('pages', $pages);
         $view->render();
     }
 
