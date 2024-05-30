@@ -5,6 +5,11 @@
     </section>
     <ul>
         <?php if (!empty($articles)): ?>
+            <?php
+            usort($articles, function($a, $b) {
+                return $a->getId() <=> $b->getId();
+            });
+            ?>
             <section class="article--wrapper__close" >
             <?php foreach ($articles as $article): ?>
             <div class="article--wrapper__unit" >
