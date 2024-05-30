@@ -36,7 +36,8 @@ DROP TABLE IF EXISTS public.esgi_page CASCADE;
 CREATE TABLE public.esgi_page (
     id SERIAL PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
-    content VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    content VARCHAR NOT NULL,
     creator_id INT NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY (creator_id) REFERENCES public.esgi_user(id),
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -49,10 +50,8 @@ CREATE TABLE public.esgi_article (
     title VARCHAR(50) NOT NULL,
     description VARCHAR(50),
     content VARCHAR NOT NULL,
-    creator_id INT NOT NULL,
-    anchor_page INT NOT NULL,
+    creator_id SMALLINT NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY (creator_id) REFERENCES public.esgi_user(id),
-    CONSTRAINT fk_page FOREIGN KEY (anchor_page) REFERENCES public.esgi_page(id),
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
