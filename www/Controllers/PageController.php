@@ -14,11 +14,6 @@ class PageController
 
     }
 
-    public function edit(): void
-    {
-
-    }
-
     public function add(): void
     {
 
@@ -34,7 +29,7 @@ class PageController
             $page = new Page();
             $page->setTitle($_POST["title"]);
             $page->setContent($_POST["content"]);
-            $page->setCreatorId($user->getId()); // Ajout id du createur
+            $page->setCreatorId($user->getId());
             $page->save();
         }
 
@@ -71,6 +66,39 @@ class PageController
             }
         } else {
             echo "ID page non spécifié";
+        }
+    }
+
+    public function edit(): void
+    {
+        if (isset($_GET['id'])) {
+            $pageId = intval($_GET['id']);
+            $page = (new Page())->findOneById($pageId);
+
+            if ($page) {
+                $pageForm = new Form("Page");
+                $pageForm->setValues([
+                    'title' => $page->getTitle(),
+                    'content' => $page->getContent()
+                ]);
+
+                if ($pageForm->isSubmitted() && $pageForm->isValid()) {
+                    $page->setTitle($_POST['title']);
+                    $page->setContent($_POST['content']);
+                    $page->save();
+
+                    header('Location: /page/home');
+                    exit();
+                }
+
+                $view = new View("Page/edit", "back");
+                $view->assign('pageForm', $pageForm->build());
+                $view->render();
+            } else {
+                echo "Page non trouvé !";
+            }
+        } else {
+            echo "ID page non spécifié !";
         }
     }
 

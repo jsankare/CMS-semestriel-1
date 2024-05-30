@@ -71,7 +71,7 @@ class UserController
             $user = (new User())->findOneById($userId);
 
             if ($user) {
-                $userForm = new Form("User");
+                $userForm = new Form("UpdateUser");
                 $userForm->setValues([
                     'firstname' => $user->getFirstname(),
                     'lastname' => $user->getLastname(),
@@ -82,7 +82,6 @@ class UserController
                     $user->setFirstname($_POST["firstname"]);
                     $user->setLastname($_POST["lastname"]);
                     $user->setEmail($_POST["email"]);
-                    $user->setPassword($_POST["password"]);
                     $user->save();
 
                     header('Location: /users/home');
