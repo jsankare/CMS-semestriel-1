@@ -1,10 +1,10 @@
    /* Style de la navbar */
    .navbar {
     overflow: hidden;
-    background-color: #001f3f; 
+    background-color: #001f3f; /* Couleur bleu nuit */
   }
 
- 
+  /* Liens de la navbar */
   .navbar a {
     float: left;
     display: block;
@@ -14,9 +14,9 @@
     text-decoration: none;
   }
 
-  
+  /* Changement de couleur de fond lors du survol */
   .navbar a:hover {
-    background-color: #555; 
+    background-color: #555; /* Couleur gris foncé */
     color: white;
   }
 
@@ -28,12 +28,12 @@
     background-color: #f4f4f4;
   }
 
-
+  /* Style du contenu de la page */
   .content {
     padding: 20px;
   }
 
-  
+  /* Style du titre principal */
   h1 {
-    color: #001f3f; 
+    color: #001f3f; /* Couleur bleu nuit */
   }

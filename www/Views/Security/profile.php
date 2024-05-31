@@ -7,12 +7,10 @@
   <link rel="stylesheet" href="./css/navbar.css">
 </head>
 <body>
-
-  <!-- Code de la Navbar -->
+  <!-- Navbar -->
   <div class="navbar">
     <a href="#">Accueil</a>
     <a href="#">Profil</a>
-
     <!-- Liens vers les pages récupérées depuis la base de données -->
     <?php
     if (isset($pages) && !empty($pages)) {
@@ -31,7 +29,6 @@
   <p>Nom: <?= htmlspecialchars($authUser->getLastname(), ENT_QUOTES, 'UTF-8') ?></p>
   <p>Email: <?= htmlspecialchars($authUser->getEmail(), ENT_QUOTES, 'UTF-8') ?></p>
   <p>session id: <?= htmlspecialchars($_SESSION['user_id'], ENT_QUOTES, 'UTF-8') ?></p>
-  <a href="/dashboard">dashboard</a>
 
 </body>
 </html>
