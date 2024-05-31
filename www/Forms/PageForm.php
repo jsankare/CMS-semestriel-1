@@ -1,8 +1,8 @@
 <?php
 namespace App\Forms;
+
 class PageForm
 {
-
     public static function getConfig(array $data = []): array
     {
         return [
@@ -23,7 +23,7 @@ class PageForm
                     "value" => $data['title'] ?? ''
                 ],
                 "description" => [
-                    "type" => "textarea",
+                    "type" => "text",
                     "max" => 50,
                     "placeholder" => "Description de la page",
                     "label" => "Description",
@@ -33,13 +33,12 @@ class PageForm
                 ],
                 "content"=>[
                     "type"=>"textarea",
-                    "placeholder"=>"Entrez ici le contenu de la page de la page",
+                    "placeholder"=>"Entrez ici le contenu de la page",
                     "label"=>"Contenu",
                     "required"=>true,
-                    "value" => $data['title'] ?? ''
+                    "value" => $data['content'] ?? ''
                 ]
             ]
-
         ];
     }
 }
