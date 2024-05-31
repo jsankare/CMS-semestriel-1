@@ -7,10 +7,12 @@
   <link rel="stylesheet" href="./css/navbar.css">
 </head>
 <body>
-  <!-- Navbar -->
+
+  <!-- Code de la Navbar -->
   <div class="navbar">
     <a href="#">Accueil</a>
     <a href="#">Profil</a>
+
     <!-- Liens vers les pages récupérées depuis la base de données -->
     <?php
     if (isset($pages) && !empty($pages)) {
