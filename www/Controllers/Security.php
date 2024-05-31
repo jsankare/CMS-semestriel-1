@@ -5,6 +5,7 @@ use App\Core\Form;
 use App\Core\View;
 use App\Models\User;
 use App\Models\Article;
+use App\Models\Page;
 
 class Security
 {
@@ -70,9 +71,13 @@ class Security
             die;
         }
 
+        $pageModel = new Page();
+        $pages = $pageModel->findAll();
+
         echo'Page profile';
         $view = new View("Security/profile", "front");
         $view->assign("authUser", $user);
+        $view->assign("pages", $pages);
         $view->render();
     }
 }
