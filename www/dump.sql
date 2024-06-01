@@ -56,8 +56,6 @@ CREATE TABLE public.esgi_article (
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-
 DROP TABLE IF EXISTS public.esgi_comment CASCADE;
 DROP TYPE IF EXISTS comment_status CASCADE;
 CREATE TYPE comment_status AS ENUM ('pending', 'approved', 'rejected');
