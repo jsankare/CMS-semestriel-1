@@ -75,7 +75,6 @@ class Security
         $pageModel = new Page();
         $pages = $pageModel->findAll();
         
-
         echo'Page profile';
         $view = new View("Security/profile", "front");
         $view->assign("authUser", $user);
