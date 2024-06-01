@@ -57,6 +57,18 @@ CREATE TABLE public.esgi_article (
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS public.esgi_comments CASCADE;
+CREATE TABLE esgi_comments (
+    id SERIAL PRIMARY KEY,
+    article_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+    FOREIGN KEY (article_id) REFERENCES articles(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)
+
 -- On supprime les lignes concernant les index et AUTO_INCREMENT car déjà gérés par SERIAL
 
 COMMIT;
