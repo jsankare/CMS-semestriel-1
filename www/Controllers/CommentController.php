@@ -27,6 +27,7 @@ class CommentController
 
         $view = new View("Comment/add", "front");
         $view->assign('commentForm', $commentForm->build());
+        $view->assign('error', 'Le formulaire n\'a pas été soumis ou n\'est pas valide.');
         $view->render();
     }
 
