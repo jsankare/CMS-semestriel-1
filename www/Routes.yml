@@ -154,6 +154,7 @@
   Security: True
   Role: "Guest"
 
+
 /comment/home:
   Controller: CommentController
   Action: "list"
