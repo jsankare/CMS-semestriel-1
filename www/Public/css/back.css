@@ -622,4 +622,14 @@ form {
   content: url("/assets/arrow-right.svg");
 }
 
+.navbar--list__link a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar--list__link  li a:hover {
+  color: var(--white-hover); /* Vous pouvez changer cette valeur selon la couleur souhaitée */
+}
+
 /*# sourceMappingURL=back.css.map */
