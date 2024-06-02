@@ -31,5 +31,57 @@ class CommentController
         $view->render();
     }
 
+    public function moderate(): void
+    {
+        $comments = (new Comment())->findAll();
+
+        if ($comments) {
+            $view = new View("Comment/moderate", "back");
+            $view->assign('comments', $comments);
+            $view->render();
+        } else {
+            echo 'Aucun commentaire à modérer.';
+        }
+    }
+
+    public function approve(): void
+    {
+        if (isset($_GET['id'])) {
+            $comment = (new Comment())->findOneById($_GET['id']);
+            if ($comment) {
+                $comment->setStatus('approved');
+                $comment->save();
+            } else {
+                echo 'Commentaire non trouvé.';
+                exit();
+            }
+        } else {
+            echo 'ID de commentaire non spécifié.';
+            exit();
+        }
+
+        header('Location: /comment/moderate');
+        exit();
+    }
+
+    public function reject(): void
+    {
+        if (isset($_GET['id'])) {
+            $comment = (new Comment())->findOneById($_GET['id']);
+            if ($comment) {
+                $comment->delete();
+            } else {
+                echo 'Commentaire non trouvé.';
+                exit();
+            }
+        } else {
+            echo 'ID de commentaire non spécifié.';
+            exit();
+        }
+
+        header('Location: /comment/moderate');
+        exit();
+    }
+
     
 }
