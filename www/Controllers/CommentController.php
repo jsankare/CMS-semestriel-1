@@ -11,7 +11,7 @@ class CommentController
 {
     public function add(): void
     {
-        $commentForm = new Form("Comments");
+        $commentForm = new Form("Comment");
         $article_id = $_GET['article_id'];
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
@@ -24,11 +24,21 @@ class CommentController
 
             header('Location: /article/home');
             exit();
-        } else {
-            $view = new View("Comment/create", "back");
-            $view->assign('commentForm', $commentForm->build());
-            $view->assign('article_id', $article_id);
-            $view->assign('error', 'Le formulaire n\'a pas été soumis ou n\'est pas valide.');
+        }
+
+        $view = new View("Comment/add", "front");
+        $view->assign('commentForm', $commentForm->build());
+        $view->assign('error', 'Le formulaire n\'a pas été soumis ou n\'est pas valide.');
+        $view->render();
+    }
+
+    public function moderate(): void
+    {
+        $comments = (new Comment())->findAll();
+
+        if ($comments) {
+            $view = new View("Comment/moderate", "back");
+            $view->assign('comments', $comments);
             $view->render();
         }
     }
@@ -59,58 +69,6 @@ class CommentController
         $view = new View("Comment/home", "back");
         $view->assign('comments', $comments);
         $view->render();
-    }
-
-    public function moderate(): void
-    {
-        $comments = (new Comment())->findAll();
-
-        if ($comments) {
-            $view = new View("Comment/moderate", "back");
-            $view->assign('comments', $comments);
-            $view->render();
-        } else {
-            echo 'Aucun commentaire à modérer.';
-        }
-    }
-
-    public function approve(): void
-    {
-        if (isset($_GET['id'])) {
-            $comment = (new Comment())->findOneById($_GET['id']);
-            if ($comment) {
-                $comment->setStatus('approved');
-                $comment->save();
-            } else {
-                echo 'Commentaire non trouvé.';
-                exit();
-            }
-        } else {
-            echo 'ID de commentaire non spécifié.';
-            exit();
-        }
-
-        header('Location: /comment/moderate');
-        exit();
-    }
-
-    public function reject(): void
-    {
-        if (isset($_GET['id'])) {
-            $comment = (new Comment())->findOneById($_GET['id']);
-            if ($comment) {
-                $comment->delete();
-            } else {
-                echo 'Commentaire non trouvé.';
-                exit();
-            }
-        } else {
-            echo 'ID de commentaire non spécifié.';
-            exit();
-        }
-
-        header('Location: /comment/moderate');
-        exit();
     }
 
     
