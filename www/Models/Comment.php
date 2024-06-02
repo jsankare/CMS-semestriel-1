@@ -10,7 +10,6 @@ class Comment extends SQL
     protected int $article_id;
     protected int $user_id;
     protected string $content;
-    protected string $created_at;
     protected string $status;
 
     public function getId(): ?int
@@ -48,11 +47,6 @@ class Comment extends SQL
         $this->content = $content;
     }
 
-    public function getCreatedAt(): string
-    {
-        return $this->created_at;
-    }
-
     public function getStatus(): string
     {
         return $this->status;
@@ -63,41 +57,12 @@ class Comment extends SQL
         $this->status = $status;
     }
 
-    public function findAllByArticleId(int $article_id)
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE article_id = :article_id ORDER BY created_at DESC";
 
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute([":article_id" => $article_id]);
-        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Comment');
-        return $queryPrepared->fetchAll();
-    }
-
-
-    public function save(): void
-    {
-        if (!empty($this->getId())) {
-            $sql = "UPDATE {$this->table} SET article_id = :article_id, user_id = :user_id, content = :content, status = :status WHERE id = :id";
-            $queryPrepared = $this->pdo->prepare($sql);
-            $queryPrepared->execute([
-                ':article_id' => $this->getArticleId(),
-                ':user_id' => $this->getUserId(),
-                ':content' => $this->getContent(),
-                ':status' => $this->getStatus(),
-                ':id' => $this->getId(),
-            ]);
-        } else {
-            $sql = "INSERT INTO {$this->table} (article_id, user_id, content, status) VALUES (:article_id, :user_id, :content, :status)";
-            $queryPrepared = $this->pdo->prepare($sql);
-            $queryPrepared->execute([
-                ':article_id' => $this->getArticleId(),
-                ':user_id' => $this->getUserId(),
-                ':content' => $this->getContent(),
-                ':status' => $this->getStatus(),
-            ]);
-            $this->id = $this->pdo->lastInsertId();
-        }
-    }
+     public function getTitle(): string
+     {
+         $article = (new Article())->findOneById($this->article_id);
+         return $article ? $article->getTitle() : 'Article non trouvé';
+     }
 
     public function findOneById(string $id)
     {
@@ -128,5 +93,28 @@ class Comment extends SQL
         }
     }
 
-
+    public function save(): void
+    {
+        if (!empty($this->getId())) {
+            $sql = "UPDATE {$this->table} SET article_id = :article_id, user_id = :user_id, content = :content, status = :status WHERE id = :id";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([
+                ':article_id' => $this->getArticleId(),
+                ':user_id' => $this->getUserId(),
+                ':content' => $this->getContent(),
+                ':status' => $this->getStatus(),
+                ':id' => $this->getId(),
+            ]);
+        } else {
+            $sql = "INSERT INTO {$this->table} (article_id, user_id, content, status) VALUES (:article_id, :user_id, :content, :status)";
+            $queryPrepared = $this->pdo->prepare($sql);
+            $queryPrepared->execute([
+                ':article_id' => $this->getArticleId(),
+                ':user_id' => $this->getUserId(),
+                ':content' => $this->getContent(),
+                ':status' => $this->getStatus(),
+            ]);
+            $this->id = $this->pdo->lastInsertId();
+        }
+    }
 }
