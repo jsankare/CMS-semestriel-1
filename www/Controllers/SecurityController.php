@@ -97,8 +97,8 @@ class SecurityController
         $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
         $phpmailer->SMTPAuth = true;
         $phpmailer->Port = 587;
-        $phpmailer->Username = 'db085c96052e83';
-        $phpmailer->Password = '343dd0d258d9f1';
+        $phpmailer->Username = 'CHANGE';
+        $phpmailer->Password = 'CHANGE';
 
         $phpmailer->setFrom('info@mailtrap.io', 'Mailtrap');
         $phpmailer->addReplyTo('info@mailtrap.io', 'Mailtrap');
