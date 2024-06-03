@@ -618,4 +618,28 @@ form {
   content: url("/assets/arrow-right.svg");
 }
 
+.dashboard {
+  width: 100%;
+}
+.dashboard--title__content {
+  text-align: left;
+}
+.dashboard--matter {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+.dashboard--content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: purple;
+}
+.dashboard--content__main {
+  width: 100%;
+}
+.dashboard--content__aside {
+  width: 100%;
+  justify-self: flex-end;
+}
+
 /*# sourceMappingURL=back.css.map */
