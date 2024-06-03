@@ -16,19 +16,16 @@ document.addEventListener("DOMContentLoaded", function() {
         [{ 'font': [] }],
         [{ 'align': [] }],
 
-        ['clean'],                                         // remove formatting button
+        ['clean'],                                        // remove formatting button
 
-        ['link', 'image']                                  // link and image
+        ['link', 'image']                                 // link and image
     ];
 
     const quill = new Quill('#editor', {
         placeholder: 'Entrez votre contenu ici',
         theme: 'snow',
         modules: {
-            toolbar: toolbarOptions,
-            imageResize: {
-                modules: ['Resize', 'DisplaySize', 'Toolbar']
-            }
+            toolbar: toolbarOptions
         }
     });
 

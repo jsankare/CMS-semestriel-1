@@ -51,10 +51,10 @@ class Form
             }
 
             if ($input["type"] == "textarea" && $name == "content") {
-                $content = isset($input["value"]) && !empty($input["value"]) ? htmlspecialchars($input["value"]) : '';
+                $content = isset($input["value"]) && !empty($input["value"]) ? $input["value"] : '';
                 $html .= "<div id='editor'>{$content}</div>";
-                $html .= "<input type='hidden' name='{$name}' value=''>";
-            }  else if ($input["type"] == "textarea") {
+                $html .= "<input type='hidden' name='{$name}' id='hidden_{$name}' value=''>";
+            } else if ($input["type"] == "textarea") {
                 $html .= "<textarea class='input input--{$name}' id='{$name}' name='{$name}'";
                 if (isset($input["placeholder"])) {
                     $html .= " placeholder='" . htmlspecialchars($input["placeholder"]) . "'";
