@@ -2,3 +2,5 @@
 
 <?= $form ?>
 
+<a href="/register" >Créer un compte</a>
+
