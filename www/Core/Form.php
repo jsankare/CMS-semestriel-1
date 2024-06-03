@@ -47,28 +47,14 @@ class Form
             $html .= "<div class='input--wrapper'>";
 
             if (isset($input["label"])) {
-                $html .= "
-                <label
-                    class='label label--{$name}'
-                    for='{$name}'>
-                    {$input["label"]}
-                </label>
-                ";
+                $html .= "<label class='label label--{$name}' for='{$name}'>{$input["label"]}</label>";
             }
 
-            if ($input["type"] == "checkbox") {
-                $html .= "
-                <div class='checkbox-wrapper-19'>
-                    <input
-                        type='checkbox'
-                        class='input input--{$name}'
-                        id='{$name}'
-                        name='{$name}'";
-                if (isset($input["required"]) && $input["required"]) {
-                    $html .= " required";
-                }
-                $html .= "><label for='{$name}' class='check-box'></label></div>";
-            } elseif ($input["type"] == "textarea") {
+            if ($input["type"] == "textarea" && $name == "content") {
+                $content = isset($input["value"]) && !empty($input["value"]) ? $input["value"] : '';
+                $html .= "<div id='editor'>{$content}</div>";
+                $html .= "<input type='hidden' name='{$name}' id='hidden_{$name}' value=''>";
+            } else if ($input["type"] == "textarea") {
                 $html .= "<textarea class='input input--{$name}' id='{$name}' name='{$name}'";
                 if (isset($input["placeholder"])) {
                     $html .= " placeholder='" . htmlspecialchars($input["placeholder"]) . "'";
@@ -82,11 +68,7 @@ class Form
                 }
                 $html .= "</textarea>";
             } else {
-                $html .= "
-                <input
-                    class='input input--{$name}'
-                    type='{$input["type"]}'
-                    name='{$name}'";
+                $html .= "<input class='input input--{$name}' type='{$input["type"]}' name='{$name}'";
                 if (isset($input["placeholder"])) {
                     $html .= " placeholder='{$input["placeholder"]}'";
                 }
@@ -96,9 +78,7 @@ class Form
                 if (isset($input["value"])) {
                     $html .= " value='" . htmlspecialchars($input["value"]) . "'";
                 }
-                $html .= ">
-                <br>
-                ";
+                $html .= ">";
             }
 
             $html .= "</div>";  // Close the input--wrapper div

@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Ceci est mon back</title>
         <meta name="description" content="Super site avec une magnifique intégration">
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
         <link rel="stylesheet" href="/css/back.css">
     </head>
     <body>
@@ -31,5 +32,8 @@
                 <?php include "../Views/".$this->view.".php";?>
             </section>
         </main>
+        <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/quill-image-resize-module/3.0.0/image-resize.min.js"></script>
+        <script src="/js/quill.js"></script>
     </body>
 </html>
