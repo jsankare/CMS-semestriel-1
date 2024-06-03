@@ -50,7 +50,7 @@ class Security
             $user->setPassword($_POST["password"]);
             $user->save();
             header('Location: http://localhost/login');
-        } elseif($form->isSubmitted() && !$form->isValid()) {
+        } elseif($form->isSubmitted() && !($form->isValid())) {
             $form->setValues([
                 "firstname"=> $_POST["firstname"],
                 "lastname"=> $_POST["lastname"],
