@@ -27,10 +27,14 @@ class ArticleController
                 echo "Ce nom d'article est déjà pris";
                 exit;
             }
+
+            $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
+            $content = strip_tags($_POST["content"], $allowed_tags);
+
             $article = new Article();
             $article->setTitle($_POST["title"]);
             $article->setDescription($_POST["description"]);
-            $article->setContent($_POST["content"]);
+            $article->setContent($content);
             $article->setCreatorId($user->getId());
             $article->save();
         }
