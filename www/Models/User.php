@@ -11,8 +11,8 @@ class User extends SQL
     protected string $lastname;
     protected string $email;
     protected string $password;
+    protected string $validationCode;
     protected int $status = 0;
-
 
 
     /**
@@ -45,6 +45,22 @@ class User extends SQL
     public function setFirstname(string $firstname): void
     {
         $this->firstname = ucwords(strtolower(trim($firstname)));
+    }
+
+        /**
+     * @return string
+     */
+    public function getValidationCode(): string
+    {
+        return $this->validationCode;
+    }
+
+    /**
+     * @param string $validationCode
+     */
+    public function setValidationCode(string $validationCode): void
+    {
+        $this->validationCode = $validationCode;
     }
 
     /**

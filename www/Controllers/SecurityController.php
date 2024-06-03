@@ -6,8 +6,9 @@ use App\Core\View;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Page;
+use PHPMailer\PHPMailer\PHPMailer;
 
-class Security
+class SecurityController
 {
 
     public function login(): void
@@ -43,12 +44,19 @@ class Security
                 echo "Un user existe déjà avec cette adresse email";
                 exit;
             }
+
+            $validationCode = md5(uniqid(rand(), true));
+
             $user = new User(); // Initialisation d'un nouveau UserController
             $user->setFirstname($_POST["firstname"]);
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
+            $user->setValidationCode($validationCode);
             $user->save();
+
+            $this->emailValidation($user);
+
             header('Location: http://localhost/login');
         }
 
@@ -82,4 +90,54 @@ class Security
         $view->assign("pages", $pages); // Passer les pages à la vue
         $view->render();
     }
+
+    private function emailValidation(User $user): void {
+        $phpmailer = new PHPMailer();
+        $phpmailer->isSMTP();
+        $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->Port = 587;
+        $phpmailer->Username = 'db085c96052e83';
+        $phpmailer->Password = '343dd0d258d9f1';
+
+        $phpmailer->setFrom('info@mailtrap.io', 'Mailtrap');
+        $phpmailer->addReplyTo('info@mailtrap.io', 'Mailtrap');
+        $phpmailer->addAddress($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname());
+        $validationCode = $user->getValidationCode();
+
+        $validationUrl = 'http://localhost/accountVerification?email=' . urlencode($user->getEmail()) . '&code=' . $validationCode;
+
+        $phpmailer->isHTML(true);
+        $phpmailer->Subject = 'Bonjour '. $user->getFirstname() .' !';
+        $phpmailer->Body    = '<h1>Votre code de validation</h1><p>Cliquez sur le lien ci-dessous pour activer votre compte</p><a href="' . $validationUrl . '">Cliquez ici</a>';
+        $phpmailer->AltBody = 'Veuillez activer votre HTML pour accéder au code d\'activation de votre compte';
+
+        if ($phpmailer->send()) {
+            echo 'Message has been sent';
+        } else {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
+        }
+    }
+
+
+    public function accountVerification(): void {
+        if (isset($_GET['email']) && isset($_GET['code'])) {
+            $email = $_GET['email'];
+            $validationCode = $_GET['code'];
+            $user = (new User())->findOneByEmail($email);
+
+            if ($user && $user->getValidationCode() === $validationCode) {
+                $user->setStatus(1);
+                $user->setValidationCode(null);
+                $user->save();
+                echo "Votre compte a été confirmé avec succès!";
+            } else {
+                echo "Code de validation invalide ou adresse email incorrecte.";
+            }
+        } else {
+            echo "Aucun code de validation ou adresse email fournis.";
+        }
+    }
+
 }

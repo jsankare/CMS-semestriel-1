@@ -6,6 +6,8 @@ use App\Core\Security;
 
 session_start(); // Débute la session, toujours en haut du fichier
 
+require '../vendor/autoload.php';
+
 //Notre Autoloader
 spl_autoload_register("App\myAutoloader");
 

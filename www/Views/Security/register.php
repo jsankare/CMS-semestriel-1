@@ -2,3 +2,4 @@
 
 <?= $form ?>
 
+<a href="/login">login</a>
