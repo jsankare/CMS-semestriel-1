@@ -369,34 +369,19 @@ form {
 
 .navbar {
   overflow: hidden;
-  background-color: #001f3f;
+  background-color: #00356c;
 }
 .navbar a {
   float: left;
   display: block;
-  color: white;
+  color: #e6e6e6;
   text-align: center;
   padding: 14px 20px;
   text-decoration: none;
 }
 .navbar a:hover {
-  background-color: #555;
-  color: white;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
-.content {
-  padding: 20px;
-}
-
-h1 {
-  color: #001f3f;
+  background-color: #4d4d4d;
+  color: #e6e6e6;
 }
 
 /*# sourceMappingURL=front.css.map */
