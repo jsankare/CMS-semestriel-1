@@ -1,37 +1,19 @@
+@use "sass:color";
 
 .navbar {
   overflow: hidden;
-  background-color: #001f3f; 
+  background-color: color.scale(#001f3f, $lightness: 10%);
 
- a {
+  a {
     float: left;
     display: block;
-    color: white;
+    color: color.adjust(#fff, $lightness: -10%);
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
     &:hover {
-      background-color: #555; 
-      color: white;
+      background-color: color.scale(#555, $lightness: -10%);
+      color: color.adjust(#fff, $lightness: -10%);
     }
   }
 }
-
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
-.content {
-  padding: 20px;
-}
-
-
-h1 {
-  color: #001f3f; 
-}
-
-
