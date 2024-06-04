@@ -11,11 +11,11 @@
   <div class="navbar">
     <a href="#">Accueil</a>
     <a href="#">Profil</a>
-    <!-- Liens vers les pages récupérées depuis la base de données -->
+  
     <?php
     if (isset($pages) && !empty($pages)) {
         foreach ($pages as $page) {
-            echo "<a href='/page/show?id={$page->getId()}'>{$page->getTitle()}</a>";
+            echo "<a href='/page/showPage?id={$page->getId()}'>{$page->getTitle()}</a>";
         }
     }
     ?>
