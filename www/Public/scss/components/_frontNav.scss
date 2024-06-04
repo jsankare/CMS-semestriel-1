@@ -16,4 +16,8 @@
       color: color.adjust(#fff, $lightness: -10%);
     }
   }
+
+  .logout {
+    float: right;
+  }
 }
