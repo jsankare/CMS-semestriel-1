@@ -58,27 +58,19 @@ CREATE TABLE public.esgi_article (
 );
 
 
-DROP TABLE IF EXISTS public.esgi_comments CASCADE;
-
-
+DROP TABLE IF EXISTS public.esgi_comment CASCADE;
 DROP TYPE IF EXISTS comment_status CASCADE;
-
--- Créer le type enum
 CREATE TYPE comment_status AS ENUM ('pending', 'approved', 'rejected');
-
-
-CREATE TABLE esgi_comments (
+CREATE TABLE esgi_comment (
     id SERIAL PRIMARY KEY,
     article_id INT NOT NULL,
     user_id INT NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status comment_status DEFAULT 'pending',
-    FOREIGN KEY (article_id) REFERENCES articles(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (article_id) REFERENCES public.esgi_article(id),
+    FOREIGN KEY (user_id) REFERENCES public.esgi_user(id)
 );
 
-
--- On supprime les lignes concernant les index et AUTO_INCREMENT car déjà gérés par SERIAL
 
 COMMIT;

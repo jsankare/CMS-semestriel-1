@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,19 +11,20 @@
     </head>
     <body>
             <!-- Navbar -->
+    <?php if (isset($_SESSION['user_id'])): ?>
     <div class="navbar">
         <a href="#">Accueil</a>
-        <a href="#">Profil</a>
         
         <?php
         if (isset($pages) && !empty($pages)) {
             foreach ($pages as $page) {
-                echo "<a href='/page/show?id={$page->getId()}'>{$page->getTitle()}</a>";
+                echo "<a href='/page/showPage?id={$page->getId()}'>{$page->getTitle()}</a>";
             }
         }
         ?>
-        <a href="/security/logout">Déconnexion</a>
+            <a href="/security/logout" class="logout">Déconnexion</a>
     </div>
+    <?php endif; ?>
         <h1>Template Front - CMS</h1>
         <!-- intégration de la vue -->
         <?php include "../Views/".$this->view.".php";?>
