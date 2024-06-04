@@ -94,6 +94,12 @@
   Security: true
   Role: "Admin"
 
+/page/showPage:
+  Controller: PageController
+  Action: "show"
+  Security: true
+  Role: "Guest"
+
 /article/create:
   Controller: ArticleController
   Action: "add"
@@ -141,7 +147,6 @@
   Action: "show"
   Security: True
   Role: "Guest"
-
 
 /comment/home:
   Controller: CommentController
