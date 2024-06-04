@@ -383,5 +383,8 @@ form {
   background-color: #4d4d4d;
   color: #e6e6e6;
 }
+.navbar .logout {
+  float: right;
+}
 
 /*# sourceMappingURL=front.css.map */

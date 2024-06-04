@@ -12,9 +12,9 @@
     <body>
     <?php if (isset($_SESSION['user_id'])): ?>
             <!-- Navbar -->
+    <?php if (isset($_SESSION['user_id'])): ?>
     <div class="navbar">
         <a href="#">Accueil</a>
-        <a href="#">Profil</a>
         
         <?php
         if (isset($pages) && !empty($pages)) {
@@ -23,7 +23,7 @@
             }
         }
         ?>
-        <a href="/security/logout">Déconnexion</a>
+            <a href="/security/logout" class="logout">Déconnexion</a>
     </div>
     <?php endif; ?>
         <h1>Template Front - CMS</h1>

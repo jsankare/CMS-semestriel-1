@@ -11,7 +11,7 @@ class CommentController
 {
     public function add(): void
     {
-        $commentForm = new Form("Comment");
+        $commentForm = new Form("Comments");
         $article_id = $_GET['article_id'];
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
