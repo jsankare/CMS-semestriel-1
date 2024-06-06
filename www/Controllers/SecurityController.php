@@ -45,14 +45,14 @@ class SecurityController
                 exit;
             }
 
-            $validationCode = md5(uniqid(rand(), true));
+            $validation_code = md5(uniqid(rand(), true));
 
             $user = new User(); // Initialisation d'un nouveau UserController
             $user->setFirstname($_POST["firstname"]);
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
-            $user->setValidationCode($validationCode);
+            $user->setValidationCode($validation_code);
             $user->save();
 
             $this->emailValidation($user);
@@ -103,9 +103,9 @@ class SecurityController
         $phpmailer->setFrom($_ENV['PHPMAILER_ADDRESS_FROM'], 'Mailtrap');
         $phpmailer->addReplyTo($_ENV['PHPMAILER_ADDRESS_FROM'], 'Mailtrap');
         $phpmailer->addAddress($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname());
-        $validationCode = $user->getValidationCode();
+        $validation_code = $user->getValidationCode();
 
-        $validationUrl = $_ENV['BASE_URL'] . '/accountVerification?email=' . urlencode($user->getEmail()) . '&code=' . $validationCode;
+        $validationUrl = $_ENV['BASE_URL'] . '/accountVerification?email=' . urlencode($user->getEmail()) . '&code=' . $validation_code;
         $phpmailer->isHTML(true);
         $phpmailer->Subject = 'Bonjour '. $user->getFirstname() .' !';
         $phpmailer->Body    = '<h1>Votre code de validation</h1><p>Cliquez sur le lien ci-dessous pour activer votre compte</p><a href="' . $validationUrl . '">Cliquez ici</a><p>Si le lien ne s\'affiche pas correctement, vous pouvez coller ce lien dans votre URL :</p>' .$validationUrl;
@@ -123,12 +123,11 @@ class SecurityController
     public function accountVerification(): void {
         if (isset($_GET['email']) && isset($_GET['code'])) {
             $email = $_GET['email'];
-            $validationCode = $_GET['code'];
+            $validation_code = $_GET['code'];
             $user = (new User())->findOneByEmail($email);
 
-            if ($user && $user->getValidationCode() === $validationCode) {
+            if ($user && $user->getValidationCode() === $validation_code) {
                 $user->setStatus(1);
-                $user->setValidationCode(null);
                 $user->save();
                 echo "Votre compte a été confirmé avec succès!";
             } else {

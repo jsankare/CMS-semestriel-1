@@ -28,7 +28,7 @@ CREATE TABLE public.esgi_user (
     email VARCHAR(320) NOT NULL,
     password VARCHAR(255) NOT NULL,
     status SMALLINT NOT NULL,
-    validationCode VARCHAR(32),
+    validation_code VARCHAR(32),
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

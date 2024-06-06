@@ -80,7 +80,7 @@ $isProtected = $listOfRoutes[$uri]["Security"];
 $securityGuard = new Security();
 
 if($isProtected && !$securityGuard->isLogged()) {
-    echo 'Vous devez être connecté pour voir cetet page';
+    echo 'Vous devez être connecté pour voir cette page';
     die();
 }
 
