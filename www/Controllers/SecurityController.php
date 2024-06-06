@@ -22,7 +22,7 @@ class SecurityController
                 if (password_verify($_POST["password"], $user->getPassword())) {
                     // on store le user ID dans la session
                     $_SESSION['user_id'] = $user->getId();
-                    header('Location: http://localhost/profile');
+                    header('Location: ' . $_ENV['BASE_URL'] . '/profile');
                 }
             } else {
                 echo "Invalid email or password";
@@ -57,7 +57,7 @@ class SecurityController
 
             $this->emailValidation($user);
 
-            header('Location: http://localhost/login');
+            header('Location: ' . $_ENV['BASE_URL'] . '/login');
         }
 
         $view = new View("Security/register"); // Création de la vue (page HTML)
@@ -67,7 +67,7 @@ class SecurityController
     public function logout(): void
     {
         unset($_SESSION['user_id']);
-        header('Location: http://localhost/login');
+        header('Location: ' . $_ENV['BASE_URL'] . '/login');
     }
 
     public function profile(): void
@@ -94,28 +94,27 @@ class SecurityController
     private function emailValidation(User $user): void {
         $phpmailer = new PHPMailer();
         $phpmailer->isSMTP();
-        $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+        $phpmailer->Host = $_ENV['PHPMAILER_HOST'];
         $phpmailer->SMTPAuth = true;
-        $phpmailer->Port = 587;
-        $phpmailer->Username = 'CHANGE';
-        $phpmailer->Password = 'CHANGE';
+        $phpmailer->Port = $_ENV['PHPMAILER_PORT'];
+        $phpmailer->Username = $_ENV['PHPMAILER_USERNAME'];
+        $phpmailer->Password = $_ENV['PHPMAILER_PASSWORD'];
 
-        $phpmailer->setFrom('info@mailtrap.io', 'Mailtrap');
-        $phpmailer->addReplyTo('info@mailtrap.io', 'Mailtrap');
+        $phpmailer->setFrom($_ENV['PHPMAILER_ADDRESS_FROM'], 'Mailtrap');
+        $phpmailer->addReplyTo($_ENV['PHPMAILER_ADDRESS_FROM'], 'Mailtrap');
         $phpmailer->addAddress($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname());
         $validationCode = $user->getValidationCode();
 
-        $validationUrl = 'http://localhost/accountVerification?email=' . urlencode($user->getEmail()) . '&code=' . $validationCode;
-
+        $validationUrl = $_ENV['BASE_URL'] . '/accountVerification?email=' . urlencode($user->getEmail()) . '&code=' . $validationCode;
         $phpmailer->isHTML(true);
         $phpmailer->Subject = 'Bonjour '. $user->getFirstname() .' !';
-        $phpmailer->Body    = '<h1>Votre code de validation</h1><p>Cliquez sur le lien ci-dessous pour activer votre compte</p><a href="' . $validationUrl . '">Cliquez ici</a>';
+        $phpmailer->Body    = '<h1>Votre code de validation</h1><p>Cliquez sur le lien ci-dessous pour activer votre compte</p><a href="' . $validationUrl . '">Cliquez ici</a><p>Si le lien ne s\'affiche pas correctement, vous pouvez coller ce lien dans votre URL :</p>' .$validationUrl;
         $phpmailer->AltBody = 'Veuillez activer votre HTML pour accéder au code d\'activation de votre compte';
 
         if ($phpmailer->send()) {
-            echo 'Message has been sent';
+            echo 'Le message a bien été envoyé';
         } else {
-            echo 'Message could not be sent.';
+            echo 'Le message n\a pas pu être envoyé';
             echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
         }
     }

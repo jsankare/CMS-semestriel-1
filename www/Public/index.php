@@ -7,6 +7,10 @@ use App\Core\Security;
 session_start(); // Débute la session, toujours en haut du fichier
 
 require '../vendor/autoload.php';
+require '../vendor/envLoader.php';
+
+// Charger les variables d'environnement
+loadEnv(__DIR__ . '/../.env');
 
 //Notre Autoloader
 spl_autoload_register("App\myAutoloader");
