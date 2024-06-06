@@ -1,14 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
-</head>
-<body>
-  
-  <h1><?= htmlspecialchars($page->getTitle(), ENT_QUOTES, 'UTF-8') ?></h1>
-  <p><?= htmlspecialchars($page->getContent(), ENT_QUOTES, 'UTF-8') ?></p>
-
-</body>
-</html>
+<section class="article--wrapper">
+    <h2>Commentaire</h2>
+    <ul>
+          <section class="article--wrapper__close">
+                <div class="article--wrapper__unit">
+                    <div class="article--infos">
+                        <li class="article--value">
+                            <h3>Article</h3>
+                            <p><?= htmlspecialchars($page->getTitle(), ENT_QUOTES, 'UTF-8') ?></p>
+                        </li>
+                        <li class="article--value">
+                            <h3>Commentaire</h3>
+                            <p><?= htmlspecialchars($page->getContent(), ENT_QUOTES, 'UTF-8') ?></p>
+                        </li>
+                    </div>
+                </div>
+               
+            </section>
+    </ul>
+</section>
