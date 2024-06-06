@@ -74,19 +74,11 @@ class Security
         // Récupération des pages
         $pageModel = new Page();
         $pages = $pageModel->findAll();
-        
-
     
-
-         // Récupération des pages
-        $pageModel = new Page();
-        $pages = $pageModel->findAll();
         
-
         $view = new View("Security/profile", "front");
         $view->assign("authUser", $user);
         $view->assign("pages", $pages); // Passer les pages à la vue
-        $view->assign("pages", $pages); // Passe les pages à la vue
         $view->render();
     }
 }
