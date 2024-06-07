@@ -12,14 +12,13 @@ class SQL
     public function __construct()
     {
         try{
-            $this->pdo = new PDO("pgsql:host=postgres;dbname=esgi;port=5432","esgi","esgipwd");
+            $this->pdo = new PDO("pgsql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']};port={$_ENV['DB_PORT']}", $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
 
         $classChild = get_called_class();
-        // Mettre le _esgi en .env
-        $this->table = "esgi_".strtolower(str_replace("App\\Models\\","",$classChild));
+        $this->table = $_ENV['DB_PREFIX'].strtolower(str_replace("App\\Models\\","",$classChild));
     }
 
     public function save()
@@ -33,8 +32,7 @@ class SQL
             $sql = "INSERT INTO ".$this->table. " (". implode(', ', array_keys($columns) ) .")  
         VALUES (:". implode(',:', array_keys($columns) ) .")";
         }else{
-
-            // UPDATE esgi_user SET firstname=:firstname, lastname=:lastname WHERE id=1
+            
             foreach ( $columns as $column=>$value){
                 $sqlUpdate[] = $column."=:".$column;
             }

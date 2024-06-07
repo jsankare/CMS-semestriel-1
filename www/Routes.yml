@@ -5,21 +5,27 @@
   Role: "Guest"
 
 /login:
-  Controller: Security
+  Controller: SecurityController
   Action: "login"
   Security: false
   Role: "Guest"
 
 /register:
-  Controller: Security
+  Controller: SecurityController
   Action: "register"
   Security: false
   Role: "Guest"
 
 /logout:
-  Controller: Security
+  Controller: SecurityController
   Action: "logout"
   Security: true
+  Role: "Guest"
+
+/accountVerification:
+  Controller: SecurityController
+  Action: "accountVerification"
+  Security: false
   Role: "Guest"
 
 /dashboard:
@@ -29,7 +35,7 @@
   Role: "Admin"
 
 /profile:
-  Controller: Security
+  Controller: SecurityController
   Action: "profile"
   Security: true
   Role: "UserController"

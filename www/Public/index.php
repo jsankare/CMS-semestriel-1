@@ -6,6 +6,12 @@ use App\Core\Security;
 
 session_start(); // Débute la session, toujours en haut du fichier
 
+require '../vendor/autoload.php';
+require '../vendor/envLoader.php';
+
+// Charger les variables d'environnement
+loadEnv(__DIR__ . '/../.env');
+
 //Notre Autoloader
 spl_autoload_register("App\myAutoloader");
 
@@ -74,7 +80,7 @@ $isProtected = $listOfRoutes[$uri]["Security"];
 $securityGuard = new Security();
 
 if($isProtected && !$securityGuard->isLogged()) {
-    echo 'Vous devez être connecté pour voir cetet page';
+    echo 'Vous devez être connecté pour voir cette page';
     die();
 }
 
