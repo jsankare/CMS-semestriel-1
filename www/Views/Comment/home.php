@@ -1,8 +1,5 @@
 <section class="article--wrapper">
     <h2>Menu des commentaires</h2>
-    <section class="article--navigation">
-        <a href="/article/home"><img class="article--icon" src="/assets/add.svg" alt="Mettre un commentaire" ></a>
-    </section>
     <ul>
         <?php if (!empty($comments)): ?>
             <?php
