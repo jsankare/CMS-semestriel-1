@@ -15,15 +15,16 @@ class SecurityController
     {
         $form = new Form("Login");
         if( $form->isSubmitted() && $form->isValid() ) {
-            // Met toutes les infos du user correspondant dans une variable
             $user = (new User())->findOneByEmail($_POST["email"]);
             if ($user) {
-                // Compare le password saisi par l'user et celui correspondant au mail en DB
-                if (password_verify($_POST["password"], $user->getPassword())) {
-                    // on store le user ID dans la session
-                    $_SESSION['user_id'] = $user->getId();
-                    header('Location: ' . $_ENV['BASE_URL'] . '/profile');
+                if ($user->getStatus() == 0) {
+                    echo "Vous devez valider votre compte avant de vous connecter";
+                } elseif (password_verify($_POST["password"], $user->getPassword())) {
+                   // on store le user ID dans la session
+                   $_SESSION['user_id'] = $user->getId();
+                   header('Location: ' . $_ENV['BASE_URL'] . '/profile');
                 }
+                // Compare le password saisi par l'user et celui correspondant au mail en DB
             } else {
                 echo "Invalid email or password";
             }
