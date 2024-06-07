@@ -1,5 +1,7 @@
-<h2>S'inscrire</h2>
-
-<?= $form ?>
-<p>Vous avez déjà un compte ? <a href="/login" >Se connecter</a></p>
-
+<main class="main--connections">
+    <h2>Créer un compte</h2>
+    <section class="form">
+        <?= $form ?>
+    </section>
+    <a href="/login">Se connecter</a>
+</main>
