@@ -35,6 +35,10 @@ class UpdateUserForm
                     "error"=>"Votre email doit faire entre 8 et 320 caractères",
                     "value" => $data['title'] ?? ''
                 ],
+                "role"=>[
+                    "type"=> "select",
+                    "options"=>["Invité", "Utilisateur", "Éditeur", "Modérateur", "Administrateur"]
+                ]
             ]
         ];
     }
