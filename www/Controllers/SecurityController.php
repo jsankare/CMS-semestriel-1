@@ -19,12 +19,12 @@ class SecurityController
             if ($user) {
                 if ($user->getStatus() == 0) {
                     echo "Vous devez valider votre compte avant de vous connecter";
+                // Compare le password saisi par l'user et celui correspondant au mail en DB
                 } elseif (password_verify($_POST["password"], $user->getPassword())) {
                    // on store le user ID dans la session
                    $_SESSION['user_id'] = $user->getId();
                    header('Location: ' . $_ENV['BASE_URL'] . '/profile');
                 }
-                // Compare le password saisi par l'user et celui correspondant au mail en DB
             } else {
                 echo "Invalid email or password";
             }
@@ -46,6 +46,9 @@ class SecurityController
                 exit;
             }
 
+            $existingUsers = (new User())->findAll();
+            $status = count($existingUsers) === 0 ? 4 : 0;
+
             $validation_code = md5(uniqid(rand(), true));
 
             $user = new User(); // Initialisation d'un nouveau UserController
@@ -53,6 +56,7 @@ class SecurityController
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
+            $user->setStatus($status);
             $user->setValidationCode($validation_code);
             $user->save();
 
@@ -128,9 +132,13 @@ class SecurityController
             $user = (new User())->findOneByEmail($email);
 
             if ($user && $user->getValidationCode() === $validation_code) {
+                if ($user->getStatus() !== 0) {
+                    echo "Votre compte est déjà vérifié";
+                    die();
+                }
                 $user->setStatus(1);
                 $user->save();
-                echo "Votre compte a été confirmé avec succès!";
+                echo "Votre compte a été confirmé avec succès! Vous pouvez fermer cette fenêtre et aller sur l'écran de connexion";
             } else {
                 echo "Code de validation invalide ou adresse email incorrecte.";
             }

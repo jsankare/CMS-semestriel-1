@@ -40,11 +40,15 @@ class UserController
                 echo "Ce nom de user est déjà pris";
                 exit;
             }
+
+            $validation_code = md5(uniqid(rand(), true));
+
             $user = new User();
             $user->setFirstname($_POST["firstname"]);
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
+            $user->setValidationCode($validation_code);
             $user->save();
         }
 
