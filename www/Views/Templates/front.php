@@ -18,7 +18,7 @@
         <?php
         if (isset($pages) && !empty($pages)) {
             foreach ($pages as $page) {
-                echo "<a href='/page/show?id={$page->getId()}'>{$page->getTitle()}</a>";
+                echo "<a href='/page/showPage?id={$page->getId()}'>{$page->getTitle()}</a>";
             }
         }
         ?>
