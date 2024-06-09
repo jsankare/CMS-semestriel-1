@@ -10,6 +10,7 @@
 
     </head>
     <body>
+    <?php if (isset($_SESSION['user_id'])): ?>
             <!-- Navbar -->
     <div class="navbar">
         <a href="#">Accueil</a>
@@ -24,6 +25,7 @@
         ?>
         <a href="/security/logout">Déconnexion</a>
     </div>
+    <?php endif; ?>
         <h1>Template Front - CMS</h1>
         <!-- intégration de la vue -->
         <?php include "../Views/".$this->view.".php";?>
