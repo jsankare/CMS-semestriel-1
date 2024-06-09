@@ -90,7 +90,7 @@ class SecurityController
         $pages = $pageModel->findAll();
         
 
-        echo'Page profile';
+  
         $view = new View("Security/profile", "front");
         $view->assign("authUser", $user);
         $view->assign("pages", $pages); // Passer les pages à la vue
