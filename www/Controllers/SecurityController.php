@@ -71,10 +71,19 @@ class SecurityController
         $view->render(); // Render de la page HTML
     }
     public function logout(): void
-    {
-        unset($_SESSION['user_id']);
-        header('Location: ' . $_ENV['BASE_URL'] . '/login');
+{
+    unset($_SESSION['user_id']);
+    session_destroy();
+    header('Location: ' . $_ENV['BASE_URL'] . '/login');
+    exit(); 
+
+    //$view = new View("Security/logout");
+    if (isset($form)) {
+        $view->assign("form", $form->build());
     }
+    $view->render();
+}
+
 
     public function profile(): void
     {
