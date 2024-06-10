@@ -23,7 +23,7 @@
             }
         }
         ?>
-        <a href="/security/logout">Déconnexion</a>
+        <a href="/logout" class="logout">Déconnexion</a>
     </div>
     <?php endif; ?>
         <h1>Template Front - CMS</h1>
