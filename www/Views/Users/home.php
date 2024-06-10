@@ -52,11 +52,7 @@
                             <h3>Status</h3><p><?php echo htmlspecialchars($user->getStatus()) == 0 ? 'Non confirmé' : 'Confirmé'; ?></p>
                         </li>
                         <a class="user--edit--link" href="/users/edit?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__edit" src="/assets/update.svg" alt="Modifier utilisateur"></a>
-<<<<<<< HEAD
                         <a class="user--edit--link" href="/dashboard"><img class="user--icon user--icon__resetpassword" src="/assets/reset-password.svg" alt="Réinitialiser mot de passe"></a>
-=======
-                        <p></p>
->>>>>>> 687aee57d9af299f865bda26531abc738f4cf0a7
                         <a class="user--edit--link" href="/users/delete?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur"></a>
                     </div>
                 <?php endforeach; ?>

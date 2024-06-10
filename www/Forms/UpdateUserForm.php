@@ -37,7 +37,14 @@ class UpdateUserForm
                 ],
                 "role"=>[
                     "type"=> "select",
-                    "options"=>["Invité", "Utilisateur", "Éditeur", "Modérateur", "Administrateur"]
+                    "options"=>[
+                        0 => "Invité",
+                        1 => "Utilisateur",
+                        2 => "Éditeur",
+                        3 => "Modérateur",
+                        4 => "Administrateur"
+                    ],
+                    "value" => $data['status'] ?? 0
                 ]
             ]
         ];

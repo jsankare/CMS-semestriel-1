@@ -81,12 +81,14 @@ class UserController
                     'firstname' => $user->getFirstname(),
                     'lastname' => $user->getLastname(),
                     'email' => $user->getEmail(),
+                    'status' => $user->getStatus()
                 ]);
 
                 if ($userForm->isSubmitted() && $userForm->isValid()) {
                     $user->setFirstname($_POST["firstname"]);
                     $user->setLastname($_POST["lastname"]);
                     $user->setEmail($_POST["email"]);
+                    $user->setStatus(intval($_POST["role"]));
                     $user->save();
 
                     header('Location: /users/home');
