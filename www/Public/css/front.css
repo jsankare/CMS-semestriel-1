@@ -453,19 +453,19 @@ form {
 
 .navbar {
   overflow: hidden;
-  background-color: #00356c;
+  background-color: blue;
 }
 .navbar a {
   float: left;
   display: block;
-  color: #e6e6e6;
+  color: white;
   text-align: center;
   padding: 14px 20px;
   text-decoration: none;
 }
 .navbar a:hover {
-  background-color: #4d4d4d;
-  color: #e6e6e6;
+  background-color: grey;
+  color: black;
 }
 .navbar .logout {
   float: right;
