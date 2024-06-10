@@ -2,18 +2,19 @@
 
 .navbar {
   overflow: hidden;
-  background-color: color.scale(#001f3f, $lightness: 10%);
+  background-color: blue;
 
   a {
     float: left;
     display: block;
-    color: color.adjust(#fff, $lightness: -10%);
+    color: white;
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
+
     &:hover {
-      background-color: color.scale(#555, $lightness: -10%);
-      color: color.adjust(#fff, $lightness: -10%);
+      background-color: grey;
+      color: black;
     }
   }
 
