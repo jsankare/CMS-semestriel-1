@@ -112,6 +112,12 @@
   Security: true
   Role: "Guest"
 
+/page/showPage:
+  Controller: PageController
+  Action: "show"
+  Security: true
+  Role: "Guest"
+
 /article/create:
   Controller: ArticleController
   Action: "add"

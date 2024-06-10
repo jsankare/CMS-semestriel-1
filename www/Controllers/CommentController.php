@@ -24,21 +24,11 @@ class CommentController
 
             header('Location: /article/home');
             exit();
-        }
-
-        $view = new View("Comment/add", "front");
-        $view->assign('commentForm', $commentForm->build());
-        $view->assign('error', 'Le formulaire n\'a pas été soumis ou n\'est pas valide.');
-        $view->render();
-    }
-
-    public function moderate(): void
-    {
-        $comments = (new Comment())->findAll();
-
-        if ($comments) {
-            $view = new View("Comment/moderate", "back");
-            $view->assign('comments', $comments);
+        } else {
+            $view = new View("Comment/create", "back");
+            $view->assign('commentForm', $commentForm->build());
+            $view->assign('article_id', $article_id);
+            $view->assign('error', 'Le formulaire n\'a pas été soumis ou n\'est pas valide.');
             $view->render();
         }
     }
