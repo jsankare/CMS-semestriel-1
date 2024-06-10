@@ -35,6 +35,9 @@ class PageController
         $page->setContent($content);
         $page->setCreatorId($user->getId());
         $page->save();
+
+        header('Location: /page/home');
+        exit();
     }
 
     $view = new View("Page/create", "back");

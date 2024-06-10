@@ -84,6 +84,22 @@ if($isProtected && !$securityGuard->isLogged()) {
     die();
 }
 
+// Conversion pour comparaison dans mon Core/Security
+$roleHierarchy = [
+    'Guest' => 0,
+    'User' => 1,
+    'Editor' => 2,
+    'Moderator' => 3,
+    'Admin' => 4,
+];
+$requiredRole = $roleHierarchy[$role];
+
+// check si l'user actuel a un role suffisant
+if ($isProtected && !$securityGuard->hasRole($requiredRole)) {
+    echo 'Vous n\'avez pas les permissions nécessaires pour voir cette page';
+    die();
+}
+
 // Est-ce qu'il y a besoin d'un rôle pour accéder à la route ?
 
 //include "../Controllers/".$controller.".php";

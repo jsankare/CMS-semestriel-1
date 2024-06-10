@@ -20,7 +20,7 @@
   Controller: SecurityController
   Action: "logout"
   Security: true
-  Role: "Guest"
+  Role: "User"
 
 /accountVerification:
   Controller: SecurityController
@@ -32,13 +32,13 @@
   Controller: DashboardController
   Action: "show"
   Security: true
-  Role: "Admin"
+  Role: "Editor"
 
 /profile:
   Controller: SecurityController
   Action: "profile"
   Security: true
-  Role: "UserController"
+  Role: "User"
 
 /users/create:
   Controller: UserController
@@ -56,7 +56,7 @@
   Controller: UserController
   Action: "show"
   Security: True
-  Role: "Guest"
+  Role: "Admin"
 
 /users/home:
   Controller: UserController
@@ -74,58 +74,58 @@
   Controller: PageController
   Action: "list"
   Security: true
-  Role: "Admin"
+  Role: "Editor"
 
 /page/create:
   Controller: PageController
   Action: "add"
   Security: true
-  Role: "Admin"
+  Role: "Editor"
 
 /page/delete:
   Controller: PageController
   Action: "delete"
   Security: true
-  Role: "Admin"
+  Role: "Editor"
 
 /show-page:
   Controller: PageController
   Action: "show"
   Security: True
-  Role: "Guest"
+  Role: ""
 
 /page/edit:
   Controller: PageController
   Action: "edit"
   Security: true
-  Role: "Admin"
+  Role: "Editor"
 
 /article/create:
   Controller: ArticleController
   Action: "add"
   Security: true
-  Role: "Admin"
+  Role: "Editor"
 
 /article/delete:
   Controller: ArticleController
   Action: "delete"
   Security: true
-  Role: "Admin"
+  Role: "Editor"
 
 /show-article:
   Controller: ArticleController
   Action: "show"
   Security: True
-  Role: "Guest"
+  Role: ""
 
 /article/home:
   Controller: ArticleController
   Action: "list"
   Security: true
-  Role: "Guest"
+  Role: "Editor"
 
 /article/edit:
   Controller: ArticleController
   Action: "edit"
   Security: true
-  Role: "Admin"
+  Role: "Editor"

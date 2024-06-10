@@ -23,6 +23,7 @@ class SecurityController
                 } elseif (password_verify($_POST["password"], $user->getPassword())) {
                    // on store le user ID dans la session
                    $_SESSION['user_id'] = $user->getId();
+                   $_SESSION['user_status'] = $user->getStatus();
                    header('Location: ' . $_ENV['BASE_URL'] . '/profile');
                 }
             } else {

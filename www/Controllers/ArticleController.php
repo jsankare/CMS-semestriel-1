@@ -37,6 +37,9 @@ class ArticleController
             $article->setContent($content);
             $article->setCreatorId($user->getId());
             $article->save();
+
+            header('Location: /article/home');
+            exit();
         }
 
         $view = new View("Article/create", "Back");

@@ -49,6 +49,7 @@ class UserController
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
             $user->setValidationCode($validation_code);
+            $user->setStatus(1);
             $user->save();
         }
 
