@@ -424,6 +424,10 @@ ul li a {
   align-self: center;
 }
 
+.user--edit--link {
+  width: fit-content;
+  margin: 0 auto;
+}
 .user--iconsWrapper {
   display: flex;
   justify-content: space-evenly;

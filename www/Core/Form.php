@@ -67,6 +67,13 @@ class Form
                     $html .= htmlspecialchars($input["value"]);
                 }
                 $html .= "</textarea>";
+            } else if ($input["type"] == "select") {
+                $html .= "<select class='input input--{$name}' id='{$name}' name='{$name}'>";
+                foreach ($input["options"] as $value => $option) {
+                    $selected = isset($input["value"]) && $input["value"] == $value ? " selected" : "";
+                    $html .= "<option value='" . htmlspecialchars($value) . "'{$selected}>" . htmlspecialchars($option) . "</option>";
+                }
+                $html .= "</select>";
             } else {
                 $html .= "<input class='input input--{$name}' type='{$input["type"]}' name='{$name}'";
                 if (isset($input["placeholder"])) {
