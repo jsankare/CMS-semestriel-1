@@ -1,3 +1,3 @@
-<h1>User Update</h1>
+<h1>Modification d'utilisateur</h1>
 
 <?= $userForm ?>

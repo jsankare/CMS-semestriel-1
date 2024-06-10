@@ -23,17 +23,37 @@
                             <h3>Nom</h3><p><?php echo htmlspecialchars($user->getLastname()); ?></p>
                         </li>
                         <li>
-                            <h3>Rôle</h3><p><?php echo htmlspecialchars($user->getLastname()); ?></p>
+                            <h3>Rôle</h3><p>
+                            <?php
+                                switch ($user->getStatus()) {
+                                    case 4:
+                                        echo 'Administrateur';
+                                        break;
+                                    case 3:
+                                        echo 'Modérateur';
+                                        break;
+                                    case 2:
+                                        echo 'Éditeur';
+                                        break;
+                                    case 1:
+                                        echo 'Utilisateur';
+                                        break;
+                                    case 0:
+                                        echo 'Invité';
+                                        break;
+                                }
+                                ?>
+                            </p>
                         </li>
                         <li>
                             <h3>Email</h3><p><?php echo htmlspecialchars($user->getEmail()); ?></p>
                         </li>
                         <li>
-                            <h3>Status</h3><p><?php echo htmlspecialchars($user->getStatus()); ?></p>
+                            <h3>Status</h3><p><?php echo htmlspecialchars($user->getStatus()) == 0 ? 'Non confirmé' : 'Confirmé'; ?></p>
                         </li>
-                        <a href="/users/edit?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__edit" src="/assets/update.svg" alt="Modifier utilisateur"></a>
-                        <p></p>
-                        <a href="/users/delete?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur"></a>
+                        <a class="user--edit--link" href="/users/edit?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__edit" src="/assets/update.svg" alt="Modifier utilisateur"></a>
+                        <a class="user--edit--link" href="/dashboard"><img class="user--icon user--icon__resetpassword" src="/assets/reset-password.svg" alt="Réinitialiser mot de passe"></a>
+                        <a class="user--edit--link" href="/users/delete?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur"></a>
                     </div>
                 <?php endforeach; ?>
             </section>

@@ -40,11 +40,16 @@ class UserController
                 echo "Ce nom de user est déjà pris";
                 exit;
             }
+
+            $validation_code = md5(uniqid(rand(), true));
+
             $user = new User();
             $user->setFirstname($_POST["firstname"]);
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
             $user->setPassword($_POST["password"]);
+            $user->setValidationCode($validation_code);
+            $user->setStatus(1);
             $user->save();
         }
 
@@ -76,12 +81,14 @@ class UserController
                     'firstname' => $user->getFirstname(),
                     'lastname' => $user->getLastname(),
                     'email' => $user->getEmail(),
+                    'status' => $user->getStatus()
                 ]);
 
                 if ($userForm->isSubmitted() && $userForm->isValid()) {
                     $user->setFirstname($_POST["firstname"]);
                     $user->setLastname($_POST["lastname"]);
                     $user->setEmail($_POST["email"]);
+                    $user->setStatus(intval($_POST["role"]));
                     $user->save();
 
                     header('Location: /users/home');

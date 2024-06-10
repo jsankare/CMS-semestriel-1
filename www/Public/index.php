@@ -7,7 +7,7 @@ use App\Core\Security;
 session_start(); // Débute la session, toujours en haut du fichier
 
 require '../vendor/autoload.php';
-require '../vendor/envLoader.php';
+require '../config/envLoader.php';
 
 // Charger les variables d'environnement
 loadEnv(__DIR__ . '/../.env');
@@ -81,6 +81,22 @@ $securityGuard = new Security();
 
 if($isProtected && !$securityGuard->isLogged()) {
     echo 'Vous devez être connecté pour voir cette page';
+    die();
+}
+
+// Conversion pour comparaison dans mon Core/Security
+$roleHierarchy = [
+    'Guest' => 0,
+    'User' => 1,
+    'Editor' => 2,
+    'Moderator' => 3,
+    'Admin' => 4,
+];
+$requiredRole = $roleHierarchy[$role];
+
+// check si l'user actuel a un role suffisant
+if ($isProtected && !$securityGuard->hasRole($requiredRole)) {
+    echo 'Vous n\'avez pas les permissions nécessaires pour voir cette page';
     die();
 }
 
