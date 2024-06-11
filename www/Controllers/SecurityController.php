@@ -1,10 +1,8 @@
 <?php
 namespace App\Controller;
 use App\Core\Form;
-// use App\Core\Security as Auth;
 use App\Core\View;
 use App\Models\User;
-use App\Models\Article;
 use App\Models\Page;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -95,6 +93,17 @@ class SecurityController
         $view->assign("authUser", $user);
         $view->assign("pages", $pages); // Passer les pages à la vue
         $view->render();
+    }
+
+    public function passwordResetVerification(): void {
+        $phpmailer = new PHPMailer();
+        $phpmailer->isSMTP();
+        $phpmailer->Host = $_ENV['PHPMAILER_HOST'];
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->Port = $_ENV['PHPMAILER_PORT'];
+        $phpmailer->Username = $_ENV['PHPMAILER_USERNAME'];
+        $phpmailer->Password = $_ENV['PHPMAILER_PASSWORD'];
+        echo "Logique d'envoi de mail reset password";
     }
 
     private function emailValidation(User $user): void {
