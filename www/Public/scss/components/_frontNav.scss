@@ -1,0 +1,24 @@
+@use "sass:color";
+
+.navbar {
+  overflow: hidden;
+  background-color: blue;
+
+  a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+
+    &:hover {
+      background-color: grey;
+      color: black;
+    }
+  }
+
+  .logout {
+    float: right;
+  }
+}
