@@ -90,7 +90,7 @@ class UserController
                     $user->setFirstname($_POST["firstname"]);
                     $user->setLastname($_POST["lastname"]);
                     $user->setEmail($_POST["email"]);
-                    $user->setStatus(intval($_POST["role"]));
+                    $user->setStatus(intval($_POST["status"]));
                     $user->save();
 
                     header('Location: /users/home');

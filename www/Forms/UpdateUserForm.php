@@ -35,7 +35,7 @@ class UpdateUserForm
                     "error"=>"Votre email doit faire entre 8 et 320 caractères",
                     "value" => $data['title'] ?? ''
                 ],
-                "role"=>[
+                "status"=>[
                     "type"=> "select",
                     "options"=>[
                         0 => "Invité",
