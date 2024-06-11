@@ -13,8 +13,8 @@
     <?php if (isset($_SESSION['user_id'])): ?>
             <!-- Navbar -->
     <div class="navbar">
-        <a href="#">Accueil</a>
-        <a href="#">Profil</a>
+        <a href="/profile">Accueil</a>
+        <a href="/profile">Profil</a>
         
         <?php
         if (isset($pages) && !empty($pages)) {
