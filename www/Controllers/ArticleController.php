@@ -52,7 +52,6 @@ class ArticleController
 
         $articleModel = new Article();
         $articles = $articleModel->findAll();
-
         $view = new View("article/home", "back");
         $view->assign('articles', $articles);
         $view->render();

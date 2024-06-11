@@ -11,7 +11,20 @@ class PageController
 
     public function show(): void
     {
+        if (isset($_GET['id'])) {
+            $pageId = intval($_GET['id']);
+            $page = (new Page())->findOneById($pageId);
 
+            if ($page) {
+                $view = new View("Page/showPage", "front");
+                $view->assign('page', $page);
+                $view->render();
+            } else {
+                echo "Page non trouvée";
+            }
+        } else {
+            echo "ID page non spécifié";
+        }
     }
 
     public function add(): void

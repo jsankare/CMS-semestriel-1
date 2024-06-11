@@ -76,10 +76,23 @@ class Security
         $pages = $pageModel->findAll();
         
 
+<<<<<<< HEAD
         echo'Page profile';
         $view = new View("Security/profile", "front");
         $view->assign("authUser", $user);
         $view->assign("pages", $pages); // Passe les pages à la vue
+=======
+    
+
+         // Récupération des pages
+        $pageModel = new Page();
+        $pages = $pageModel->findAll();
+        
+
+        $view = new View("Security/profile", "front");
+        $view->assign("authUser", $user);
+        $view->assign("pages", $pages); // Passer les pages à la vue
+>>>>>>> 32c673ae7d6baf688961cd98c935b2abace073f2
         $view->render();
     }
 }

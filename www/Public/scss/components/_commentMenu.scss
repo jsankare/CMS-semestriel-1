@@ -1,18 +1,47 @@
-.page {
+
+
+
+
+
+.comment {
+  &--infos {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 4fr 2fr;
+    justify-content: center;
+    align-items: center;
+  }
   &--navigation {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
   }
+  &--value {
+  }
   &--icon {
     width: 100%;
     max-width: 2rem;
     min-width: 1.5rem;
-    &__link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    &__trash {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+    &__update {
+      position: absolute;
+      bottom: 1rem;
+      right: 0.8rem;
+    }
+  }
+  &--content {
+    width: 100%;
+    &__value {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      overflow: hidden;
+      width: 90%;
     }
   }
   &--wrapper {
@@ -44,17 +73,17 @@
     &__unit {
       width: 100%;
       max-width: 80%;
-      display: grid;
       gap: 1rem;
-      grid-template-columns: 3fr 6fr 2fr 2fr;
-      justify-content: center;
-      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       &:not(:last-child) {
         border-bottom: 1px solid black;
         padding-bottom: 1rem;
         margin-bottom: 1rem;
       }
-      img.page--icon {
+      img.article--icon {
         justify-self: center;
         align-self: center;
       }
