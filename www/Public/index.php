@@ -1,6 +1,6 @@
 <?php
 
-namespace Apps;
+namespace App;
 
 use App\Core\Security;
 
