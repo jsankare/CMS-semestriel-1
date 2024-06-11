@@ -40,6 +40,18 @@
   Security: true
   Role: "User"
 
+/users/home:
+  Controller: UserController
+  Action: "list"
+  Security: true
+  Role: "Admin"
+
+/users/reset-password:
+  Controller: SecurityController
+  Action: "resetPassword"
+  Security: true
+  Role: "Admin"
+
 /users/create:
   Controller: UserController
   Action: "add"
@@ -56,12 +68,6 @@
   Controller: UserController
   Action: "show"
   Security: True
-  Role: "Admin"
-
-/users/home:
-  Controller: UserController
-  Action: "list"
-  Security: true
   Role: "Admin"
 
 /users/edit:
