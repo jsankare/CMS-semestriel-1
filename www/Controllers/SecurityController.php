@@ -1,10 +1,8 @@
 <?php
 namespace App\Controller;
 use App\Core\Form;
-// use App\Core\Security as Auth;
 use App\Core\View;
 use App\Models\User;
-use App\Models\Article;
 use App\Models\Page;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -75,13 +73,7 @@ class SecurityController
     unset($_SESSION['user_id']);
     session_destroy();
     header('Location: ' . $_ENV['BASE_URL'] . '/login');
-    exit(); 
-
-    //$view = new View("Security/logout");
-    if (isset($form)) {
-        $view->assign("form", $form->build());
-    }
-    $view->render();
+    exit();
 }
 
 
@@ -97,13 +89,110 @@ class SecurityController
         // Récupération des pages
         $pageModel = new Page();
         $pages = $pageModel->findAll();
-        
-
   
         $view = new View("Security/profile", "front");
         $view->assign("authUser", $user);
         $view->assign("pages", $pages); // Passer les pages à la vue
         $view->render();
+    }
+
+    public function resetPassword(): void {
+
+        if (isset($_GET['id'])) {
+            $userId = intval($_GET['id']);
+            $user = (new User())->findOneById($userId);
+        } else {
+            echo "impossible de récupérer l'user";
+            exit();
+        }
+
+        $view = new View('Users/reset-password', 'back');
+        $view->assign('user', $user);
+        $view->render();
+    }
+
+    public function sendResetPassword(): void {
+
+        if (isset($_GET['id'])) {
+            $userId = intval($_GET['id']);
+            $user = (new User())->findOneById($userId);
+        } else {
+            echo "impossible de récupérer l'user";
+            exit();
+        }
+
+        $resetToken = md5(uniqid(rand(), true));
+        $resetTokenCreatedAt = new \DateTime();
+        $resetTokenCreatedAtFormatted = $resetTokenCreatedAt->format('Y-m-d H:i:s');
+
+        $phpmailer = new PHPMailer();
+        $phpmailer->isSMTP();
+        $phpmailer->Host = $_ENV['PHPMAILER_HOST'];
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->Port = $_ENV['PHPMAILER_PORT'];
+        $phpmailer->Username = $_ENV['PHPMAILER_USERNAME'];
+        $phpmailer->Password = $_ENV['PHPMAILER_PASSWORD'];
+
+        $phpmailer->setFrom($_ENV['PHPMAILER_ADDRESS_FROM'], 'Mailtrap');
+        $phpmailer->addReplyTo($_ENV['PHPMAILER_ADDRESS_FROM'], 'Mailtrap');
+        $phpmailer->addAddress($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname());
+
+        $user->setResetToken($resetToken);
+        $user->setTokenExpiration($resetTokenCreatedAtFormatted);
+        $user->save();
+
+        $resetPasswordURL = $_ENV['BASE_URL'] . '/resetPassword?email=' . urlencode($user->getEmail()) . '&code=' . $resetToken;
+        $phpmailer->isHTML(true);
+        $phpmailer->Subject = 'Bonjour '. $user->getFirstname() .' !';
+        $phpmailer->Body    = '<h1>Voici le lien pour changer votre mot de passe</h1><p>Cliquez sur le lien ci-dessous pour changer votre mot de passe</p><a href="' . $resetPasswordURL . '">Cliquez ici</a><p>Si le lien ne s\'affiche pas correctement, vous pouvez coller ce lien dans votre URL :</p>' .$resetPasswordURL;
+        $phpmailer->AltBody = 'Veuillez activer votre HTML pour accéder au code de changement de mot de passe';
+
+        if ($phpmailer->send()) {
+            echo 'Le message a bien été envoyé';
+        } else {
+            echo 'Le message n\a pas pu être envoyé';
+            echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
+        }
+
+        header('Location: ' . $_ENV['BASE_URL'] . '/users/edit?id='.$userId);
+    }
+
+    public function treatResetPassword(): void {
+        if(isset($_GET['email']) && isset($_GET['code'])) {
+            $resetPasswordCode = $_GET['code'];
+            $email = $_GET['email'];
+
+            $user = (new User())->findOneByEmail($email);
+
+            if($user->getResetToken() === $resetPasswordCode) {
+                $tokenExpiration = new \DateTime($user->getTokenExpiration());
+                $now = new \DateTime();
+
+                $diff = $now->diff($tokenExpiration);
+                $hours = $diff->h + ($diff->days * 24);
+
+                if($hours < 12) {
+                    $updatePasswordForm = new Form("ResetPassword");
+
+                    if($updatePasswordForm->isSubmitted() && $updatePasswordForm->isValid()) {
+                        $user->setPassword($_POST['password']);
+                        $user->setResetToken(null);
+                        $user->setTokenExpiration(null);
+                        $user->save();
+                    }
+
+                    $view = new View('Users/reset-password-interface', 'front');
+                    $view->assign('updatePasswordForm', $updatePasswordForm->build());
+                    $view->render();
+                } else {
+                    echo "Le code de réinitialisation a expiré, veuillez demander un nouveau lien.";
+                }
+            } else {
+                echo "Votre code de changement de mot de passe n'est pas valide";
+            }
+        } else {
+            echo "Impossible de récupérer les informations d'utilisateur";
+        }
     }
 
     private function emailValidation(User $user): void {
@@ -143,17 +232,18 @@ class SecurityController
 
             if ($user && $user->getValidationCode() === $validation_code) {
                 if ($user->getStatus() !== 0) {
-                    echo "Votre compte est déjà vérifié";
+                    echo "Votre compte est déjà vérifié.";
                     die();
                 }
                 $user->setStatus(1);
+                $user->setValidationCode("used");
                 $user->save();
-                echo "Votre compte a été confirmé avec succès! Vous pouvez fermer cette fenêtre et aller sur l'écran de connexion";
+                echo "Votre compte a été confirmé avec succès! Vous pouvez fermer cette fenêtre et aller sur l'écran de connexion.";
             } else {
                 echo "Code de validation invalide ou adresse email incorrecte.";
             }
         } else {
-            echo "Aucun code de validation ou adresse email fournis.";
+            echo "=code de validation ou adresse email non fournis.";
         }
     }
 
