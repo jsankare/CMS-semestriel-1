@@ -52,6 +52,12 @@
   Security: true
   Role: "Admin"
 
+/sendResetPassword:
+  Controller: SecurityController
+  Action: "sendResetPassword"
+  Security: true
+  Role: "User"
+
 /users/create:
   Controller: UserController
   Action: "add"

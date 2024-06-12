@@ -14,6 +14,8 @@ class User extends SQL
     protected string $validation_code;
     protected int $status = 0;
 
+    protected ?string $reset_token = null;
+
 
     /**
      * @return int
@@ -61,6 +63,22 @@ class User extends SQL
     public function setValidationCode(string $validation_code): void
     {
         $this->validation_code = $validation_code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResetToken(): string
+    {
+        return $this->reset_token;
+    }
+
+    /**
+     * @param string $reset_token
+     */
+    public function setResetToken(string $reset_token): void
+    {
+        $this->reset_token = $reset_token;
     }
 
     /**
