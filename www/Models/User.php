@@ -76,7 +76,7 @@ class User extends SQL
     /**
      * @param string $reset_token
      */
-    public function setResetToken(string $reset_token): void
+    public function setResetToken(?string $reset_token): void
     {
         $this->reset_token = $reset_token;
     }

@@ -168,17 +168,18 @@ class SecurityController
 
                 if($updatePasswordForm->isSubmitted() && $updatePasswordForm->isValid()) {
                     $user->setPassword($_POST['password']);
-                    $user->setResetToken('used');
+                    $user->setResetToken(null);
                     $user->save();
                 }
 
                 $view = new View('Users/reset-password-interface', 'front');
                 $view->assign('updatePasswordForm', $updatePasswordForm->build());
                 $view->render();
-
             } else {
                 echo "Votre code de changement de mot de passe n'est pas valide";
             }
+        } else {
+            echo "Impossible de récupérer les informations d'utilisateur";
         }
     }
 
