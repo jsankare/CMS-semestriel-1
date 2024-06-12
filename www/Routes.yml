@@ -58,6 +58,12 @@
   Security: true
   Role: "User"
 
+/resetPassword:
+  Controller: SecurityController
+  Action: "treatResetPassword"
+  Security: false
+  Role: "Guest"
+
 /users/create:
   Controller: UserController
   Action: "add"

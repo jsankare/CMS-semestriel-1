@@ -152,7 +152,34 @@ class SecurityController
         }
 
         header('Location: ' . $_ENV['BASE_URL'] . '/users/edit?id='.$userId);
+    }
 
+    public function treatResetPassword(): void {
+        if(isset($_GET['email']) && isset($_GET['code'])) {
+            $resetPasswordCode = $_GET['code'];
+            $email = $_GET['email'];
+
+            $user = (new User())->findOneByEmail($email);
+
+            // Besoin de rajouter la logique pour l'expiration du token !important
+            if($user->getResetToken() === $resetPasswordCode) {
+
+                $updatePasswordForm = new Form("ResetPassword");
+
+                if($updatePasswordForm->isSubmitted() && $updatePasswordForm->isValid()) {
+                    $user->setPassword($_POST['password']);
+                    $user->setResetToken('used');
+                    $user->save();
+                }
+
+                $view = new View('Users/reset-password-interface', 'front');
+                $view->assign('updatePasswordForm', $updatePasswordForm->build());
+                $view->render();
+
+            } else {
+                echo "Votre code de changement de mot de passe n'est pas valide";
+            }
+        }
     }
 
     private function emailValidation(User $user): void {
@@ -192,13 +219,13 @@ class SecurityController
 
             if ($user && $user->getValidationCode() === $validation_code) {
                 if ($user->getStatus() !== 0) {
-                    echo "Votre compte est déjà vérifié";
+                    echo "Votre compte est déjà vérifié.";
                     die();
                 }
                 $user->setStatus(1);
                 $user->setValidationCode("used");
                 $user->save();
-                echo "Votre compte a été confirmé avec succès! Vous pouvez fermer cette fenêtre et aller sur l'écran de connexion";
+                echo "Votre compte a été confirmé avec succès! Vous pouvez fermer cette fenêtre et aller sur l'écran de connexion.";
             } else {
                 echo "Code de validation invalide ou adresse email incorrecte.";
             }
