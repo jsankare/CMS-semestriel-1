@@ -9,9 +9,8 @@
         <link rel="stylesheet" href="/css/front.css">
 
     </head>
-    <body>
+    <body> 
     <?php if (isset($_SESSION['user_id'])): ?>
-            <!-- Navbar -->
     <div class="navbar">
         <a href="/profile">Accueil</a>
         <a href="/profile">Profil</a>
