@@ -16,6 +16,8 @@ class User extends SQL
 
     protected ?string $reset_token = null;
 
+    protected ?string $token_expiration = null;
+
 
     /**
      * @return int
@@ -74,11 +76,27 @@ class User extends SQL
     }
 
     /**
-     * @param string $reset_token
+     * @param ?string $reset_token
      */
     public function setResetToken(?string $reset_token): void
     {
         $this->reset_token = $reset_token;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getTokenExpiration(): string
+    {
+        return $this->token_expiration;
+    }
+
+    /**
+     * @param ?string $token_expiration
+     */
+    public function setTokenExpiration(?string $token_expiration): void
+    {
+        $this->token_expiration = $token_expiration;
     }
 
     /**

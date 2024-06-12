@@ -122,6 +122,8 @@ class SecurityController
         }
 
         $resetToken = md5(uniqid(rand(), true));
+        $resetTokenCreatedAt = new \DateTime();
+        $resetTokenCreatedAtFormatted = $resetTokenCreatedAt->format('Y-m-d H:i:s');
 
         $phpmailer = new PHPMailer();
         $phpmailer->isSMTP();
@@ -136,6 +138,7 @@ class SecurityController
         $phpmailer->addAddress($user->getEmail(), $user->getFirstname() . ' ' . $user->getLastname());
 
         $user->setResetToken($resetToken);
+        $user->setTokenExpiration($resetTokenCreatedAtFormatted);
         $user->save();
 
         $resetPasswordURL = $_ENV['BASE_URL'] . '/resetPassword?email=' . urlencode($user->getEmail()) . '&code=' . $resetToken;
@@ -161,20 +164,29 @@ class SecurityController
 
             $user = (new User())->findOneByEmail($email);
 
-            // Besoin de rajouter la logique pour l'expiration du token !important
             if($user->getResetToken() === $resetPasswordCode) {
+                $tokenExpiration = new \DateTime($user->getTokenExpiration());
+                $now = new \DateTime();
 
-                $updatePasswordForm = new Form("ResetPassword");
+                $diff = $now->diff($tokenExpiration);
+                $hours = $diff->h + ($diff->days * 24);
 
-                if($updatePasswordForm->isSubmitted() && $updatePasswordForm->isValid()) {
-                    $user->setPassword($_POST['password']);
-                    $user->setResetToken(null);
-                    $user->save();
+                if($hours < 12) {
+                    $updatePasswordForm = new Form("ResetPassword");
+
+                    if($updatePasswordForm->isSubmitted() && $updatePasswordForm->isValid()) {
+                        $user->setPassword($_POST['password']);
+                        $user->setResetToken(null);
+                        $user->setTokenExpiration(null);
+                        $user->save();
+                    }
+
+                    $view = new View('Users/reset-password-interface', 'front');
+                    $view->assign('updatePasswordForm', $updatePasswordForm->build());
+                    $view->render();
+                } else {
+                    echo "Le code de réinitialisation a expiré, veuillez demander un nouveau lien.";
                 }
-
-                $view = new View('Users/reset-password-interface', 'front');
-                $view->assign('updatePasswordForm', $updatePasswordForm->build());
-                $view->render();
             } else {
                 echo "Votre code de changement de mot de passe n'est pas valide";
             }

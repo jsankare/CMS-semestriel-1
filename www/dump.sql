@@ -30,7 +30,7 @@ CREATE TABLE public.esgi_user (
     status SMALLINT NOT NULL,
     validation_code VARCHAR(32),
     reset_token VARCHAR(32),
-    token_expiration TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    token_expiration TIMESTAMP,
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
