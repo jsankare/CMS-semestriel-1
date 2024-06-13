@@ -4,7 +4,6 @@
     <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
     <section class="dashboard--main">
         <h2>Statistiques</h2>
-
         <div class="dashboard--main__charts" >
             <div class="dashboard--main__chartUnit dashboard--main__chartUnit--1">
                 <div class="dashboard--chart__wrapper dashboard--chart__wrapper--1" >

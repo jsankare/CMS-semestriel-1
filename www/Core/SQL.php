@@ -12,14 +12,14 @@ class SQL
     public function __construct()
     {
         try{
-            $this->pdo = new PDO("pgsql:host=postgres;dbname=esgi;port=5432","esgi","esgipwd");
+            $this->pdo = new PDO("pgsql:host=".$_ENV['DB_HOST'].";dbname=".$_ENV['DB_NAME'].";port=".$_ENV['DB_PORT'],$_ENV['DB_USER'],$_ENV['DB_PASSWORD']);
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }
 
         $classChild = get_called_class();
-        // Mettre le _esgi en .env
-        $this->table = "esgi_".strtolower(str_replace("App\\Models\\","",$classChild));
+
+        $this->table = $_ENV['DB_PREFIX'].strtolower(str_replace("App\\Models\\","",$classChild));
     }
 
     public function save()

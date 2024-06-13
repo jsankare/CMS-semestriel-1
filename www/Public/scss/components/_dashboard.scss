@@ -1,5 +1,8 @@
 .dashboard {
   &--main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     &__charts {
       display: flex;
       flex-direction: column;
