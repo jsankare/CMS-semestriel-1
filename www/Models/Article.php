@@ -110,6 +110,15 @@ class Article extends SQL
         return $queryPrepared->fetch();
     }
 
+    public function findArticlesWithComments(): array
+    {
+        $sql = "SELECT DISTINCT a.id, a.title FROM {$this->table} a INNER JOIN esgi_comment c ON a.id = c.article_id";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function findAll() {
         $sql = "SELECT * FROM {$this->table}";
 

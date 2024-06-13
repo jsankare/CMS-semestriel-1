@@ -64,9 +64,11 @@ class PageController
 
         $pageModel = new Page();
         $pages = $pageModel->findAll();
+        $pageCount = count($pages);
 
         $view = new View("Page/home", "back");
         $view->assign('pages', $pages);
+        $view->assign('pageCount', $pageCount);
         $view->render();
     }
 
