@@ -152,4 +152,13 @@ class Article extends SQL
             $this->id = $this->pdo->lastInsertId();
         }
     }
+
+    public function count(): int
+    {
+        $sql = "SELECT COUNT(*) as count FROM {$this->table}";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetch(\PDO::FETCH_ASSOC);
+        return (int) $result['count'];
+    }
 }

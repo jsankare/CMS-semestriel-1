@@ -57,12 +57,11 @@ class Comment extends SQL
         $this->status = $status;
     }
 
-
-     public function getTitle(): string
-     {
-         $article = (new Article())->findOneById($this->article_id);
-         return $article ? $article->getTitle() : 'Article non trouvé';
-     }
+    public function getTitle(): string
+    {
+        $article = (new Article())->findOneById($this->article_id);
+        return $article ? $article->getTitle() : 'Article non trouvé';
+    }
 
     public function findOneById(string $id)
     {
@@ -116,5 +115,14 @@ class Comment extends SQL
             ]);
             $this->id = $this->pdo->lastInsertId();
         }
+    }
+
+    public function count(): int
+    {
+        $sql = "SELECT COUNT(*) as count FROM {$this->table}";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetch(\PDO::FETCH_ASSOC);
+        return (int) $result['count'];
     }
 }
