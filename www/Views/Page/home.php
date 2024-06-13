@@ -1,5 +1,6 @@
 <section class="page--wrapper">
     <h2>Menu pages</h2>
+    <p>Nombre total de pages : <?php echo $pageCount; ?></p>
     <section class="page--navigation">
         <a href="/page/create"><img class="page--icon" src="/assets/add.svg" alt="Créer une page" ></a>
     </section>
