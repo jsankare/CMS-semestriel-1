@@ -26,7 +26,6 @@
         <a href="/logout" class="logout">Déconnexion</a>
     </div>
     <?php endif; ?>
-        <h1>Template Front - CMS</h1>
         <!-- intégration de la vue -->
         <?php include "../Views/".$this->view.".php";?>
     </body>

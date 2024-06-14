@@ -5,10 +5,7 @@ class MainController
 {
     public function home()
     {
-        //Appeler un template Front et la vue MainController/Home
-        $view = new View("MainController/home", "Back");
-        //$view->setView("MainController/Home");
-        //$view->setTemplate("Front");
+        $view = new View("Main/home", "front");
         $view->render();
     }
 

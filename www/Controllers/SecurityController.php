@@ -4,6 +4,8 @@ use App\Core\Form;
 use App\Core\View;
 use App\Models\User;
 use App\Models\Page;
+use App\Models\Article;
+use App\Models\Comment;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class SecurityController
@@ -76,7 +78,6 @@ class SecurityController
     exit();
 }
 
-
     public function profile(): void
     {
         $user = (new User())->findOneById($_SESSION['user_id']);
@@ -86,13 +87,34 @@ class SecurityController
             die;
         }
 
+        $updateProfileForm = new Form("updateProfile");
+        $updateProfileForm->setValues([
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
+        ]);
+
+        if ($updateProfileForm->isSubmitted() && $updateProfileForm->isValid()) {
+            $user->setFirstname($_POST["firstname"]);
+            $user->setLastname($_POST["lastname"]);
+            $user->setEmail($_POST["email"]);
+            $user->save();
+
+            header('Location: /profile');
+            exit();
+        }
+
         // Récupération des pages
         $pageModel = new Page();
+        $articleModel = New Article();
+
+        $allArticles = $articleModel->findAll();
         $pages = $pageModel->findAll();
   
         $view = new View("Security/profile", "front");
-        $view->assign("authUser", $user);
-        $view->assign("pages", $pages); // Passer les pages à la vue
+        $view->assign("authenticatedUser", $user);
+        $view->assign('updateProfileForm', $updateProfileForm->build());
+        $view->assign("pages", $pages);
         $view->render();
     }
 
