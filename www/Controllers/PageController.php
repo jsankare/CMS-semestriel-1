@@ -13,12 +13,14 @@ class PageController
     {
         if (isset($_GET['id'])) {
             $pageId = intval($_GET['id']);
-            $currentpage = (new Page())->findOneById($pageId);
-            $pages = (new Page())->findAll();
+            $page = (new Page())->findOneById($pageId);
 
-            if ($currentpage) {
+            
+
+            if ($page) {
+                $pages = (new Page())->findAll();
                 $view = new View("Page/showPage", "front");
-                $view->assign('currentpage', $currentpage);
+                $view->assign('page', $page);
                 $view->assign('pages', $pages);
                 $view->render();
             } else {
