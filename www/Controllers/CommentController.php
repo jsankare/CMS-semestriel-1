@@ -22,7 +22,7 @@ class CommentController
             $comment->setStatus('pending');
             $comment->save();
 
-            header('Location: /article/home');
+            header('Location: /comment/home');
             exit();
         } else {
             $view = new View("Comment/create", "back");
@@ -33,7 +33,7 @@ class CommentController
         }
     }
 
-    public function reject(): void
+    public function delete(): void
     {
         if (isset($_GET['id'])) {
             $comment = (new Comment())->findOneById($_GET['id']);
