@@ -28,7 +28,7 @@
                 </div>
                 <a class="article--icon__link" href="/article/delete?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__trash" src="/assets/trash.svg" ></a>
                 <a class="article--icon__link" href="/article/edit?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__update" src="/assets/update.svg" ></a>
-                <a class="article--icon__link" href="/comment/create?article_id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__comment" src="/assets/comment.svg" alt="Commenter l'article"></a>
+                <a class="article--icon__link" href="/comment/show?article_id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__comment" src="/assets/comment.svg" alt="Voir les commentaires liés à cet articles"></a>
             </div>
             <?php endforeach; ?>
             </section>

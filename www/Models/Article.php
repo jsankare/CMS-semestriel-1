@@ -112,6 +112,7 @@ class Article extends SQL
 
     public function findArticlesWithComments(): array
     {
+        // Need to find a solution to replace esgi_comment with secured values
         $sql = "SELECT DISTINCT a.id, a.title FROM {$this->table} a INNER JOIN esgi_comment c ON a.id = c.article_id";
 
         $queryPrepared = $this->pdo->prepare($sql);
