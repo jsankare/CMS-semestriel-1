@@ -23,6 +23,22 @@
     }
     ?>
     <body>
+    <?php if (isset($_SESSION['user_id'])): ?>
+    
+    <div class="navbar">
+        <a href="/">Accueil</a>
+        <a href="/profile">Profil</a>
+        
+        <?php
+        if (isset($pages) && !empty($pages)) {
+            foreach ($pages as $page) {
+                echo "<a href='/page/showPage?id={$page->getId()}'>{$page->getTitle()}</a>";
+            }
+        }
+        ?>
+        <a href="/logout" class="logout">Déconnexion</a>
+    </div>
+    <?php endif; ?>
 
         <?php include 'navbar.php'; ?>
 
