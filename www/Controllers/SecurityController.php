@@ -104,11 +104,14 @@ class SecurityController
             exit();
         }
 
-        // Récupération des commentaires de l'utilisateur
+        $pageModel = new Page();
         $commentModel = new Comment();
         $userComments = $commentModel->findCommentsByUserId($user->getId());
 
+        $pages = $pageModel->findAll();
+
         $view = new View("Security/profile", "front");
+        $view->assign('pages', $pages);
         $view->assign("authenticatedUser", $user);
         $view->assign('updateProfileForm', $updateProfileForm->build());
         $view->assign("userComments", $userComments);
