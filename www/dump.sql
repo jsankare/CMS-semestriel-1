@@ -10,16 +10,6 @@
 BEGIN;
 SET TIME ZONE 'UTC';
 
---
--- Base de données : `esgi`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `esgi_user`
---
-
 DROP TABLE IF EXISTS public.esgi_user CASCADE;
 CREATE TABLE public.esgi_user (
     id SERIAL PRIMARY KEY,

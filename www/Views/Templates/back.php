@@ -16,11 +16,12 @@
 <!--                <h3>Bonjour --><?php //echo $user->getFirstName(); ?><!--</h3>-->
                 <section class="navbar--list" >
                     <ul class="navbar--list__links">
+                        <li class="navbar--list__link"><a href="/profile">Aller sur le site</a></li>
                         <li class="navbar--list__link"><a href="/dashboard">Tableau de bord</a></li>
                         <li class="navbar--list__link"><a href="/users/home">Utilisateurs</a></li>
                         <li class="navbar--list__link"><a href="/page/home">Pages</a></li>
                         <li class="navbar--list__link"><a href="/article/home">Articles</a></li>
-                        <li class="navbar--list__link"><a href="/comment/home">Comments</a></li>
+                        <li class="navbar--list__link"><a href="/comment/home">Commentaires</a></li>
                     </ul>
                     <ul class="navbar--list__links">
                         <li class="navbar--list__link"><a href="/logout">Se déconnecter</a></li>
@@ -28,7 +29,6 @@
                 </section>
             </aside>
             <section class="content" >
-                <h1>Template Back - CMS</h1>
                 <!-- intégration de la vue -->
                 <?php include "../Views/".$this->view.".php";?>
             </section>

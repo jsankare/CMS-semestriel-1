@@ -496,7 +496,7 @@ form {
   flex-direction: column;
   gap: 1rem;
   width: 100%;
-  max-width: 35rem;
+  max-width: 50rem;
   min-width: 25rem;
   height: 100%;
   min-height: 25rem;
@@ -520,7 +520,7 @@ form {
   height: 2.5rem;
   min-height: max-content;
   width: 100%;
-  max-width: 33rem;
+  max-width: 40rem;
   padding: 0.25rem 1rem;
   border: 3px solid transparent;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
@@ -546,8 +546,8 @@ form {
   height: 1rem;
 }
 .input--submit {
-  width: 220px;
-  height: 50px;
+  width: 15rem;
+  height: 3rem;
   border: none;
   outline: none;
   color: #fff;
@@ -704,6 +704,39 @@ form {
 .comment--wrapper__unit img.article--icon {
   justify-self: center;
   align-self: center;
+}
+
+.dashboard {
+  position: relative;
+}
+.dashboard--main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboard--main__charts {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 1000px;
+}
+.dashboard--chart__wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.chart {
+  height: 100%;
+  flex: 1;
+  min-height: 250px;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+.chart--attribution {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
 }
 
 /*# sourceMappingURL=back.css.map */

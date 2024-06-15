@@ -12,6 +12,10 @@
                 <div class="article--wrapper__unit">
                     <div class="article--infos">
                         <li class="article--value">
+                            <h3>Auteur ID</h3>
+                            <p><?php echo $comment->getUserId(); ?></p>
+                        </li>
+                        <li class="article--value">
                             <h3>Article</h3>
                             <p><?php echo htmlspecialchars($comment->getTitle()); ?></p>
                         </li>
@@ -20,8 +24,9 @@
                             <p><?php echo htmlspecialchars($comment->getContent()); ?></p>
                         </li>
                         <li class="article--value">
-                            <h3>Status</h3>
-                            <p><?php echo htmlspecialchars($comment->getStatus()); ?></p>
+                            <a class="article--icon__link" href="/article/delete?id=<?php echo $comment->getId(); ?>">
+                                <img class="article--icon article--icon__trash" src="/assets/trash.svg" >
+                            </a>
                         </li>
                     </div>
                 </div>
