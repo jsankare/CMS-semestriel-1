@@ -24,7 +24,7 @@ class SecurityController
                    // on store le user ID dans la session
                    $_SESSION['user_id'] = $user->getId();
                    $_SESSION['user_status'] = $user->getStatus();
-                   header('Location: ' . $_ENV['BASE_URL'] . '/profile');
+                   header('Location: ' . $_ENV['BASE_URL'] . '/');
                 }
             } else {
                 echo "Invalid email or password";
@@ -104,19 +104,17 @@ class SecurityController
             exit();
         }
 
-        // Récupération des pages
-        $pageModel = new Page();
-        $articleModel = New Article();
+        // Récupération des commentaires de l'utilisateur
+        $commentModel = new Comment();
+        $userComments = $commentModel->findCommentsByUserId($user->getId());
 
-        $allArticles = $articleModel->findAll();
-        $pages = $pageModel->findAll();
-  
         $view = new View("Security/profile", "front");
         $view->assign("authenticatedUser", $user);
         $view->assign('updateProfileForm', $updateProfileForm->build());
-        $view->assign("pages", $pages);
+        $view->assign("userComments", $userComments);
         $view->render();
     }
+
 
     public function resetPassword(): void {
 

@@ -117,6 +117,17 @@ class Comment extends SQL
         }
     }
 
+    public function findCommentsByUserId(int $userId): array
+    {
+        $sql = "SELECT c.*, a.title AS article_title 
+                FROM esgi_comment c
+                INNER JOIN esgi_article a ON c.article_id = a.id 
+                WHERE c.user_id = :user_id";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute(['user_id' => $userId]);
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function count(): int
     {
         $sql = "SELECT COUNT(*) as count FROM {$this->table}";

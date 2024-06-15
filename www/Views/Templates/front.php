@@ -14,8 +14,6 @@
             <!-- Navbar -->
     <div class="navbar">
         <a href="/">Accueil</a>
-        <a href="/profile">Profil</a>
-        
         <?php
         if (isset($pages) && !empty($pages)) {
             foreach ($pages as $page) {
@@ -23,7 +21,9 @@
             }
         }
         ?>
+        
         <a href="/logout" class="logout">Déconnexion</a>
+        <a class="logout" href="/profile">Profil</a>
     </div>
     <?php endif; ?>
         <!-- intégration de la vue -->

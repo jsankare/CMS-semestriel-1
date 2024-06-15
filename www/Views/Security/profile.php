@@ -4,12 +4,19 @@
         <section class="profile--statistics">
             <h2>Statistiques de votre profil</h2>
             <div>
-                <h3>Voici la liste des articles que vous avez commentés</h3>
-                <ul>
-                    <?php
-
-                    ?>
-                </ul>
+                <?php if (empty($userComments)): ?>
+                    <h3>Vous n'avez pas encore commenté d'article pour le moment</h3>
+                    <?php else: ?>
+                    <h3>Voici la liste des articles que vous avez commentés</h3>
+                    <ul>
+                        <?php foreach ($userComments as $comment): ?>
+                            <li>
+                                <strong><?= htmlspecialchars($comment['article_title'], ENT_QUOTES, 'UTF-8') ?>:</strong>
+                                <?= htmlspecialchars($comment['content'], ENT_QUOTES, 'UTF-8') ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
             </div>
         </section>
         <section class="profile--update">
@@ -17,13 +24,7 @@
             <?= $updateProfileForm ?>
             <h4>Pour recevoir un mail de modification de mot de passe <a href="#" alt="reset password link">cliquez ici</a></h4>
             <span>Attention, le mail est à usage unique et expire après 12heures.</span>
+            <a href="/dashboard" >dashboard</a>
         </section>
     </section>
-<!--    <aside class="profile--aside">-->
-<!--        <a href="/dashboard" >dashboard</a>-->
-<!--    </aside>-->
 </main>
-
-
-
-
