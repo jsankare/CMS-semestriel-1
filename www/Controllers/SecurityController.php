@@ -87,7 +87,7 @@ class SecurityController
             die;
         }
 
-        $updateProfileForm = new Form("updateProfile");
+        $updateProfileForm = new Form("UpdateProfile");
         $updateProfileForm->setValues([
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),

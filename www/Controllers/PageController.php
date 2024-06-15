@@ -19,7 +19,7 @@ class PageController
             $pages = $pageModel->findAll();
 
             if ($page) {
-                $view = new View("Page/showPage", "front");
+                $view = new View("Page/showpage", "front");
                 $view->assign('page', $page);
                 $view->assign('pages', $pages);
                 $view->render();
