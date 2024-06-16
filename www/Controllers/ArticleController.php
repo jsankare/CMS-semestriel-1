@@ -28,7 +28,7 @@ class ArticleController
                 exit;
             }
 
-            $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
+            $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
             $content = strip_tags($_POST["content"], $allowed_tags);
 
             $article = new Article();

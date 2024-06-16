@@ -11,11 +11,8 @@
     </head>
     <body>
     <?php if (isset($_SESSION['user_id'])): ?>
-            <!-- Navbar -->
     <div class="navbar">
         <a href="/">Accueil</a>
-        <a href="/profile">Profil</a>
-        
         <?php
         if (isset($pages) && !empty($pages)) {
             foreach ($pages as $page) {
@@ -24,9 +21,12 @@
         }
         ?>
         <a href="/logout" class="logout">Déconnexion</a>
+        <a class="logout" href="/profile">Profil</a>
+        <?php if($_SESSION['user_status'] > 1) {
+            echo '<a href="/dashboard" class="logout">Dashboard</a>';
+        };  ?>
     </div>
     <?php endif; ?>
-        <h1>Template Front - CMS</h1>
         <!-- intégration de la vue -->
         <?php include "../Views/".$this->view.".php";?>
     </body>

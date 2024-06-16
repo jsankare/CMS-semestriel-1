@@ -4,6 +4,8 @@ use App\Core\Form;
 use App\Core\View;
 use App\Models\User;
 use App\Models\Page;
+use App\Models\Article;
+use App\Models\Comment;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class SecurityController
@@ -22,7 +24,7 @@ class SecurityController
                    // on store le user ID dans la session
                    $_SESSION['user_id'] = $user->getId();
                    $_SESSION['user_status'] = $user->getStatus();
-                   header('Location: ' . $_ENV['BASE_URL'] . '/profile');
+                   header('Location: ' . $_ENV['BASE_URL'] . '/');
                 }
             } else {
                 echo "Invalid email or password";
@@ -76,7 +78,6 @@ class SecurityController
     exit();
 }
 
-
     public function profile(): void
     {
         $user = (new User())->findOneById($_SESSION['user_id']);
@@ -86,15 +87,37 @@ class SecurityController
             die;
         }
 
-        // Récupération des pages
+        $updateProfileForm = new Form("UpdateProfile");
+        $updateProfileForm->setValues([
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
+        ]);
+
+        if ($updateProfileForm->isSubmitted() && $updateProfileForm->isValid()) {
+            $user->setFirstname($_POST["firstname"]);
+            $user->setLastname($_POST["lastname"]);
+            $user->setEmail($_POST["email"]);
+            $user->save();
+
+            header('Location: /profile');
+            exit();
+        }
+
         $pageModel = new Page();
+        $commentModel = new Comment();
+        $userComments = $commentModel->findCommentsByUserId($user->getId());
+
         $pages = $pageModel->findAll();
-  
+
         $view = new View("Security/profile", "front");
-        $view->assign("authUser", $user);
-        $view->assign("pages", $pages); // Passer les pages à la vue
+        $view->assign('pages', $pages);
+        $view->assign("authenticatedUser", $user);
+        $view->assign('updateProfileForm', $updateProfileForm->build());
+        $view->assign("userComments", $userComments);
         $view->render();
     }
+
 
     public function resetPassword(): void {
 
@@ -153,8 +176,6 @@ class SecurityController
             echo 'Le message n\a pas pu être envoyé';
             echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
         }
-
-        header('Location: ' . $_ENV['BASE_URL'] . '/users/edit?id='.$userId);
     }
 
     public function treatResetPassword(): void {
@@ -179,6 +200,7 @@ class SecurityController
                         $user->setResetToken(null);
                         $user->setTokenExpiration(null);
                         $user->save();
+                        header('Location: ' . $_ENV['BASE_URL'] . '/');
                     }
 
                     $view = new View('Users/reset-password-interface', 'front');
@@ -236,7 +258,7 @@ class SecurityController
                     die();
                 }
                 $user->setStatus(1);
-                $user->setValidationCode("used");
+                $user->setValidationCode(null);
                 $user->save();
                 echo "Votre compte a été confirmé avec succès! Vous pouvez fermer cette fenêtre et aller sur l'écran de connexion.";
             } else {
