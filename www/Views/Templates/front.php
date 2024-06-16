@@ -11,7 +11,6 @@
     </head>
     <body>
     <?php if (isset($_SESSION['user_id'])): ?>
-            <!-- Navbar -->
     <div class="navbar">
         <a href="/">Accueil</a>
         <?php
