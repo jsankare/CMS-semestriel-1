@@ -11,7 +11,7 @@ class User extends SQL
     protected string $lastname;
     protected string $email;
     protected string $password;
-    protected string $validation_code;
+    protected ?string $validation_code;
     protected int $status = 0;
 
     protected ?string $reset_token = null;
@@ -52,7 +52,7 @@ class User extends SQL
     }
 
         /**
-     * @return string
+     * @return ?string
      */
     public function getValidationCode(): string
     {
@@ -60,7 +60,7 @@ class User extends SQL
     }
 
     /**
-     * @param string $validation_code
+     * @param ?string $validation_code
      */
     public function setValidationCode(string $validation_code): void
     {

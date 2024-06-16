@@ -22,7 +22,7 @@
         <section class="profile--update">
             <h2>Pour modifier vos informations</h2>
             <?= $updateProfileForm ?>
-            <h4>Pour recevoir un mail de modification de mot de passe <a href="#" alt="reset password link">cliquez ici</a></h4>
+            <h4>Pour recevoir un mail de modification de mot de passe <a href="/sendResetPassword?id=<?php echo $authenticatedUser->getid(); ?>" >cliquez ici</a></h4>
             <span>Attention, le mail est à usage unique et expire après 12heures.</span>
             <a href="/dashboard" >dashboard</a>
         </section>

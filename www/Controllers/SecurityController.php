@@ -176,8 +176,6 @@ class SecurityController
             echo 'Le message n\a pas pu être envoyé';
             echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
         }
-
-        header('Location: ' . $_ENV['BASE_URL'] . '/users/edit?id='.$userId);
     }
 
     public function treatResetPassword(): void {
@@ -202,6 +200,7 @@ class SecurityController
                         $user->setResetToken(null);
                         $user->setTokenExpiration(null);
                         $user->save();
+                        header('Location: ' . $_ENV['BASE_URL'] . '/');
                     }
 
                     $view = new View('Users/reset-password-interface', 'front');
@@ -259,7 +258,7 @@ class SecurityController
                     die();
                 }
                 $user->setStatus(1);
-                $user->setValidationCode("used");
+                $user->setValidationCode(null);
                 $user->save();
                 echo "Votre compte a été confirmé avec succès! Vous pouvez fermer cette fenêtre et aller sur l'écran de connexion.";
             } else {
