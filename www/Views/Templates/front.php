@@ -20,9 +20,11 @@
             }
         }
         ?>
-        
         <a href="/logout" class="logout">Déconnexion</a>
         <a class="logout" href="/profile">Profil</a>
+        <?php if($_SESSION['user_status'] > 1) {
+            echo '<a href="/dashboard" class="logout">Dashboard</a>';
+        };  ?>
     </div>
     <?php endif; ?>
         <!-- intégration de la vue -->

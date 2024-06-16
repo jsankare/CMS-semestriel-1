@@ -62,7 +62,7 @@ class User extends SQL
     /**
      * @param ?string $validation_code
      */
-    public function setValidationCode(string $validation_code): void
+    public function setValidationCode(?string $validation_code): void
     {
         $this->validation_code = $validation_code;
     }
