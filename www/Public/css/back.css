@@ -278,6 +278,95 @@ ul li a {
   --danger-hover: var(--red-hover);
 }
 
+#editor {
+  width: 100%;
+  min-height: 10rem;
+}
+
+form {
+  border-radius: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 50rem;
+  min-width: 25rem;
+  height: 100%;
+  min-height: 25rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.logout--form {
+  height: fit-content;
+  width: max-content;
+  min-height: min-content;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.input {
+  border-radius: 1rem;
+  height: 2.5rem;
+  min-height: max-content;
+  width: 100%;
+  max-width: 40rem;
+  padding: 0.25rem 1rem;
+  border: 3px solid transparent;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  transition: 0.1s ease-in-out;
+}
+.input--wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.input:focus {
+  outline-width: 0;
+  border: 3px solid black;
+}
+.input::placeholder {
+  color: darkgrey;
+}
+.input--acceptTos {
+  width: 1rem;
+  height: 1rem;
+}
+.input--submit {
+  width: 15rem;
+  height: 3rem;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 1rem;
+  transition: 0.25s ease-in-out;
+}
+.input--submit:hover {
+  background-color: seagreen;
+}
+.input--description {
+  border-radius: 1rem;
+  min-height: 5rem;
+}
+.input--content {
+  border-radius: 1rem;
+  min-height: 5rem;
+}
+
+.label {
+  font-size: 1.25rem;
+}
+
 .page--navigation {
   display: flex;
   justify-content: center;
@@ -483,95 +572,6 @@ ul li a {
 .user--wrapper__unit img.user--icon {
   justify-self: center;
   align-self: center;
-}
-
-#editor {
-  width: 100%;
-  min-height: 10rem;
-}
-
-form {
-  border-radius: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  max-width: 50rem;
-  min-width: 25rem;
-  height: 100%;
-  min-height: 25rem;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-}
-
-.logout--form {
-  height: fit-content;
-  width: max-content;
-  min-height: min-content;
-  border-radius: 0;
-  background-color: transparent;
-  box-shadow: none;
-}
-
-.input {
-  border-radius: 1rem;
-  height: 2.5rem;
-  min-height: max-content;
-  width: 100%;
-  max-width: 40rem;
-  padding: 0.25rem 1rem;
-  border: 3px solid transparent;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  transition: 0.1s ease-in-out;
-}
-.input--wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.input:focus {
-  outline-width: 0;
-  border: 3px solid black;
-}
-.input::placeholder {
-  color: darkgrey;
-}
-.input--acceptTos {
-  width: 1rem;
-  height: 1rem;
-}
-.input--submit {
-  width: 15rem;
-  height: 3rem;
-  border: none;
-  outline: none;
-  color: #fff;
-  background: #111;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 1rem;
-  transition: 0.25s ease-in-out;
-}
-.input--submit:hover {
-  background-color: seagreen;
-}
-.input--description {
-  border-radius: 1rem;
-  min-height: 5rem;
-}
-.input--content {
-  border-radius: 1rem;
-  min-height: 5rem;
-}
-
-.label {
-  font-size: 1.25rem;
 }
 
 .navbar {

@@ -104,7 +104,10 @@ class SecurityController
             exit();
         }
 
+        $pageModel = new Page();
         $commentModel = new Comment();
+
+        $pages = $pageModel->findAll();
         $userComments = $commentModel->findCommentsByUserId($user->getId());
 
         foreach ($userComments as &$comment) {
@@ -113,6 +116,7 @@ class SecurityController
 
         $view = new View("Security/profile", "front");
         $view->assign("authenticatedUser", $user);
+        $view->assign('pages', $pages);
         $view->assign('updateProfileForm', $updateProfileForm->build());
         $view->assign("userComments", $userComments);
         $view->render();
