@@ -24,6 +24,7 @@
                         <li class="navbar--list__link"><a href="/comment/home">Commentaires</a></li>
                     </ul>
                     <ul class="navbar--list__links">
+                        <li class="navbar--list__link"><a href="#">Paramètres</a></li>
                         <li class="navbar--list__link"><a href="/logout">Se déconnecter</a></li>
                     </ul>
                 </section>
