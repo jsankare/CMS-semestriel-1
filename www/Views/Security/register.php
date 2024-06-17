@@ -3,5 +3,5 @@
     <section class="form">
         <?= $form ?>
     </section>
-    <a href="/login">Se connecter</a>
+    <span>Vous avez déjà un compte ? <a href="/login">Connexion</a></span>
 </main>

@@ -3,5 +3,5 @@
     <section class="form">
         <?= $form ?>
     </section>
-    <a href="/register">register</a>
+    <span>Pas encore de compte ? <a href="/register">Inscription</a></span>
 </main>

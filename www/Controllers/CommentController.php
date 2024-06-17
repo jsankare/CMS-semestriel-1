@@ -11,24 +11,35 @@ class CommentController
 {
     public function add(): void
     {
-        $commentForm = new Form("Comments");
-        $article_id = $_GET['article_id'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['article_id']) && isset($_POST['content'])) {
+                $articleId = (int)$_POST['article_id'];
+                $content = trim($_POST['content']);
 
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $comment = new Comment();
-            $comment->setArticleId($article_id);
-            $comment->setUserId($_SESSION['user_id']); 
-            $comment->setContent($_POST["content"]);
-            $comment->setStatus('pending');
-            $comment->save();
+                if (isset($_SESSION['user_id'])) {
+                    $userId = (int)$_SESSION['user_id'];
 
-            header('Location: /comment/home');
-            exit();
+                    $comment = new Comment();
+                    $comment->setArticleId($articleId);
+                    $comment->setUserId($userId);
+                    $comment->setContent($content);
+                    $comment->setStatus('pending'); // ou 'approved' selon vos besoins
+                    $comment->save();
+
+                    header('Location: /articles');
+                    exit();
+                } else {
+                    header('Location: /login');
+                    exit();
+                }
+            } else {
+                $error = "Les données du formulaire sont invalides.";
+                $view = new View("Comment/create", "back");
+                $view->assign('error', $error);
+                $view->render();
+            }
         } else {
             $view = new View("Comment/create", "back");
-            $view->assign('commentForm', $commentForm->build());
-            $view->assign('article_id', $article_id);
-            $view->assign('error', 'Le formulaire n\'a pas été soumis ou n\'est pas valide.');
             $view->render();
         }
     }

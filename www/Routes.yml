@@ -121,19 +121,7 @@
 /page/showPage:
   Controller: PageController
   Action: "show"
-  Security: true
-  Role: "Guest"
-
-/page/showPage:
-  Controller: PageController
-  Action: "show"
-  Security: true
-  Role: "Guest"
-
-/page/showPage:
-  Controller: PageController
-  Action: "show"
-  Security: true
+  Security: false
   Role: "Guest"
 
 /article/create:
@@ -165,6 +153,12 @@
   Action: "edit"
   Security: true
   Role: "Admin"
+
+/articles:
+  Controller: ArticleController
+  Action: "show"
+  Security: false
+  Role: "Guest"
 
 /comment/create:
   Controller: CommentController

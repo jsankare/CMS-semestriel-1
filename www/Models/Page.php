@@ -41,7 +41,7 @@ class Page extends SQL
      */
     public function setTitle(string $title): void
     {
-        $this->title = strtolower(trim($title));
+        $this->title = ucwords(strtolower(($title)));
     }
 
     /**
