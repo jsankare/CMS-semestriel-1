@@ -3,8 +3,10 @@
 @import "partials/globals";
 @import "partials/variables";
 
-@import "components/form";
-@import "components/input";
-@import "components/frontNav";
-@import "components/pageDisplayFront";
-@import "components/frontProfile";
+@import "components/globals/form";
+@import "components/globals/input";
+
+@import "components/front/nav";
+@import "components/front/pageDisplay";
+@import "components/front/profile";
+@import "components/front/articleDisplay";

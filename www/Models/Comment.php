@@ -11,6 +11,7 @@ class Comment extends SQL
     protected int $user_id;
     protected string $content;
     protected string $status;
+    protected string $created_at;
 
     public function getId(): ?int
     {
@@ -119,13 +120,18 @@ class Comment extends SQL
 
     public function findCommentsByUserId(int $userId): array
     {
-        $sql = "SELECT c.*, a.title AS article_title 
-                FROM esgi_comment c
-                INNER JOIN esgi_article a ON c.article_id = a.id 
-                WHERE c.user_id = :user_id";
+        $sql = "SELECT c.*, a.title AS article_title FROM esgi_comment c INNER JOIN esgi_article a ON c.article_id = a.id WHERE c.user_id = :user_id";
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute(['user_id' => $userId]);
         return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function findCommentsByArticleId(int $articleId): array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE article_id = :article_id";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([':article_id' => $articleId]);
+        return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, 'App\Models\Comment');
     }
 
     public function count(): int
@@ -135,5 +141,17 @@ class Comment extends SQL
         $queryPrepared->execute();
         $result = $queryPrepared->fetch(\PDO::FETCH_ASSOC);
         return (int) $result['count'];
+    }
+
+    public function getUserName(): string
+    {
+        $user = (new User())->findOneById($this->user_id);
+        return $user ? $user->getFirstname() . ' ' . $user->getLastname() : 'Utilisateur inconnu';
+    }
+
+    public function getFormattedDate(): string
+    {
+        $date = new \DateTime();
+        return $date->format('d/m/Y à H:i');
     }
 }

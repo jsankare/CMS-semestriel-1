@@ -121,19 +121,7 @@
 /page/showPage:
   Controller: PageController
   Action: "show"
-  Security: true
-  Role: "Guest"
-
-/page/showPage:
-  Controller: PageController
-  Action: "show"
-  Security: true
-  Role: "Guest"
-
-/page/showPage:
-  Controller: PageController
-  Action: "show"
-  Security: true
+  Security: false
   Role: "Guest"
 
 /article/create:
@@ -148,11 +136,11 @@
   Security: true
   Role: "Editor"
 
-/show-article:
-  Controller: ArticleController
-  Action: "show"
-  Security: True
-  Role: ""
+#/show-article:
+#  Controller: ArticleController
+#  Action: "show"
+#  Security: True
+#  Role: "Guest"
 
 /article/home:
   Controller: ArticleController
@@ -166,6 +154,12 @@
   Security: true
   Role: "Admin"
 
+/articles:
+  Controller: ArticleController
+  Action: "show"
+  Security: false
+  Role: "Guest"
+
 /comment/create:
   Controller: CommentController
   Action: "add"
@@ -176,16 +170,16 @@
   Controller: CommentController
   Action: "delete"
   Security: true
-  Role: "Admin"
+  Role: "Moderator"
 
-/show-comment:
-  Controller: CommentController
-  Action: "show"
-  Security: True
-  Role: "Guest"
-
-/comment/home:
+/comments/home:
   Controller: CommentController
   Action: "list"
   Security: true
-  Role: "Guest"
+  Role: "Editor"
+
+/comment/show:
+  Controller: CommentController
+  Action: "show"
+  Security: True
+  Role: "Editor"
