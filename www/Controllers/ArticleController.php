@@ -1,8 +1,6 @@
 <?php
 namespace App\Controller;
 
-
-
 use App\Core\Form;
 use App\Core\View;
 use App\Models\Article;

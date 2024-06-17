@@ -151,7 +151,7 @@ class Comment extends SQL
 
     public function getFormattedDate(): string
     {
-        $date = new \DateTime($this->created_at);
+        $date = new \DateTime();
         return $date->format('d/m/Y à H:i');
     }
 }

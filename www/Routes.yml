@@ -136,11 +136,11 @@
   Security: true
   Role: "Editor"
 
-/show-article:
-  Controller: ArticleController
-  Action: "show"
-  Security: True
-  Role: ""
+#/show-article:
+#  Controller: ArticleController
+#  Action: "show"
+#  Security: True
+#  Role: "Guest"
 
 /article/home:
   Controller: ArticleController
@@ -178,8 +178,8 @@
   Security: true
   Role: "Editor"
 
-/show-comment:
+/comment/show:
   Controller: CommentController
   Action: "show"
   Security: True
-  Role: "Guest"
+  Role: "Editor"

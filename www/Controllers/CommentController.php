@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\Form;
 use App\Models\Comment;
+use App\Models\Article;
 use App\Core\View;
 
 
@@ -72,5 +73,28 @@ class CommentController
         $view = new View("Comment/home", "back");
         $view->assign('comments', $comments);
         $view->render();
+    }
+
+    public function show(): void
+    {
+        if (isset($_GET['article_id'])) {
+            $articleId = intval($_GET['article_id']);
+            $article = (new Article())->findOneById($articleId);
+
+            if ($article) {
+                $comments = (new Comment())->findCommentsByArticleId($articleId);
+
+                $view = new View("Comment/list_per_article", "back");
+                $view->assign('article', $article);
+                $view->assign('comments', $comments);
+                $view->render();
+            } else {
+                echo "Article non trouvé";
+                exit();
+            }
+        } else {
+            echo "ID de l'article non spécifié";
+            exit();
+        }
     }
 }

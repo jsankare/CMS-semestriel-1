@@ -20,6 +20,10 @@
                             <p><?php echo $comment->getTitle(); ?></p>
                         </li>
                         <li class="comment--value">
+                            <h3>date </h3>
+                            <p><?= htmlspecialchars($comment->getFormattedDate()); ?></p>
+                        </li>
+                        <li class="comment--value">
                             <h3>Commentaire</h3>
                             <p><?php echo $comment->getContent(); ?></p>
                         </li>
