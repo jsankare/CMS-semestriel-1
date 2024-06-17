@@ -23,7 +23,7 @@ class CommentController
                     $comment->setArticleId($articleId);
                     $comment->setUserId($userId);
                     $comment->setContent($content);
-                    $comment->setStatus('pending'); // ou 'approved' selon vos besoins
+                    $comment->setStatus('pending');
                     $comment->save();
 
                     header('Location: /articles');
@@ -59,18 +59,18 @@ class CommentController
             exit();
         }
 
-        header('Location: /comment/moderate');
+        header('Location: /comments/home');
         exit();
     }
 
     public function list(): void
     {
-        $articleModel = new Comment();
-        $comments = $articleModel->findAll();
+        $commentModel = new Comment();
+
+        $comments = $commentModel->findAll();
+
         $view = new View("Comment/home", "back");
         $view->assign('comments', $comments);
         $view->render();
     }
-
-    
 }

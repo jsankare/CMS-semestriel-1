@@ -170,16 +170,16 @@
   Controller: CommentController
   Action: "delete"
   Security: true
-  Role: "Admin"
+  Role: "Moderator"
+
+/comments/home:
+  Controller: CommentController
+  Action: "list"
+  Security: true
+  Role: "Editor"
 
 /show-comment:
   Controller: CommentController
   Action: "show"
   Security: True
-  Role: "Guest"
-
-/comment/home:
-  Controller: CommentController
-  Action: "list"
-  Security: true
   Role: "Guest"

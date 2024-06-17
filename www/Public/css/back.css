@@ -625,7 +625,7 @@ form {
 .comment--infos {
   width: 100%;
   display: grid;
-  grid-template-columns: 4fr 4fr 2fr;
+  grid-template-columns: 2fr 2fr 5fr;
   justify-content: center;
   align-items: center;
 }
@@ -642,13 +642,8 @@ form {
 }
 .comment--icon__trash {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-.comment--icon__update {
-  position: absolute;
   bottom: 1rem;
-  right: 0.8rem;
+  right: -2rem;
 }
 .comment--content {
   width: 100%;

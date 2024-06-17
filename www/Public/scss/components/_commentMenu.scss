@@ -2,7 +2,7 @@
   &--infos {
     width: 100%;
     display: grid;
-    grid-template-columns: 4fr 4fr 2fr;
+    grid-template-columns: 2fr 2fr 5fr;
     justify-content: center;
     align-items: center;
   }
@@ -20,13 +20,8 @@
     min-width: 1.5rem;
     &__trash {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-    }
-    &__update {
-      position: absolute;
       bottom: 1rem;
-      right: 0.8rem;
+      right: -2rem;
     }
   }
   &--content {
