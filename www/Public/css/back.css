@@ -429,6 +429,13 @@ form {
   align-self: center;
 }
 
+.article--value {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  overflow: hidden;
+  width: 90%;
+}
 .article--infos {
   width: 100%;
   display: grid;

@@ -19,6 +19,7 @@
                         <li class="navbar--list__link"><a href="/profile">Aller sur le site</a></li>
                         <li class="navbar--list__link"><a href="/dashboard">Tableau de bord</a></li>
                         <li class="navbar--list__link"><a href="/users/home">Utilisateurs</a></li>
+                        <li class="navbar--list__link"><a href="/gallery" >Bibliothèque</a></li>
                         <li class="navbar--list__link"><a href="/page/home">Pages</a></li>
                         <li class="navbar--list__link"><a href="/article/home">Articles</a></li>
                         <li class="navbar--list__link"><a href="/comments/home">Commentaires</a></li>

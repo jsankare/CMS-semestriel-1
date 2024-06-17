@@ -13,6 +13,7 @@
     <div class="navbar">
         <a href="/">Accueil</a>
         <a href="/articles" >Articles</a>
+        <a href="/gallery" >Galerie</a>
         <?php
         if (isset($pages) && !empty($pages)) {
             foreach ($pages as $page) {

@@ -49,17 +49,14 @@ CREATE TABLE public.esgi_article (
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-
 DROP TABLE IF EXISTS public.esgi_comment CASCADE;
 DROP TYPE IF EXISTS comment_status CASCADE;
-CREATE TYPE comment_status AS ENUM ('pending', 'approved', 'rejected');
 CREATE TABLE esgi_comment (
     id SERIAL PRIMARY KEY,
     article_id INT NOT NULL,
     user_id INT NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status comment_status DEFAULT 'pending',
     FOREIGN KEY (article_id) REFERENCES public.esgi_article(id),
     FOREIGN KEY (user_id) REFERENCES public.esgi_user(id)
 );
