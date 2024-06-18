@@ -61,5 +61,14 @@ CREATE TABLE esgi_comment (
     FOREIGN KEY (user_id) REFERENCES public.esgi_user(id)
 );
 
+DROP TABLE IF EXISTS public.esgi_pictures;
+CREATE TABLE esgi_pictures (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(100) NOT NULL,
+    link VARCHAR(500),
+    date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 COMMIT;
