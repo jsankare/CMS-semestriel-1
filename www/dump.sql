@@ -32,6 +32,8 @@ CREATE TABLE public.esgi_page (
     description VARCHAR(255) NOT NULL,
     content VARCHAR NOT NULL,
     creator_id INT NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    is_main BOOLEAN DEFAULT FALSE,
     CONSTRAINT fk_user FOREIGN KEY (creator_id) REFERENCES public.esgi_user(id),
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
