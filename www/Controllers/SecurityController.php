@@ -106,13 +106,17 @@ class SecurityController
 
         $pageModel = new Page();
         $commentModel = new Comment();
-        $userComments = $commentModel->findCommentsByUserId($user->getId());
 
         $pages = $pageModel->findAll();
+        $userComments = $commentModel->findCommentsByUserId($user->getId());
+
+        foreach ($userComments as &$comment) {
+            $comment['formatted_date'] = (new Comment())->getFormattedDate($comment['created_at']);
+        }
 
         $view = new View("Security/profile", "front");
-        $view->assign('pages', $pages);
         $view->assign("authenticatedUser", $user);
+        $view->assign('pages', $pages);
         $view->assign('updateProfileForm', $updateProfileForm->build());
         $view->assign("userComments", $userComments);
         $view->render();

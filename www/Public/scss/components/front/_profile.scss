@@ -10,8 +10,24 @@
   }
   &--statistics {
     text-align: center;
+    width: 50%;
+    margin-bottom: 1rem;
+    ul {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
   }
   &--update {
     text-align: center;
+    max-height: 20rem;
+    width: 100%;
+    max-width: 20rem;
+    margin-right: 10%;
   }
+}
+
+.tochange {
+  position: fixed;
 }

@@ -1,0 +1,50 @@
+.comment {
+  &--wrapper {
+    &__unit {
+      position: relative;
+    }
+  }
+  &--infos {
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2fr 3fr 1fr 8fr;
+    justify-content: center;
+    align-items: flex-start;
+    border-bottom: 1px solid black;
+  }
+  &--navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  &--value {
+  }
+  &--icon {
+    width: 100%;
+    max-width: 2rem;
+    min-width: 1.5rem;
+    &__trash {
+      position: absolute;
+      bottom: 1rem;
+      right: -2rem;
+    }
+  }
+
+  &--container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    &__global {
+      width: 100%;
+      max-width: 1000px;
+    }
+    &__wrapper {
+      display: grid;
+      grid-template-columns: 2fr 2fr 8fr;
+      border-bottom: 1px solid black;
+      position: relative;
+    }
+  }
+}

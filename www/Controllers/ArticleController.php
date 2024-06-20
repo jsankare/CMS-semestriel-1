@@ -1,19 +1,33 @@
 <?php
 namespace App\Controller;
 
-
-
 use App\Core\Form;
 use App\Core\View;
 use App\Models\Article;
 use App\Models\User;
+use App\Models\Comment;
+use App\Models\Page;
 
 class ArticleController
 {
 
     public function show(): void
     {
+        $articleModel = new Article();
+        $pageModel = new Page();
 
+        $articles = $articleModel->findAll();
+        $pages = $pageModel->findAll();
+
+        foreach ($articles as $article) {
+            $comments = (new Comment())->findCommentsByArticleId($article->getId());
+            $article->comments = $comments;
+        }
+
+        $view = new View("article/show", "front");
+        $view->assign('pages', $pages);
+        $view->assign('articles', $articles);
+        $view->render();
     }
 
     public function add(): void
@@ -49,8 +63,10 @@ class ArticleController
 
     public function list(): void
     {
-
         $articleModel = new Article();
+        $userModel = new User();
+        $commentModel = new Comment();
+
         $articles = $articleModel->findAll();
         $view = new View("article/home", "back");
         $view->assign('articles', $articles);

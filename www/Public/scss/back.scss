@@ -3,11 +3,12 @@
 @import "partials/globals";
 @import "partials/variables";
 
-@import "components/pageMenu";
-@import "components/articleMenu";
-@import "components/userMenu";
-@import "components/form";
-@import "components/input";
-@import "components/backNav";
-@import "components/commentMenu";
-@import "components/dashboard";
+@import "components/globals/form";
+@import "components/globals/input";
+
+@import "components/back/pageMenu";
+@import "components/back/articleMenu";
+@import "components/back/userMenu";
+@import "components/back/nav";
+@import "components/back/commentMenu";
+@import "components/back/dashboard";

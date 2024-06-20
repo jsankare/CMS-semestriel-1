@@ -21,7 +21,7 @@
                         <li class="navbar--list__link"><a href="/users/home">Utilisateurs</a></li>
                         <li class="navbar--list__link"><a href="/page/home">Pages</a></li>
                         <li class="navbar--list__link"><a href="/article/home">Articles</a></li>
-                        <li class="navbar--list__link"><a href="/comment/home">Commentaires</a></li>
+                        <li class="navbar--list__link"><a href="/comments/home">Commentaires</a></li>
                     </ul>
                     <ul class="navbar--list__links">
                         <li class="navbar--list__link"><a href="#">Paramètres</a></li>

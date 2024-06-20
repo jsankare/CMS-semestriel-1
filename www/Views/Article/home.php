@@ -23,7 +23,7 @@
                 </div>
                 <div class="article--content">
                     <li class="article--value" >
-                        <h3>Contenu</h3><p class="article--content__value" ><?php echo htmlspecialchars($article->getContent()); ?></p>
+                        <h3>Contenu</h3><p class="article--content__value" ><?= $article->getContent() ?></p>
                     </li>
                 </div>
                 <a class="article--icon__link" href="/article/delete?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__trash" src="/assets/trash.svg" ></a>
