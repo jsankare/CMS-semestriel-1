@@ -113,22 +113,22 @@ class Form
     }
 
     public function isValid(): bool
-{
-    $fileInputs = array_filter($this->config['inputs'], function ($input) {
-        return $input['type'] === 'file';
-    });
+    {
+    $requiredFieldsCount = 0;
+    foreach ($this->config["inputs"] as $input) {
+        if (isset($input["required"]) && $input["required"]) {
+            $requiredFieldsCount++;
+        }
+    }
 
-    $checkboxInputs = array_filter($this->config['inputs'], function ($input) {
-        return $input['type'] === 'checkbox';
-    });
+    $submittedRequiredFieldsCount = 0;
+    foreach ($_POST as $name => $dataSent) {
+        if (isset($this->config["inputs"][$name]["required"]) && $this->config["inputs"][$name]["required"]) {
+            $submittedRequiredFieldsCount++;
+        }
+    }
 
-    // Filtrer les cases à cocher non présentes dans $_POST
-    $postedFields = array_filter($_POST, function($key) use ($checkboxInputs) {
-        return !isset($checkboxInputs[$key]);
-    }, ARRAY_FILTER_USE_KEY);
-
-    // Est-ce que j'ai exactement le même nb de champs (avec les champs file et checkbox filtrés)
-    if (count($this->config["inputs"]) - count($fileInputs) - count($checkboxInputs) != count($postedFields)) {
+    if ($submittedRequiredFieldsCount != $requiredFieldsCount) {
         $this->errors[] = "Tentative de Hack, le compte n'est pas bon";
     }
 
@@ -153,24 +153,31 @@ class Form
             $this->errors[] = $this->config["inputs"][$name]["error"];
         }
 
-        // Est-ce que la confirmation correspond
-        if (isset($this->config["inputs"][$name]["confirm"]) && $dataSent != $_POST[$this->config["inputs"][$name]["confirm"]]) {
-            $this->errors[] = $this->config["inputs"][$name]["error"];
-        } else {
-            // Est-ce que le format email est OK
-            if ($this->config["inputs"][$name]["type"] == "email" && !filter_var($dataSent, FILTER_VALIDATE_EMAIL)) {
-                $this->errors[] = "Le format de l'email est incorrect";
-            }
-            // Est-ce que le format password est OK
-            if ($this->config["inputs"][$name]["type"] == "password" &&
-                (!preg_match("#[a-z]#", $dataSent) ||
-                    !preg_match("#[A-Z]#", $dataSent) ||
-                    !preg_match("#[0-9]#", $dataSent))
-            ) {
+            //Est ce que la confirmation correspond
+            if (isset($this->config["inputs"][$name]["confirm"]) && $dataSent != $_POST[$this->config["inputs"][$name]["confirm"]]) {
                 $this->errors[] = $this->config["inputs"][$name]["error"];
+            } else {
+                //Est ce que le format email est OK
+                if ($this->config["inputs"][$name]["type"] == "email" &&
+                    !filter_var($dataSent, FILTER_VALIDATE_EMAIL)) {
+                    $this->errors[] = "Le format de l'email est incorrect";
+                }
+                //Est ce que le format password est OK
+                if ($this->config["inputs"][$name]["type"] == "password" &&
+                    (!preg_match("#[a-z]#", $dataSent) ||
+                        !preg_match("#[A-Z]#", $dataSent) ||
+                        !preg_match("#[0-9]#", $dataSent))
+                ) {
+                    $this->errors[] = $this->config["inputs"][$name]["error"];
+                }
             }
         }
-    }
+
+        foreach ($this->config["inputs"] as $name => $input) {
+            if ($input["type"] == "checkbox" && !isset($_POST[$name])) {
+                $_POST[$name] = 0; 
+            }
+        }
 
     // Gérer les champs de type checkbox
     foreach ($this->config["inputs"] as $name => $input) {
