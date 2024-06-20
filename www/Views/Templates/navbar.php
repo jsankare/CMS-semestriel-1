@@ -9,7 +9,7 @@
             <?php
             if (isset($pages) && !empty($pages)) {
                 foreach ($pages as $page) {
-                  echo "<a href='/page/{$page->getSlug()}/{$page->getId()}'>{$page->getTitle()}</a>";
+                    echo "<a href='/page/{$page->getSlug()}/{$page->getId()}'>{$page->getTitle()}</a>";
                 }
             }
             ?>
@@ -19,10 +19,9 @@
         <?php else: ?>
            
             <a href="/home">Accueil</a>
-            <a href="/login">Se connecter</a>
+            <a href="/login" class="login">Se connecter</a> <a href="/register" class="register">S'inscrire</a>
         <?php endif; ?>
     <?php else: ?>
-        <!-- Navbar for connected users -->
         <a href="/">Accueil</a>
         <a href="/profile">Profil</a>
         <div class="dropdown">

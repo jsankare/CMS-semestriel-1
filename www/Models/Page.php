@@ -11,6 +11,8 @@ class Page extends SQL
     protected string $description;
     protected string $content;
     protected int $creator_id;
+    protected string $slug;
+    protected bool $is_main;
 
     /**
      * @return int
@@ -92,6 +94,31 @@ class Page extends SQL
         $this->creator_id = $creator_id;
     }
 
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    public function isMain(): bool
+    {
+        return $this->is_main;
+    }
+
+    public function setIsMain(bool $is_main): void
+    {
+        $this->is_main = $is_main;
+    }
+
+    public function getIsMain(): bool
+    {
+        return (bool) $this->is_main;
+    }
+
     public function findOneByTitle(string $title) {
         $sql = "SELECT * FROM {$this->table} WHERE title = :title";
 
@@ -110,6 +137,15 @@ class Page extends SQL
         return $queryPrepared->fetch();
     }
 
+    public function findOneBySlug(string $slug) {
+        $sql = "SELECT * FROM {$this->table} WHERE slug = :slug";
+    
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([":slug" => $slug]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        return $queryPrepared->fetch();
+    }
+
     public function findAll() {
         $sql = "SELECT * FROM {$this->table}";
 
@@ -117,6 +153,21 @@ class Page extends SQL
         $queryPrepared->execute();
         $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
         return $queryPrepared->fetchAll();
+    }
+
+    public function findMainPage() {
+        $sql = "SELECT * FROM {$this->table} WHERE is_main = TRUE";
+    
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        return $queryPrepared->fetch();
+    }
+
+    public function resetMainPage(): void
+    {
+        $sql = "UPDATE {$this->table} SET is_main = FALSE";
+        $this->pdo->exec($sql);
     }
 
     public function delete(): void
@@ -130,23 +181,29 @@ class Page extends SQL
 
     public function save(): void
     {
+        $isMain = $this->isMain() ? 'TRUE' : 'FALSE';
+
         if (!empty($this->getId())) {
-            $sql = "UPDATE {$this->table} SET title = :title, description = :description, content = :content, creator_id = :creator_id WHERE id = :id";
+            $sql = "UPDATE {$this->table} SET title = :title, description = :description, content = :content, slug = :slug, is_main = :is_main, creator_id = :creator_id WHERE id = :id";
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute([
                 ':title' => $this->getTitle(),
                 ':description' => $this->getDescription(),
                 ':content' => $this->getContent(),
+                ':slug' => $this->getSlug(),
+                ':is_main'  => $isMain,
                 ':creator_id' => $this->getCreatorId(),
                 ':id' => $this->getId(),
             ]);
         } else {
-            $sql = "INSERT INTO {$this->table} (title, description, content, creator_id) VALUES (:title, :description, :content, :creator_id)";
+            $sql = "INSERT INTO {$this->table} (title, description, content, slug, is_main, creator_id) VALUES (:title, :description, :content, :slug, :is_main,:creator_id)";
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute([
                 ':title' => $this->getTitle(),
                 ':description' => $this->getDescription(),
                 ':content' => $this->getContent(),
+                ':slug' => $this->getSlug(),
+                ':is_main' => $isMain,
                 ':creator_id' => $this->getCreatorId(),
             ]);
             $this->id = $this->pdo->lastInsertId();
