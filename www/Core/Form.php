@@ -75,6 +75,9 @@ class Form
                     $html .= "<option value='" . htmlspecialchars($value) . "'{$selected}>" . htmlspecialchars($option) . "</option>";
                 }
                 $html .= "</select>";
+            }else if ($input["type"] == "checkbox") {
+                $checked = isset($input["value"]) && $input["value"] ? " checked" : "";
+                $html .= "<input type='checkbox' class='input input--{$name}' id='{$name}' name='{$name}' value='1'{$checked}>";
             } else {
                 $html .= "<input class='input input--{$name}' type='{$input["type"]}' name='{$name}'";
                 if (isset($input["placeholder"])) {
@@ -118,9 +121,25 @@ class Form
         if (count($this->config["inputs"]) - count($fileInputs) != count($_POST)) {
             $this->errors[] = "Tentative de Hack, le compte n'est pas bon";
         }
+    $requiredFieldsCount = 0;
+    foreach ($this->config["inputs"] as $input) {
+        if (isset($input["required"]) && $input["required"]) {
+            $requiredFieldsCount++;
+        }
+    }
+
+    $submittedRequiredFieldsCount = 0;
+    foreach ($_POST as $name => $dataSent) {
+        if (isset($this->config["inputs"][$name]["required"]) && $this->config["inputs"][$name]["required"]) {
+            $submittedRequiredFieldsCount++;
+        }
+    }
+
+    if ($submittedRequiredFieldsCount != $requiredFieldsCount) {
+        $this->errors[] = "Tentative de Hack, le compte n'est pas bon";
+    }
 
         foreach ($_POST as $name => $dataSent) {
-            //Est-ce qu'il s'agit d'un champ que je lui ai donné ?
             if (!isset($this->config["inputs"][$name])) {
                 $this->errors[] = "Tentative de Hack, le champ " . $name . " n'est pas autorisé";
             }
@@ -159,6 +178,12 @@ class Form
                 ) {
                     $this->errors[] = $this->config["inputs"][$name]["error"];
                 }
+            }
+        }
+
+        foreach ($this->config["inputs"] as $name => $input) {
+            if ($input["type"] == "checkbox" && !isset($_POST[$name])) {
+                $_POST[$name] = 0; 
             }
         }
 

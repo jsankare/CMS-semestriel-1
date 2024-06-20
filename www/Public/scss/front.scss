@@ -3,6 +3,7 @@
 @import "partials/globals";
 @import "partials/variables";
 
+<<<<<<< HEAD
 @import "components/globals/form";
 @import "components/globals/input";
 
@@ -12,3 +13,10 @@
 @import "components/front/articleDisplay";
 @import "components/front/gallery";
 @import "components/pageFront";
+=======
+@import "components/form";
+@import "components/input";
+@import "components/frontNav";
+@import "components/pageDisplayFront";
+@import "components/pageDisplayHome";
+>>>>>>> 9141abd (Add function for mainPage and update styles and routes)
