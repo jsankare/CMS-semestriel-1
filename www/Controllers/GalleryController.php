@@ -8,17 +8,16 @@ use App\Models\Image;
 
 class GalleryController
 {
-    public function home(): void
+    public function create(): void
     {
         $pages = (new Page())->findAll();
         $galleryForm = new Form('Gallery');
 
         if ($galleryForm->isSubmitted() && $galleryForm->isValid()) {
-            // var_dump($_FILES);
-            // var_dump($_POST);
-            // die;
+
+            $ext = (new \SplFileInfo($_FILES["image"]["name"]))->getExtension();
             $uploadDir = '/var/www/html/Public/uploads/';
-            $uploadFile = $uploadDir . basename($_FILES["image"]["name"]);
+            $uploadFile = $uploadDir . uniqid() . '.' . $ext;
 
             // Is uploaded && right mime type
             if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
@@ -33,12 +32,18 @@ class GalleryController
             $image->setDescription($_POST['description']);
             $image->setLink($uploadFile);
             $image->save();
+
+            
         }
 
-        $view = new View('Gallery/home', 'front');
+        $view = new View('Gallery/home', 'back');
         $view->assign('galleryForm', $galleryForm->build());
         $view->assign('pages', $pages);
         $view->render();
+    }
+
+    function home(): void {
+        echo "beuteu";
     }
 
 }

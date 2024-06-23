@@ -184,3 +184,8 @@
   Security: false
   Role: "Guest"
 
+/gallery/create:
+  Controller: GalleryController
+  Action: "create"
+  Security: true
+  Role: "Editor"
