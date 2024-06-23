@@ -12,11 +12,11 @@ class Form
 
     public function __construct(string $name)
     {
-        if (!file_exists("../Forms/${name}Form.php")) {
+        if (!file_exists("../Forms/{$name}Form.php")) {
             die("Le form " . $name . "Form.php n'existe pas dans le dossier ../Forms");
         }
-        include "../Forms/${name}Form.php";
-        $name = "App\\Forms\\${name}Form";
+        include "../Forms/{$name}Form.php";
+        $name = "App\\Forms\\{$name}Form";
         $this->config = $name::getConfig();
     }
 
@@ -41,7 +41,8 @@ class Form
             $html .= "</ul>";
         }
 
-        $html .= "<form action='" . $this->config["config"]["action"] . "' method='" . $this->config["config"]["method"] . "'>";
+        $enctype = isset($this->config["config"]["enctype"]) ? "enctype='{$this->config["config"]["enctype"]}'" : '';
+        $html .= "<form action='{$this->config["config"]["action"]}' method='{$this->config["config"]["method"]}' {$enctype}>";
 
         foreach ($this->config["inputs"] as $name => $input) {
             $html .= "<div class='input--wrapper'>";
@@ -110,8 +111,11 @@ class Form
 
     public function isValid(): bool
     {
+        $fileInputs = array_filter($this->config['inputs'], function ($input) {
+            return $input['type'] === 'file';
+        });
         //Est-ce que j'ai exactement le meme nb de champs
-        if (count($this->config["inputs"]) != count($_POST)) {
+        if (count($this->config["inputs"]) - count($fileInputs) != count($_POST)) {
             $this->errors[] = "Tentative de Hack, le compte n'est pas bon";
         }
 
