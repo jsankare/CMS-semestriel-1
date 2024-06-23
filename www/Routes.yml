@@ -189,3 +189,9 @@
   Action: "create"
   Security: true
   Role: "Editor"
+
+/gallery/list:
+  Controller: GalleryController
+  Action: "list"
+  Security: true
+  Role: "Editor"

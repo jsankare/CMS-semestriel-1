@@ -80,7 +80,7 @@ class Image extends SQL
 
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute([":title" => $title]);
-        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Image');
         return $queryPrepared->fetch();
     }
 
@@ -89,7 +89,7 @@ class Image extends SQL
 
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute([":id" => $id]);
-        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Image');
         return $queryPrepared->fetch();
     }
 
@@ -98,7 +98,7 @@ class Image extends SQL
 
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute();
-        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Image');
         return $queryPrepared->fetchAll();
     }
 
