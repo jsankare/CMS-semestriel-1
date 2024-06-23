@@ -16,7 +16,16 @@ class GalleryController
         if ($galleryForm->isSubmitted() && $galleryForm->isValid()) {
 
             $ext = (new \SplFileInfo($_FILES["image"]["name"]))->getExtension();
+            // might be error with creating folder rights, fixed using "chmod -R 777 www/Public"
             $uploadDir = '/var/www/html/Public/uploads/';
+            if(is_dir($uploadDir)) {
+            } else {
+                if (!mkdir($uploadDir, 0777, true)) {
+                    echo "pb creating folder";
+                } else {
+                    echo "folder has been created";
+                }
+            }
             $uploadFile = $uploadDir . uniqid() . '.' . $ext;
 
             // Is uploaded && right mime type
@@ -32,6 +41,7 @@ class GalleryController
             $image->setDescription($_POST['description']);
             $image->setLink($uploadFile);
             $image->save();
+            echo "all is saved";
 
             
         }
