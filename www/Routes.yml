@@ -119,12 +119,6 @@ routes:
   Security: true
   Role: "Editor"
 
-/page/show:
-  Controller: PageController
-  Action: "show"
-  Security: true
-  Role: "Guest"
-
 /page/{slug}:
   Controller: PageController
   Action: "show"
