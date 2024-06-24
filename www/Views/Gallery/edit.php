@@ -1,9 +1,9 @@
-<section>
+<section class="gallery--edit">
     <div>
         <h1>Image Update</h1>
         <?= $imageForm ?>
     </div>
-    <aside>
+    <aside class="gallery--edit__aside">
         <?php
         $link = $image->getLink();
         $relativeLink = str_replace('/var/www/html/Public', '', $link);

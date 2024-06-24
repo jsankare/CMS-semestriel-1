@@ -3,11 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const items = document.querySelectorAll('.carousel--item');
     const prevButton = document.querySelector('.carousel--control.prev');
     const nextButton = document.querySelector('.carousel--control.next');
+    const currentSlide = document.getElementById('current--slide');
     let currentIndex = 0;
 
     function updateCarousel() {
         const width = items[0].clientWidth;
         carousel.style.transform = `translateX(-${currentIndex * width}px)`;
+        currentSlide.textContent = currentIndex + 1;
     }
 
     prevButton.addEventListener('click', function() {

@@ -1,5 +1,5 @@
 <main class="gallery">
-    <h2>Gallerie avec carrousel d'images</h2>
+    <h2>Galerie</h2>
     <section class="gallery--content">
         <div class="carousel">
             <button class="carousel--control prev">&lt;</button>
@@ -18,6 +18,9 @@
                 <?php endforeach; ?>
             </div>
             <button class="carousel--control next">&gt;</button>
+            <div class="carousel--counter">
+                <span id="current--slide">1</span> / <span id="total-slides"><?php echo count($images); ?></span>
+            </div>
         </div>
         <div class="gallery--classic">
             <?php foreach ($images as $image): ?>

@@ -712,6 +712,18 @@ form {
   align-items: center;
   gap: 2rem;
 }
+.gallery--edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  text-align: center;
+}
+.gallery--picture__edit {
+  width: 100%;
+  max-width: 20rem;
+}
 .gallery--link {
   color: black;
 }
