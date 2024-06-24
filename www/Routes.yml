@@ -137,7 +137,7 @@ routes:
   Security: true
   Role: "Editor"
 
-/page/{slug}:
+/page/show:
   Controller: PageController
   Action: "show"
   Security: true
