@@ -1,6 +1,9 @@
 <main class="gallery">
     <h2>Galerie</h2>
     <section class="gallery--content">
+        <?php if (empty($images)): ?>
+            <h2>Pas d'image pour le moment !</h2>
+        <?php else: ?>
         <div class="carousel">
             <button class="carousel--control prev">&lt;</button>
             <div class="carousel--inner">
@@ -40,7 +43,7 @@
             <img class="modal-content" id="modalImage">
             <div id="caption"></div>
         </div>
-
+        <?php endif; ?>
     </section>
 </main>
 <script src="/js/gallery.js"></script>
