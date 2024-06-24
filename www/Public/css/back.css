@@ -706,4 +706,36 @@ form {
   right: 1px;
 }
 
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.gallery--icon {
+  width: 100%;
+  max-width: 2rem;
+  min-width: 1.5rem;
+}
+.gallery--content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 5rem;
+}
+.gallery--content__item {
+  height: 25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+.gallery--item__picture {
+  max-width: 10rem;
+  max-height: 10rem;
+  margin: 0 auto;
+}
+
 /*# sourceMappingURL=back.css.map */
