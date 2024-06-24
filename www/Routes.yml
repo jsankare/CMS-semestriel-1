@@ -1,3 +1,4 @@
+routes:
 /:
   Controller: PageController
   Action: "home"
@@ -142,18 +143,12 @@
   Security: true
   Role: "Guest"
 
-/page/showPage:
+/page/{slug}:
   Controller: PageController
   Action: "show"
-  Security: true
+  Security: false
   Role: "Guest"
-
-/page/{slug}/{id}:
-  Controller: PageController
-  Action: "show"
-  Security: True
-  Role: "Guest"
-
+ 
 /article/create:
   Controller: ArticleController
   Action: "add"
