@@ -195,3 +195,15 @@
   Action: "list"
   Security: true
   Role: "Editor"
+
+/image/delete:
+  Controller: GalleryController
+  Action: "delete"
+  Security: true
+  Role: "Editor"
+
+/image/edit:
+  Controller: GalleryController
+  Action: "edit"
+  Security: true
+  Role: "Editor"

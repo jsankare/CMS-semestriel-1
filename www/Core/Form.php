@@ -114,7 +114,7 @@ class Form
         $fileInputs = array_filter($this->config['inputs'], function ($input) {
             return $input['type'] === 'file';
         });
-        //Est-ce que j'ai exactement le meme nb de champs
+        //Est-ce que j'ai exactement le meme nb de champs (avec les champs file filtres au dessus)
         if (count($this->config["inputs"]) - count($fileInputs) != count($_POST)) {
             $this->errors[] = "Tentative de Hack, le compte n'est pas bon";
         }

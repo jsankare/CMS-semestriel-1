@@ -1,5 +1,4 @@
-<p>Ajouter des images</p>
-
-<?= $galleryForm ?>
-
-<a href="/gallery/list" >Voir les images</a>
+<section class="gallery" >
+    <h1>Ajouter des images</h1>
+    <?= $galleryForm ?>
+</section>

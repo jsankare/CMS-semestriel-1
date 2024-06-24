@@ -712,6 +712,9 @@ form {
   align-items: center;
   gap: 2rem;
 }
+.gallery--link {
+  color: black;
+}
 .gallery--icon {
   width: 100%;
   max-width: 2rem;
@@ -728,14 +731,30 @@ form {
   display: flex;
   flex-direction: column;
   align-self: center;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
   gap: 1.5rem;
+  position: relative;
 }
 .gallery--item__picture {
   max-width: 10rem;
   max-height: 10rem;
   margin: 0 auto;
+}
+.gallery--item__icons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.separator {
+  position: absolute;
+  background-color: black;
+  height: 1px;
+  width: 100rem;
+  bottom: -3rem;
+  left: -1rem;
 }
 
 /*# sourceMappingURL=back.css.map */
