@@ -65,8 +65,12 @@ class GalleryController
 
     public function home(): void {
         $pages = (new Page())->findAll();
-        
+
+        $imageModel = new Image();
+        $images = $imageModel->findAll();
+
         $view = new View('Gallery/home', 'front');
+        $view->assign('images', $images);
         $view->assign('pages', $pages);
         $view->render();
     }
