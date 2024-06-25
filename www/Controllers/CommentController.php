@@ -24,7 +24,6 @@ class CommentController
                     $comment->setArticleId($articleId);
                     $comment->setUserId($userId);
                     $comment->setContent($content);
-                    $comment->setStatus('pending');
                     $comment->save();
 
                     header('Location: /articles');

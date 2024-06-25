@@ -10,7 +10,6 @@ class Comment extends SQL
     protected int $article_id;
     protected int $user_id;
     protected string $content;
-    protected string $status;
     protected string $created_at;
 
     public function getId(): ?int
@@ -46,16 +45,6 @@ class Comment extends SQL
     public function setContent(string $content): void
     {
         $this->content = $content;
-    }
-
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): void
-    {
-        $this->status = $status;
     }
 
     public function getTitle(): string
@@ -96,23 +85,21 @@ class Comment extends SQL
     public function save(): void
     {
         if (!empty($this->getId())) {
-            $sql = "UPDATE {$this->table} SET article_id = :article_id, user_id = :user_id, content = :content, status = :status WHERE id = :id";
+            $sql = "UPDATE {$this->table} SET article_id = :article_id, user_id = :user_id, content = :content WHERE id = :id";
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute([
                 ':article_id' => $this->getArticleId(),
                 ':user_id' => $this->getUserId(),
                 ':content' => $this->getContent(),
-                ':status' => $this->getStatus(),
                 ':id' => $this->getId(),
             ]);
         } else {
-            $sql = "INSERT INTO {$this->table} (article_id, user_id, content, status) VALUES (:article_id, :user_id, :content, :status)";
+            $sql = "INSERT INTO {$this->table} (article_id, user_id, content) VALUES (:article_id, :user_id, :content)";
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute([
                 ':article_id' => $this->getArticleId(),
                 ':user_id' => $this->getUserId(),
                 ':content' => $this->getContent(),
-                ':status' => $this->getStatus(),
             ]);
             $this->id = $this->pdo->lastInsertId();
         }

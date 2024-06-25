@@ -8,7 +8,7 @@
             <div class="dashboard--main__chartUnit dashboard--main__chartUnit--1">
                 <div class="dashboard--chart__wrapper dashboard--chart__wrapper--1">
                     <h3>Items créés depuis la création du site</h3>
-                    <?php if ($userCount > 0 || $pageCount > 0 || $articleCount > 0 || $commentCount > 0) { ?>
+                    <?php if ($userCount > 0 || $pageCount > 0 || $articleCount > 0 || $commentCount > 0 || $imageCount > 0 ) { ?>
                         <div class="chart" id="itemsInformationTemplate"></div>
                     <?php } else { ?>
                         <p>Aucune donnée disponible pour ce graphique.</p>
@@ -69,7 +69,8 @@
             { category: "Utilisateurs", value: <?php echo $userCount; ?> },
             { category: "Pages", value: <?php echo $pageCount; ?> },
             { category: "Articles", value: <?php echo $articleCount; ?> },
-            { category: "Commentaires", value: <?php echo $commentCount; ?> }
+            { category: "Commentaires", value: <?php echo $commentCount; ?> },
+            { category: "Images", value: <?php echo $imageCount; ?> }
         ];
         createChart("itemsInformationTemplate", itemsInformationData, "PieChart");
         <?php } ?>
