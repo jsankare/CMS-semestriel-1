@@ -49,8 +49,7 @@ class SecurityController
 
             $existingUsers = (new User())->findAll();
             $status = count($existingUsers) === 0 ? 4 : 0;
-
-            $validation_code = md5(uniqid(rand(), true));
+            $validation_code = count($existingUsers) === 0 ? null : md5(uniqid(rand(), true));
 
             $user = new User(); // Initialisation d'un nouveau UserController
             $user->setFirstname($_POST["firstname"]);
@@ -61,7 +60,7 @@ class SecurityController
             $user->setValidationCode($validation_code);
             $user->save();
 
-            $this->emailValidation($user);
+            count($existingUsers) === 0 ? '' : $this->emailValidation($user);
 
             header('Location: ' . $_ENV['BASE_URL'] . '/login');
         }

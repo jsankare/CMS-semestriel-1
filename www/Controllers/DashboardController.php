@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Core\View;
+use App\Models\Image;
 use App\Models\Page;
 use App\Models\User;
 use App\Models\Article;
@@ -23,16 +24,19 @@ class DashboardController
         $articleModel = new Article();
         $commentModel = new Comment();
         $userModel = new User();
+        $imageModel = new Image();
 
         $pages = $pageModel->findAll();
         $articles = $articleModel->findAll();
         $users = $userModel->findAll();
         $comments = $commentModel->findAll();
+        $images = $imageModel->findAll();
 
         $pageCount = $pageModel->count();
         $articleCount = $articleModel->count();
         $userCount = $userModel->count();
         $commentCount = $commentModel->count();
+        $imageCount = $imageModel->count();
 
         $articlesWithComments = $articleModel->findArticlesWithComments();
         $articleWithCommentCount = count($articlesWithComments);
@@ -72,11 +76,13 @@ class DashboardController
         $view->assign('articles', $articles);
         $view->assign('comments', $comments);
         $view->assign('users', $users);
+        $view->assign('images', $images);
 
         $view->assign('pageCount', $pageCount);
         $view->assign('articleCount', $articleCount);
         $view->assign('userCount', $userCount);
         $view->assign('commentCount', $commentCount);
+        $view->assign('imageCount', $imageCount);
         $view->assign('articlesWithComments', $articlesWithComments);
         $view->assign('articleWithCommentCount', $articleWithCommentCount);
 
