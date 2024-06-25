@@ -722,4 +722,16 @@ form {
   padding-left: 0rem;
 }
 
+.page--wrappe {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding-left: 20rem;
+}
+.page--wrappe h1 {
+  font-size: 2em;
+  text-align: left;
+  padding-left: 0rem;
+}
+
 /*# sourceMappingURL=front.css.map */
