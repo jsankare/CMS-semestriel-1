@@ -26,25 +26,26 @@ class PageController
     public function show(): void
 {
     $uriSegments = explode('/', $_SERVER['REQUEST_URI']);
-
-    if (isset($uriSegments[2]) && isset($uriSegments[3])) {
+    if (isset($uriSegments[2])) {
         $slug = $uriSegments[2];
-        $id = $uriSegments[3];
         $page = (new Page())->findOneBySlug($slug);
+        if ($page) {
+          
+            $pages = (new Page())->findAllExcept($slug);
 
-        if ($page && $page->getId() == $id) {
-            $pages = (new Page())->findAll();
             $view = new View("Page/showPage", "front");
             $view->assign('page', $page);
-            $view->assign('pages', $pages);
+            $view->assign('pages', $pages); 
             $view->render();
         } else {
             echo "Page non trouvée";
         }
     } else {
-        echo "Slug ou ID non spécifié dans l'URL";
+        echo "Slug non spécifié dans l'URL";
     }
 }
+
+
     public function add(): void
 {
     $user = (new User())->findOneById($_SESSION['user_id']);
