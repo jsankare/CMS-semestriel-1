@@ -12,10 +12,12 @@ class PageController
     public function home(): void
     {
         $mainPage = (new Page())->findMainPage();
+        $pages = (new Page())->findAll();
 
         if ($mainPage) {
             $view = new View("Home/home", "front");
             $view->assign('page', $mainPage);
+            $view->assign('pages', $pages);
             $view->render();
         } else {
             echo "Aucune page principale définie.";
