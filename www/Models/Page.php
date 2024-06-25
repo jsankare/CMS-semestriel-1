@@ -137,20 +137,40 @@ class Page extends SQL
         return $queryPrepared->fetch();
     }
 
-    public function findOneBySlug(string $slug) {
-        $sql = "SELECT * FROM {$this->table} WHERE slug = :slug";
+    public function findOneBySlug(string $slug)
+{
+    $sql = "SELECT * FROM {$this->table} WHERE slug = :slug";
+    $queryPrepared = $this->pdo->prepare($sql);
+    $queryPrepared->execute([':slug' => $slug]);
+    $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+    $page = $queryPrepared->fetch();
     
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute([":slug" => $slug]);
-        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
-        return $queryPrepared->fetch();
+    if ($page === false) {
+        error_log("Page not found for slug: $slug");
+        return null;
     }
+    
+    return $page;
+}
+
+    
+
 
     public function findAll() {
         $sql = "SELECT * FROM {$this->table}";
 
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute();
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
+        return $queryPrepared->fetchAll();
+    }
+
+    public function findAllExcept(string $slug)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE slug != :slug";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([':slug' => $slug]);
         $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Page');
         return $queryPrepared->fetchAll();
     }
