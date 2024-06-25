@@ -269,6 +269,16 @@ ul li a {
   --grey-hover: #3d4246;
   --red: #dc3545;
   --red-hover: #921925;
+  --black: #000;
+  --black-transparent: rgba(0, 0, 0, 0.8);
+  --blue: #0d6efd;
+  --blue-transparent: rgba(13, 110, 253, 0.8);
+  --white: #fff;
+  --white-transparent: rgba(255, 255, 255, 0.8);
+  --grey: #6c757d;
+  --grey-transparent: rgba(108, 117, 125, 0.8);
+  --red: #dc3545;
+  --red-transparent: rgba(220, 53, 69, 0.8);
   --text-color: var(--black);
   --primary: var(--blue);
   --secondary: var(--grey);
@@ -546,16 +556,16 @@ form {
 .gallery .carousel .carousel--control {
   position: absolute;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
+  background-color: var(--grey-transparent);
   color: white;
   border: none;
-  padding: 10px;
+  padding: 0.75rem;
   cursor: pointer;
   border-radius: 0.25rem;
   transition: 0.2s ease-in-out;
 }
 .gallery .carousel .carousel--control:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background-color: var(--grey);
 }
 .gallery .carousel .carousel--control.prev {
   left: 20rem;
@@ -568,13 +578,14 @@ form {
 
 .carousel--counter {
   position: absolute;
-  bottom: 4rem;
+  top: 8rem;
   right: 50%;
   transform: translateX(50%);
   background: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
+  z-index: 1;
 }
 
 .modal {

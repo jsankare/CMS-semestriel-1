@@ -29,6 +29,10 @@ $colors: (
     --#{$name}: #{$value};
     --#{$name}-hover: #{color.adjust($value, $lightness: -20%)};
   }
+  @each $name, $value in $colors {
+    --#{$name}: #{$value};
+    --#{$name}-transparent: #{rgba($value, 0.8)};
+  }
 
   --text-color: var(--black);
   --primary: var(--blue);

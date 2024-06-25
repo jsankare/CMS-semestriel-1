@@ -6,6 +6,9 @@
         <?php else: ?>
         <div class="carousel">
             <button class="carousel--control prev">&lt;</button>
+            <div class="carousel--counter">
+                <span id="current--slide">1</span> / <span id="total-slides"><?php echo count($images); ?></span>
+            </div>
             <div class="carousel--inner">
                 <?php foreach ($images as $index => $image): ?>
                     <div class="carousel--item <?php echo $index === 0 ? 'active' : ''; ?>">
@@ -21,9 +24,6 @@
                 <?php endforeach; ?>
             </div>
             <button class="carousel--control next">&gt;</button>
-            <div class="carousel--counter">
-                <span id="current--slide">1</span> / <span id="total-slides"><?php echo count($images); ?></span>
-            </div>
         </div>
         <div class="gallery--classic">
             <?php foreach ($images as $image): ?>
