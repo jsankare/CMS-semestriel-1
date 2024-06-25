@@ -1,4 +1,3 @@
-routes:
 /:
   Controller: PageController
   Action: "home"
@@ -148,7 +147,7 @@ routes:
   Action: "show"
   Security: false
   Role: "Guest"
- 
+
 /article/create:
   Controller: ArticleController
   Action: "add"
