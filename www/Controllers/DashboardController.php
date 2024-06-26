@@ -101,9 +101,14 @@ class DashboardController
 
         $settingsForm = new Form('Settings');
 
-//        if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
-//
-//        }
+        if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
+            $setting = new Settings();
+            $setting->setColor($_POST["color"]);
+            $setting->setFont($_POST["font"]);
+            $setting->setId(1);
+            $setting->save();
+            var_dump($setting);
+        }
 
         $view = new View("Dashboard/settings", "back");
         $view->assign('settingsForm', $settingsForm->build());

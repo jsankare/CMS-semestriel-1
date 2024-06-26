@@ -6,7 +6,7 @@ use App\Core\SQL;
 
 class Settings extends SQL
 {
-    private ?int $id=1;
+    private ?int $id=null;
     protected ?string $color=null;
     protected ?string $font=null;
 
