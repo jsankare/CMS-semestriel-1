@@ -32,3 +32,18 @@
     right: 1px;
   }
 }
+
+.settings {
+  &--section {
+    &__color {
+      display: flex;
+      gap: 1rem;
+    }
+    &--currentColor {
+      display: flex;
+      width: 5rem;
+      border-radius: 0.5rem;
+      flex-shrink: 0;
+    }
+  }
+}

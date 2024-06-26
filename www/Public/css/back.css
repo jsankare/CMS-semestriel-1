@@ -739,6 +739,17 @@ input[type=color] {
   right: 1px;
 }
 
+.settings--section__color {
+  display: flex;
+  gap: 1rem;
+}
+.settings--section--currentColor {
+  display: flex;
+  width: 5rem;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
 .gallery {
   display: flex;
   flex-direction: column;

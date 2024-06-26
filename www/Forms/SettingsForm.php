@@ -26,6 +26,7 @@ class SettingsForm
                         "Helvetica" => "Helvetica",
                         "Calibri" => "Calibri"
                     ],
+                    "value" => $data['font'] ?? ''
                 ]
             ]
         ];

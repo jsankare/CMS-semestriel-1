@@ -58,4 +58,21 @@ class Settings extends SQL
         $this->font = ucwords(strtolower($font));
     }
 
+    public function count(): int
+    {
+        $sql = "SELECT COUNT(*) as count FROM {$this->table}";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetch(\PDO::FETCH_ASSOC);
+        return (int) $result['count'];
+    }
+
+    public function findOneById(string $id) {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([":id" => $id]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Settings');
+        return $queryPrepared->fetch();
+    }
 }

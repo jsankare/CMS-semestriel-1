@@ -100,18 +100,29 @@ class DashboardController
     function settings(): void {
 
         $settingsForm = new Form('Settings');
+        $setting = new Settings();
+        $count= $setting->count();
+
+        if ($count > 0) {
+            $currentSetting = $setting->findOneById(1);
+        }
 
         if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
-            $setting = new Settings();
+            if ($count > 0) {
+                $setting->setId(1);
+            }
             $setting->setColor($_POST["color"]);
             $setting->setFont($_POST["font"]);
-            $setting->setId(1);
             $setting->save();
-            var_dump($setting);
+
+            header('Location: /dashboard/settings');
+            exit();
         }
 
         $view = new View("Dashboard/settings", "back");
         $view->assign('settingsForm', $settingsForm->build());
+        $view->assign('currentSetting', $currentSetting);
+        $view->assign('count', $count);
         $view->render();
     }
 }

@@ -9,7 +9,7 @@
     </head>
     <body>
         <main class="mainBack" >
-            <aside class="navbar" >
+            <aside class="navbar" style="" >
                 <a class="navbar--logo__link" href="/dashboard">
                     <img class="navbar--logo__picture" src="/assets/logo.svg">
                 </a>
