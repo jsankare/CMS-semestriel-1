@@ -7,6 +7,8 @@ use App\Models\Page;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Settings;
+use App\Core\Form;
 
 class DashboardController
 {
@@ -68,7 +70,7 @@ class DashboardController
             }
         }
 
-        $view = new View("Main/dashboard", "back");
+        $view = new View("Dashboard/home", "back");
 
         $view->assign('user', $currentUser);
 
@@ -92,6 +94,19 @@ class DashboardController
         $view->assign('moderatorAmount', $moderatorAmount);
         $view->assign('adminAmount', $adminAmount);
 
+        $view->render();
+    }
+
+    function settings(): void {
+
+        $settingsForm = new Form('Settings');
+
+//        if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
+//
+//        }
+
+        $view = new View("Dashboard/settings", "back");
+        $view->assign('settingsForm', $settingsForm->build());
         $view->render();
     }
 }

@@ -34,6 +34,12 @@
   Security: true
   Role: "Editor"
 
+/dashboard/settings:
+  Controller: DashboardController
+  Action: "settings"
+  Security: true
+  Role: "Admin"
+
 /profile:
   Controller: SecurityController
   Action: "profile"

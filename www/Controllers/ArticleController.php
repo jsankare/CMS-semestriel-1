@@ -64,8 +64,6 @@ class ArticleController
     public function list(): void
     {
         $articleModel = new Article();
-        $userModel = new User();
-        $commentModel = new Comment();
 
         $articles = $articleModel->findAll();
         $view = new View("article/home", "back");

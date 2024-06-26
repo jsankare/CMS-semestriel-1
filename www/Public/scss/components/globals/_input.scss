@@ -64,3 +64,15 @@
 .label {
   font-size: 1.25rem;
 }
+
+input[type="color"] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  padding: 1rem;
+  cursor: pointer;
+  height: 15em;
+  width: 15em;
+}
