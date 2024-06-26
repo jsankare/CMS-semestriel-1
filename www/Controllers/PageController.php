@@ -74,6 +74,21 @@ class PageController
         $view->render();
     }
 
+    public function predelete(): void {
+
+        if (isset($_GET['id'])) {
+            $pageId = intval($_GET['id']);
+            $page = (new Page())->findOneById($pageId);
+        } else {
+            echo "impossible de récupérer la page";
+            exit();
+        }
+
+        $view = new View('Page/delete', 'back');
+        $view->assign('page', $page);
+        $view->render();
+    }
+
     public function delete(): void
     {
         if (isset($_GET['id'])) {

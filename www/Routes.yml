@@ -106,6 +106,12 @@
   Security: true
   Role: "Editor"
 
+/page/predelete:
+  Controller: PageController
+  Action: "predelete"
+  Security: true
+  Role: "Editor"
+
 /show-page:
   Controller: PageController
   Action: "show"
