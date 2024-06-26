@@ -9,6 +9,21 @@ use PHPMailer\PHPMailer\PHPMailer;
 class UserController
 {
 
+    public function predelete(): void {
+
+        if (isset($_GET['id'])) {
+            $userId = intval($_GET['id']);
+            $user = (new User())->findOneById($userId);
+        } else {
+            echo "impossible de récupérer cet utilisateur";
+            exit();
+        }
+
+        $view = new View('Users/delete', 'back');
+        $view->assign('user', $user);
+        $view->render();
+    }
+
     public function delete(): void
     {
         if (isset($_GET['id'])) {
@@ -53,6 +68,9 @@ class UserController
             $user->setValidationCode($validation_code);
             $user->setStatus(1);
             $user->save();
+
+            header('Location: /users/home');
+            exit();
         }
 
         $view = new View("Users/create", "back");

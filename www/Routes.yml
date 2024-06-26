@@ -76,6 +76,12 @@
   Security: true
   Role: "Admin"
 
+/users/predelete:
+  Controller: UserController
+  Action: "predelete"
+  Security: true
+  Role: "Admin"
+
 /show-utilisateur:
   Controller: UserController
   Action: "show"
