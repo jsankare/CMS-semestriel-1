@@ -1,4 +1,4 @@
-<h1>Suppression d'article'</h1>
+<h1>Suppression d'article</h1>
 
 <h2>Attention !</h2>
 <p>Vous vous appretez à supprimer l'article <?= $article->getTitle()?>, continuer ?</p>

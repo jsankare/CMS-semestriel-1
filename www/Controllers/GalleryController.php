@@ -105,6 +105,21 @@ class GalleryController
         }
     }
 
+    public function predelete(): void {
+
+        if (isset($_GET['id'])) {
+            $imageId = intval($_GET['id']);
+            $image = (new Image())->findOneById($imageId);
+        } else {
+            echo "impossible de récupérer l'image";
+            exit();
+        }
+
+        $view = new View('Gallery/delete', 'back');
+        $view->assign('image', $image);
+        $view->render();
+    }
+
     public function edit(): void
     {
         if (isset($_GET['id'])) {

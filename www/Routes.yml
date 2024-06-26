@@ -220,6 +220,12 @@
   Security: true
   Role: "Editor"
 
+/image/predelete:
+  Controller: GalleryController
+  Action: "predelete"
+  Security: true
+  Role: "Editor"
+
 /image/edit:
   Controller: GalleryController
   Action: "edit"
