@@ -73,6 +73,21 @@ class ArticleController
         $view->render();
     }
 
+    public function predelete(): void {
+
+        if (isset($_GET['id'])) {
+            $articleId = intval($_GET['id']);
+            $article = (new Article())->findOneById($articleId);
+        } else {
+            echo "impossible de récupérer l'article";
+            exit();
+        }
+
+        $view = new View('Article/delete', 'back');
+        $view->assign('article', $article);
+        $view->render();
+    }
+
     public function delete(): void
     {
         if (isset($_GET['id'])) {

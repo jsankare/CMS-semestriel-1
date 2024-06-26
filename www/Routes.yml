@@ -148,6 +148,12 @@
   Security: true
   Role: "Editor"
 
+/article/predelete:
+  Controller: ArticleController
+  Action: "predelete"
+  Security: true
+  Role: "Editor"
+
 /article/home:
   Controller: ArticleController
   Action: "list"
