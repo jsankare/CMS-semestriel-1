@@ -26,7 +26,7 @@
                         <h3>Contenu (aperçu)</h3><p class="article--content__value" ><?= $article->getContent() ?></p>
                     </li>
                 </div>
-                <a class="article--icon__link" href="/article/delete?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__trash" src="/assets/trash.svg" ></a>
+                <a class="article--icon__link" href="/article/predelete?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__trash" src="/assets/trash.svg" ></a>
                 <a class="article--icon__link" href="/article/edit?id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__update" src="/assets/update.svg" ></a>
                 <a class="article--icon__link" href="/comment/show?article_id=<?php echo $article->getId(); ?>"><img class="article--icon article--icon__comment" src="/assets/comment.svg" alt="Voir les commentaires liés à cet articles"></a>
             </div>

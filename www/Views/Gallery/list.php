@@ -16,7 +16,7 @@
                     <p class="gallery--item__description"><?php echo htmlspecialchars($image->getDescription()); ?></p>
                     <div class="gallery--item__icons">
                         <a class="gallery--icon__link" href="/image/edit?id=<?php echo $image->getId(); ?>"><img class="gallery--icon gallery--icon__update" src="/assets/update.svg" ></a>
-                        <a class="gallery--icon__link" href="/image/delete?id=<?php echo $image->getId(); ?>"><img class="gallery--icon gallery--icon__trash" src="/assets/trash.svg" ></a>
+                        <a class="gallery--icon__link" href="/image/predelete?id=<?php echo $image->getId(); ?>"><img class="gallery--icon gallery--icon__trash" src="/assets/trash.svg" ></a>
                     </div>
                     <div class="separator"></div>
                 </div>

@@ -53,7 +53,7 @@
                         </li>
                         <a class="user--edit--link" href="/users/edit?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__edit" src="/assets/update.svg" alt="Modifier utilisateur"></a>
                         <a class="user--edit--link" href="/users/reset-password?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__resetpassword" src="/assets/reset-password.svg" alt="Réinitialiser mot de passe"></a>
-                        <a class="user--edit--link" href="/users/delete?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur"></a>
+                        <a class="user--edit--link" href="/users/predelete?id=<?php echo $user->getId(); ?>"><img class="user--icon user--icon__trash" src="/assets/trash.svg" alt="Supprimer utilisateur"></a>
                     </div>
                 <?php endforeach; ?>
             </section>

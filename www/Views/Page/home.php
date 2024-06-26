@@ -22,7 +22,7 @@
                         <h3>Description</h3><p><?php echo htmlspecialchars($page->getDescription()); ?></p>
                     </li>
                     <a class="page--icon__link" href="/page/edit?id=<?php echo $page->getId(); ?>"><img class="page--icon page--icon__update" src="/assets/update.svg" ></a>
-                    <a class="page--icon__link" href="/page/delete?id=<?php echo $page->getId(); ?>"><img class="page--icon page--icon__trash" src="/assets/trash.svg" ></a>
+                    <a class="page--icon__link" href="/page/predelete?id=<?php echo $page->getId(); ?>"><img class="page--icon page--icon__trash" src="/assets/trash.svg" ></a>
                 </div>
             <?php endforeach; ?>
             </section>
