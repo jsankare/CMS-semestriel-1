@@ -25,10 +25,38 @@
   flex: 1;
   min-height: 250px;
   flex-shrink: 0;
-  flex-grow: 1;
   &--attribution {
     position: absolute;
     bottom: 1px;
     right: 1px;
+  }
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &--section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    &__current {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    &__color {
+      display: flex;
+      gap: 1rem;
+    }
+    &--currentColor {
+      display: flex;
+      width: 5rem;
+      border-radius: 0.5rem;
+      flex-shrink: 0;
+      border: 1px solid black;
+    }
   }
 }
