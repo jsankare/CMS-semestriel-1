@@ -23,7 +23,7 @@
     }
     ?>
     <body>
-    <div class="navbar" style="background-color: <?= $backgroundColor ?>;">
+    <div class="navbar" style="background-color: <?= $backgroundColor ?>; font-family: <?= $fontStyle ?>">
         <ul>
             <li><a style="color: <?= $fontColor ?>;" href="/">Accueil</a></li>
             <li><a style="color: <?= $fontColor ?>;" href="/articles" >Articles</a></li>
@@ -46,7 +46,9 @@
         ?>
         </ul>
     </div>
+    <main style="font-family: <?= $fontStyle ?>">
         <!-- intégration de la vue -->
         <?php include "../Views/".$this->view.".php";?>
+    </main>
     </body>
 </html>
