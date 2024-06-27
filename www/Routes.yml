@@ -142,21 +142,27 @@
   Security: false
   Role: "Guest"
 
-/404:
-  Controller: PageController
-  Action: "misdirection"
-  Security: false
-  Role: "Guest"
-
 /401:
-  Controller: PageController
+  Controller: ErrorController
   Action: "unauthorized"
   Security: false
   Role: "Guest"
 
+/404:
+  Controller: ErrorController
+  Action: "misdirection"
+  Security: false
+  Role: "Guest"
+
 /500:
-  Controller: PageController
+  Controller: ErrorController
   Action: "serverError"
+  Security: false
+  Role: "Guest"
+
+/501:
+  Controller: ErrorController
+  Action: "notImplemented"
   Security: false
   Role: "Guest"
 

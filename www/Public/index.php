@@ -58,7 +58,8 @@ list($requestedRoute, $params) = mapSlugToRoute($uri, $listOfRoutes);
 
 if (!$requestedRoute || empty($listOfRoutes[$requestedRoute])) {
     header("Status 404 Not Found", true, 404);
-    die("PageForm 404");
+    header('Location: /404');
+    exit();
 }
 
 // !isset() pour les bool, empty() considere vide si bool:false
@@ -71,6 +72,7 @@ if(
     header("Internal Server Error", true, 500);
     header('Location: /500');
     exit();
+//    die("Le fichier routes.yml ne contient pas de controller, d'action, de sécurité ou de role pour l'uri :".$uri);
 }
 
 $controller = $listOfRoutes[$requestedRoute]["Controller"];
@@ -108,20 +110,22 @@ if ($isProtected && !$securityGuard->hasRole($requiredRole)) {
 
 // include controller file
 if (!file_exists("../Controllers/".$controller.".php")) {
-    die("Le fichier controller ../Controllers/".$controller.".php n'existe pas");
+    header("Not Implemented", true, 501);
+    header('Location: /501');
 }
 include "../Controllers/".$controller.".php";
 
 $controller = "App\\Controller\\".$controller;
 
 if (!class_exists($controller)) {
-    die("La classe controller ".$controller." n'existe pas");
+    header("Not Implemented", true, 501);
+    header('Location: /501');
 }
-
 $objetController = new $controller();
 
 if (!method_exists($objetController, $action)) {
-    die("L'action ".$action." n'existe pas dans le controller ".$controller);
+    header("Not Implemented", true, 501);
+    header('Location: /501');
 }
 
 $objetController->$action(...$params);

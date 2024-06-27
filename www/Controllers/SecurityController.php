@@ -257,8 +257,7 @@ class SecurityController
 
             if ($user && $user->getValidationCode() === $validation_code) {
                 if ($user->getStatus() !== 0) {
-                    echo "Votre compte est déjà vérifié.";
-                    die();
+                    header('Location: /');
                 }
                 $user->setStatus(1);
                 $user->setValidationCode(null);
