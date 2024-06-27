@@ -15,12 +15,12 @@ class SettingsForm
                 "background_color"=>[
                     "type"=>"color",
                     "label"=>"Couleur de fond",
-                    "value" => $data['color'] ?? $_ENV["BACKGROUND_COLOR"]
+                    "value" => $data['background_color'] ?? $_ENV["BACKGROUND_COLOR"]
                 ],
                 "font_color"=>[
                     "type"=>"color",
                     "label"=>"Couleur de police",
-                    "value" => $data['color'] ?? $_ENV["FONT_COLOR"]
+                    "value" => $data['font_color'] ?? $_ENV["FONT_COLOR"]
                 ],
                 "font_style" => [
                     "type" => "select",
@@ -31,7 +31,7 @@ class SettingsForm
                         "Helvetica" => "Helvetica",
                         "Calibri" => "Calibri"
                     ],
-                    "value" => $data['font'] ?? ''
+                    "value" => $data['font_style'] ?? $_ENV["FONT_STYLE"]
                 ]
             ]
         ];

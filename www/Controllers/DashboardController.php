@@ -107,6 +107,16 @@ class DashboardController
             $currentSetting = $setting->findOneById(1);
         }
 
+        // Prepare initial form data
+        $initialData = [];
+        if ($currentSetting) {
+            $initialData['background_color'] = $currentSetting->getBackgroundColor();
+            $initialData['font_color'] = $currentSetting->getFontColor();
+            $initialData['font_style'] = $currentSetting->getFontStyle();
+        }
+
+        $settingsForm->setValues($initialData);
+
         if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
             if ($count > 0) {
                 $setting->setId(1);
