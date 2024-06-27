@@ -9,7 +9,7 @@
     </head>
     <body>
         <main class="mainBack" >
-            <aside class="navbar" >
+            <aside class="navbar" style="" >
                 <a class="navbar--logo__link" href="/dashboard">
                     <img class="navbar--logo__picture" src="/assets/logo.svg">
                 </a>
@@ -25,7 +25,7 @@
                         <li class="navbar--list__link"><a href="/comments/home">Commentaires</a></li>
                     </ul>
                     <ul class="navbar--list__links">
-                        <li class="navbar--list__link"><a href="#">Paramètres</a></li>
+                        <li class="navbar--list__link"><a href="/dashboard/settings">Paramètres</a></li>
                         <li class="navbar--list__link"><a href="/logout">Se déconnecter</a></li>
                     </ul>
                 </section>

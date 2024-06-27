@@ -7,6 +7,8 @@ use App\Models\Page;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Settings;
+use App\Core\Form;
 
 class DashboardController
 {
@@ -68,7 +70,7 @@ class DashboardController
             }
         }
 
-        $view = new View("Main/dashboard", "back");
+        $view = new View("Dashboard/home", "back");
 
         $view->assign('user', $currentUser);
 
@@ -92,6 +94,49 @@ class DashboardController
         $view->assign('moderatorAmount', $moderatorAmount);
         $view->assign('adminAmount', $adminAmount);
 
+        $view->render();
+    }
+
+    function settings(): void {
+
+        $settingsForm = new Form('Settings');
+        $setting = new Settings();
+        $count= $setting->count();
+
+        $currentSetting = null;
+
+        if ($count > 0) {
+            $currentSetting = $setting->findOneById(1);
+        }
+
+        $initialData = [];
+        if ($currentSetting) {
+            $initialData['background_color'] = $currentSetting->getBackgroundColor();
+            $initialData['font_color'] = $currentSetting->getFontColor();
+            $initialData['font_style'] = $currentSetting->getFontStyle();
+        }
+
+        $settingsForm->setValues($initialData);
+
+        if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
+            if ($count > 0) {
+                $setting->setId(1);
+            }
+            $setting->setBackgroundColor($_POST["background_color"]);
+            $setting->setFontColor($_POST["font_color"]);
+            $setting->setFontStyle($_POST["font_style"]);
+            $setting->save();
+
+            header('Location: /dashboard/settings');
+            exit();
+        }
+
+        $view = new View("Dashboard/settings", "back");
+        $view->assign('settingsForm', $settingsForm->build());
+        if(isset($currentSetting)) {
+            $view->assign('currentSetting', $currentSetting);
+        }
+        $view->assign('count', $count);
         $view->render();
     }
 }

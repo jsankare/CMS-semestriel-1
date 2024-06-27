@@ -14,9 +14,9 @@ Use a better box model (opinionated).
 
 html {
   /* Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3) */
-  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: Roboto, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   line-height: 1.15; /* 1. Correct the line height in all browsers. */
-  -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
+  -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font.php size after orientation changes in iOS. */
   -moz-tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
   tab-size: 4; /* 3 */
 }
@@ -54,7 +54,7 @@ abbr[title] {
 }
 
 /**
-Add the correct font weight in Edge and Safari.
+Add the correct font.php weight in Edge and Safari.
 */
 b,
 strong {
@@ -63,7 +63,7 @@ strong {
 
 /**
 1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
-2. Correct the odd 'em' font sizing in all browsers.
+2. Correct the odd 'em' font.php sizing in all browsers.
 */
 code,
 kbd,
@@ -74,7 +74,7 @@ pre {
 }
 
 /**
-Add the correct font size in all browsers.
+Add the correct font.php size in all browsers.
 */
 small {
   font-size: 80%;
@@ -117,7 +117,7 @@ Forms
 =====
 */
 /**
-1. Change the font styles in all browsers.
+1. Change the font.php styles in all browsers.
 2. Remove the margin in Firefox and Safari.
 */
 button,
@@ -212,7 +212,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 
 /**
 1. Correct the inability to style clickable types in iOS and Safari.
-2. Change font properties to 'inherit' in Safari.
+2. Change font.php properties to 'inherit' in Safari.
 */
 ::-webkit-file-upload-button {
   -webkit-appearance: button; /* 1 */
@@ -269,6 +269,26 @@ ul li a {
   --grey-hover: #3d4246;
   --red: #dc3545;
   --red-hover: #921925;
+  --black: #000;
+  --black-transparent: rgba(0, 0, 0, 0.8);
+  --blue: #0d6efd;
+  --blue-transparent: rgba(13, 110, 253, 0.8);
+  --white: #fff;
+  --white-transparent: rgba(255, 255, 255, 0.8);
+  --grey: #6c757d;
+  --grey-transparent: rgba(108, 117, 125, 0.8);
+  --red: #dc3545;
+  --red-transparent: rgba(220, 53, 69, 0.8);
+  --black: #000;
+  --black-light: #333333;
+  --blue: #0d6efd;
+  --blue-light: #72abfe;
+  --white: #fff;
+  --white-light: white;
+  --grey: #6c757d;
+  --grey-light: #a1a8ae;
+  --red: #dc3545;
+  --red-light: #eb8c95;
   --text-color: var(--black);
   --primary: var(--blue);
   --secondary: var(--grey);
@@ -365,6 +385,18 @@ form {
 
 .label {
   font-size: 1.25rem;
+}
+
+input[type=color] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  padding: 1rem;
+  cursor: pointer;
+  height: 10rem;
+  width: 15rem;
 }
 
 .page--navigation {
@@ -699,12 +731,40 @@ form {
   flex: 1;
   min-height: 250px;
   flex-shrink: 0;
-  flex-grow: 1;
 }
 .chart--attribution {
   position: absolute;
   bottom: 1px;
   right: 1px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.settings--section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+.settings--section__current {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.settings--section__color {
+  display: flex;
+  gap: 1rem;
+}
+.settings--section--currentColor {
+  display: flex;
+  width: 5rem;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  border: 1px solid black;
 }
 
 .gallery {

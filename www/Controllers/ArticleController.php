@@ -64,12 +64,25 @@ class ArticleController
     public function list(): void
     {
         $articleModel = new Article();
-        $userModel = new User();
-        $commentModel = new Comment();
 
         $articles = $articleModel->findAll();
         $view = new View("article/home", "back");
         $view->assign('articles', $articles);
+        $view->render();
+    }
+
+    public function predelete(): void {
+
+        if (isset($_GET['id'])) {
+            $articleId = intval($_GET['id']);
+            $article = (new Article())->findOneById($articleId);
+        } else {
+            echo "impossible de récupérer l'article";
+            exit();
+        }
+
+        $view = new View('Article/delete', 'back');
+        $view->assign('article', $article);
         $view->render();
     }
 

@@ -71,4 +71,14 @@ CREATE TABLE esgi_image (
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS public.esgi_settings;
+CREATE TABLE esgi_settings(
+    id SERIAL PRIMARY KEY,
+    background_color VARCHAR(7) NOT NULL,
+    font_color VARCHAR(7) NOT NULL,
+    font_style VARCHAR(50) NOT NULL,
+    date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 COMMIT;
