@@ -9,8 +9,13 @@
         <link rel="stylesheet" href="/css/front.css">
 
     </head>
+    <?php
+    $setting = new \App\Models\Settings();
+    $currentSetting = $setting->findOneById(1);
+    $color = $currentSetting->getColor();
+    ?>
     <body>
-    <div class="navbar">
+    <div class="navbar" style="background-color: <?php echo $color; ?>;">
         <a href="/">Accueil</a>
         <a href="/articles" >Articles</a>
         <a href="/gallery" >Galerie</a>
