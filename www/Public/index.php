@@ -4,7 +4,7 @@ namespace App;
 
 use App\Core\Security;
 
-session_start();
+session_start(); // Débute la session, toujours en haut du fichier
 
 require '../vendor/autoload.php';
 require '../config/envLoader.php';
@@ -50,19 +50,27 @@ if (file_exists("../Routes.yml")) {
     $listOfRoutes = yaml_parse_file("../Routes.yml");
 } else {
     header("Internal Server Error", true, 500);
-    die("Le fichier de routing ../Routes.yml n'existe pas");
+    header('Location: /500');
+    exit();
 }
 
 list($requestedRoute, $params) = mapSlugToRoute($uri, $listOfRoutes);
 
 if (!$requestedRoute || empty($listOfRoutes[$requestedRoute])) {
     header("Status 404 Not Found", true, 404);
-    echo "Page 404 : Aucune route trouvée pour l'URI '$uri'";
-    echo "<br>Liste des routes disponibles :<br>";
-    foreach ($listOfRoutes as $route => $data) {
-        echo "- $route<br>";
-    }
-    die();
+    die("PageForm 404");
+}
+
+// !isset() pour les bool, empty() considere vide si bool:false
+if(
+    empty($listOfRoutes[$uri]["Controller"]) ||
+    empty($listOfRoutes[$uri]["Action"]) ||
+    !isset($listOfRoutes[$uri]["Security"]) ||
+    empty($listOfRoutes[$uri]["Role"])
+) {
+    header("Internal Server Error", true, 500);
+    header('Location: /500');
+    exit();
 }
 
 $controller = $listOfRoutes[$requestedRoute]["Controller"];
@@ -74,8 +82,10 @@ $isProtected = $listOfRoutes[$requestedRoute]["Security"];
 $securityGuard = new Security();
 
 if($isProtected && !$securityGuard->isLogged()) {
-    echo 'Vous devez être connecté pour voir cette page';
-    die();
+    header("UNAUTHORIZED", true, 401);
+    // echo 'Vous devez être connecté pour voir cette page';
+    header('Location: /401');
+    exit();
 }
 
 // Conversion pour comparaison dans mon Core/Security
@@ -90,8 +100,10 @@ $requiredRole = $roleHierarchy[$role];
 
 // check si l'user actuel a un role suffisant
 if ($isProtected && !$securityGuard->hasRole($requiredRole)) {
-    echo 'Vous n\'avez pas les permissions nécessaires pour voir cette page';
-    die();
+    header("UNAUTHORIZED", true, 401);
+    // echo 'Vous devez être connecté pour voir cette page';
+    header('Location: /401');
+    exit();
 }
 
 // include controller file

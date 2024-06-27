@@ -142,6 +142,24 @@
   Security: false
   Role: "Guest"
 
+/404:
+  Controller: PageController
+  Action: "misdirection"
+  Security: false
+  Role: "Guest"
+
+/401:
+  Controller: PageController
+  Action: "unauthorized"
+  Security: false
+  Role: "Guest"
+
+/500:
+  Controller: PageController
+  Action: "serverError"
+  Security: false
+  Role: "Guest"
+
 /article/create:
   Controller: ArticleController
   Action: "add"

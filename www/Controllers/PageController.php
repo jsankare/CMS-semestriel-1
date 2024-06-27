@@ -35,13 +35,15 @@ class PageController
             $pages = (new Page())->findAllExcept($slug);
             $view = new View("Page/showPage", "front");
             $view->assign('currentPage', $currentPage);
-            $view->assign('pages', $pages); 
+            $view->assign('pages', $pages);
             $view->render();
         } else {
-            echo "Page non trouvée";
+            header('Location: /page/404');
+            exit();
         }
     } else {
-        echo "Slug non spécifié dans l'URL";
+        header('Location: /page/500');
+        exit();
     }
 }
 
@@ -183,6 +185,30 @@ class PageController
         } else {
             echo "ID page non spécifié !";
         }
+    }
+
+    public function misdirection(): void {
+        $pages = (new Page())->findAll();
+
+        $view = new View("Error/misdirection", "front");
+        $view->assign('pages', $pages);
+        $view->render();
+    }
+
+    public function serverError(): void {
+        $pages = (new Page())->findAll();
+
+        $view = new View("Error/server", "front");
+        $view->assign('pages', $pages);
+        $view->render();
+    }
+
+    public function unauthorized(): void {
+        $pages = (new Page())->findAll();
+
+        $view = new View("Error/unauthorized", "front");
+        $view->assign('pages', $pages);
+        $view->render();
     }
 
 }
