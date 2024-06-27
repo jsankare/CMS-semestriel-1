@@ -15,18 +15,19 @@
         $currentSetting = $setting->findOneById(1);
         $backgroundColor = $currentSetting->getBackgroundColor();
         $fontColor = $currentSetting->getFontColor();
+        $fontStyle = $currentSetting->getFontStyle();
     } else {
-        $currentSetting = $_ENV["BACKGROUND_COLOR"];
-        $backgroundColor = $_ENV["FONT_COLOR"];
-        $fontColor = $_ENV["FONT_STYLE"];
+        $backgroundColor = $_ENV["BACKGROUND_COLOR"];
+        $fontColor = $_ENV["FONT_COLOR"];
+        $fontStyle = $_ENV["FONT_STYLE"];
     }
     ?>
     <body>
-    <div class="navbar" style="background-color: <?php echo $backgroundColor; ?>;">
+    <div class="navbar" style="background-color: <?= $backgroundColor ?>;">
         <ul>
-            <li><a style="<?php echo $fontColor; ?>;" href="/">Accueil</a></li>
-            <li><a style="<?php echo $fontColor; ?>;" href="/articles" >Articles</a></li>
-            <li><a style="<?php echo $fontColor; ?>;" href="/gallery" >Galerie</a></li>
+            <li><a style="color: <?= $fontColor ?>;" href="/">Accueil</a></li>
+            <li><a style="color: <?= $fontColor ?>;" href="/articles" >Articles</a></li>
+            <li><a style="color: <?= $fontColor ?>;" href="/gallery" >Galerie</a></li>
         <?php
         if (isset($pages) && !empty($pages)) {
             foreach ($pages as $page) {
@@ -35,12 +36,12 @@
         }
         ?>
         <?php if (isset($_SESSION['user_status']) && $_SESSION['user_status'] > 1) {
-            echo '<li><a href="/logout" class="logout" style="' . $fontColor . '">Déconnexion</a></li>';
-            echo '<li><a href="/profile" class="logout" style="' . $fontColor . '">Profil</a></li>';
-            echo '<li><a href="/dashboard" class="logout" style="' . $fontColor . '">Dashboard</a></li>';
+            echo '<li><a href="/logout" class="logout" style="color: ' . $fontColor . '">Déconnexion</a></li>';
+            echo '<li><a href="/profile" class="logout" style="color: ' . $fontColor . '">Profil</a></li>';
+            echo '<li><a href="/dashboard" class="logout" style="color: ' . $fontColor . '">Dashboard</a></li>';
         } else {
-            echo '<li><a href="/register" class="logout" style="' . $fontColor . '">Inscription</a></li>';
-            echo '<li><a href="/login" class="logout" style="' . $fontColor . '">Connexion</a></li>';
+            echo '<li><a href="/register" class="logout" style="color: ' . $fontColor . '">Inscription</a></li>';
+            echo '<li><a href="/login" class="logout" style="color: ' . $fontColor . '">Connexion</a></li>';
         }
         ?>
         </ul>
