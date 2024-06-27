@@ -248,7 +248,6 @@ class SecurityController
         }
     }
 
-
     public function accountVerification(): void {
         if (isset($_GET['email']) && isset($_GET['code'])) {
             $email = $_GET['email'];
