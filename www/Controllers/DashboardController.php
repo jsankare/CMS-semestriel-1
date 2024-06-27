@@ -103,11 +103,12 @@ class DashboardController
         $setting = new Settings();
         $count= $setting->count();
 
+        $currentSetting = null;
+
         if ($count > 0) {
             $currentSetting = $setting->findOneById(1);
         }
 
-        // Prepare initial form data
         $initialData = [];
         if ($currentSetting) {
             $initialData['background_color'] = $currentSetting->getBackgroundColor();
