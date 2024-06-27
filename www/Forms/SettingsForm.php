@@ -12,12 +12,17 @@ class SettingsForm
                 "submit"=>"Valider mes préférences"
             ],
             "inputs"=>[
-                "color"=>[
+                "background_color"=>[
                     "type"=>"color",
-                    "label"=>"Couleur Principale",
-                    "value" => $data['color'] ?? $_ENV["BASE_COLOR"]
+                    "label"=>"Couleur de fond",
+                    "value" => $data['color'] ?? $_ENV["BACKGROUND_COLOR"]
                 ],
-                "font" => [
+                "font_color"=>[
+                    "type"=>"color",
+                    "label"=>"Couleur de police",
+                    "value" => $data['color'] ?? $_ENV["FONT_COLOR"]
+                ],
+                "font_style" => [
                     "type" => "select",
                     "options"=>[
                         "Roboto" => "Roboto",

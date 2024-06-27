@@ -111,8 +111,9 @@ class DashboardController
             if ($count > 0) {
                 $setting->setId(1);
             }
-            $setting->setColor($_POST["color"]);
-            $setting->setFont($_POST["font"]);
+            $setting->setBackgroundColor($_POST["background_color"]);
+            $setting->setFontColor($_POST["font_color"]);
+            $setting->setFontStyle($_POST["font_style"]);
             $setting->save();
 
             header('Location: /dashboard/settings');
@@ -121,7 +122,9 @@ class DashboardController
 
         $view = new View("Dashboard/settings", "back");
         $view->assign('settingsForm', $settingsForm->build());
-        $view->assign('currentSetting', $currentSetting);
+        if(isset($currentSetting)) {
+            $view->assign('currentSetting', $currentSetting);
+        }
         $view->assign('count', $count);
         $view->render();
     }

@@ -11,29 +11,39 @@
     </head>
     <?php
     $setting = new \App\Models\Settings();
-    $currentSetting = $setting->findOneById(1);
-    $color = $currentSetting->getColor();
+    if($setting->findOneById(1)) {
+        $currentSetting = $setting->findOneById(1);
+        $backgroundColor = $currentSetting->getBackgroundColor();
+        $fontColor = $currentSetting->getFontColor();
+    } else {
+        $currentSetting = $_ENV["BACKGROUND_COLOR"];
+        $backgroundColor = $_ENV["FONT_COLOR"];
+        $fontColor = $_ENV["FONT_STYLE"];
+    }
     ?>
     <body>
-    <div class="navbar" style="background-color: <?php echo $color; ?>;">
-        <a href="/">Accueil</a>
-        <a href="/articles" >Articles</a>
-        <a href="/gallery" >Galerie</a>
+    <div class="navbar" style="background-color: <?php echo $backgroundColor; ?>;">
+        <ul>
+            <li><a style="<?php echo $fontColor; ?>;" href="/">Accueil</a></li>
+            <li><a style="<?php echo $fontColor; ?>;" href="/articles" >Articles</a></li>
+            <li><a style="<?php echo $fontColor; ?>;" href="/gallery" >Galerie</a></li>
         <?php
         if (isset($pages) && !empty($pages)) {
             foreach ($pages as $page) {
-                echo "<a href='/page/showPage?id={$page->getId()}'>{$page->getTitle()}</a>";
+                echo "<li><a style='color: " . $fontColor . ";' href='/page/showPage?id=" . $page->getId() . "'>" . $page->getTitle() . "</a></li>";
             }
         }
         ?>
-        <?php if(isset($_SESSION['user_status']) && $_SESSION['user_status'] > 1) {
-            echo '<a href="/logout" class="logout">Déconnexion</a>';
-            echo '<a class="logout" href="/profile">Profil</a>';
-            echo '<a href="/dashboard" class="logout">Dashboard</a>';
+        <?php if (isset($_SESSION['user_status']) && $_SESSION['user_status'] > 1) {
+            echo '<li><a href="/logout" class="logout" style="' . $fontColor . '">Déconnexion</a></li>';
+            echo '<li><a href="/profile" class="logout" style="' . $fontColor . '">Profil</a></li>';
+            echo '<li><a href="/dashboard" class="logout" style="' . $fontColor . '">Dashboard</a></li>';
         } else {
-            echo '<a href="/register" class="logout">Inscription</a>';
-            echo '<a href="/login" class="logout">Connexion</a>';
-        }; ?>
+            echo '<li><a href="/register" class="logout" style="' . $fontColor . '">Inscription</a></li>';
+            echo '<li><a href="/login" class="logout" style="' . $fontColor . '">Connexion</a></li>';
+        }
+        ?>
+        </ul>
     </div>
         <!-- intégration de la vue -->
         <?php include "../Views/".$this->view.".php";?>
