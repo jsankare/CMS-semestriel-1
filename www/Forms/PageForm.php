@@ -42,7 +42,7 @@ class PageForm
                     "type" => "checkbox",
                     "label" => "Définir comme page principale",
                     "value" => 0,
-                    //"required" => false,
+                    "required" => false,
                     "checked" => isset($data['is_main']) && $data['is_main']
                     
                 ]

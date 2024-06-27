@@ -75,6 +75,9 @@ class Form
                     $html .= "<option value='" . htmlspecialchars($value) . "'{$selected}>" . htmlspecialchars($option) . "</option>";
                 }
                 $html .= "</select>";
+            }else if ($input["type"] == "checkbox") {
+                $checked = isset($input["value"]) && $input["value"] ? " checked" : "";
+                $html .= "<input type='checkbox' class='input input--{$name}' id='{$name}' name='{$name}' value='1'{$checked}>";
             } else {
                 $html .= "<input class='input input--{$name}' type='{$input["type"]}' name='{$name}'";
                 if (isset($input["placeholder"])) {
