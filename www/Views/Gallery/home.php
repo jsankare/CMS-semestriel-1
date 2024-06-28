@@ -17,7 +17,9 @@
                         $link = $image->getLink();
                         $relativeLink = str_replace('/var/www/html/Public', '', $link);
                         ?>
-                        <img class="gallery--item__picture" src="<?php echo htmlspecialchars($relativeLink); ?>" alt="<?php echo htmlspecialchars($image->getDescription()); ?>">
+                        <div class="carousel--item__picture__container">
+                            <img class="gallery--item__picture" src="<?php echo htmlspecialchars($relativeLink); ?>" alt="<?php echo htmlspecialchars($image->getDescription()); ?>">
+                        </div>
                         <p class="gallery--item__description"><?php echo htmlspecialchars($image->getDescription()); ?></p>
                         <div class="separator"></div>
                     </div>
@@ -33,7 +35,9 @@
                     $link = $image->getLink();
                     $relativeLink = str_replace('/var/www/html/Public', '', $link);
                     ?>
-                    <img class="gallery--classic__item__picture" src="<?php echo htmlspecialchars($relativeLink); ?>" alt="<?php echo htmlspecialchars($image->getDescription()); ?>">
+                    <div class="gallery--image__container">
+                        <img class="gallery--classic__item__picture" src="<?php echo htmlspecialchars($relativeLink); ?>" alt="<?php echo htmlspecialchars($image->getDescription()); ?>">
+                    </div>
                     <p class="gallery--classic__item__description"><?php echo htmlspecialchars($image->getDescription()); ?></p>
                 </div>
             <?php endforeach; ?>

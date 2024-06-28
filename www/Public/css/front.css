@@ -401,7 +401,6 @@ form {
 }
 .navbar a:hover {
   background-color: grey;
-  color: black;
 }
 .navbar .logout {
   float: right;
@@ -512,6 +511,10 @@ form {
   margin: 1.5rem auto;
   text-align: center;
 }
+.gallery--image__container {
+  max-height: 6rem;
+  overflow: hidden;
+}
 .gallery--classic {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -583,6 +586,12 @@ form {
 .gallery .carousel .carousel--control.next {
   right: 20rem;
   z-index: 1;
+}
+
+.carousel--item__picture__container {
+  max-height: 25rem;
+  overflow: hidden;
+  width: 100%;
 }
 
 .carousel--counter {

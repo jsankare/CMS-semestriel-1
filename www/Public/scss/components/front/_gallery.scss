@@ -4,6 +4,12 @@
   width: 80%;
   margin: 1.5rem auto;
   text-align: center;
+  &--image{
+    &__container{
+      max-height: 6rem;
+      overflow: hidden;
+    }
+  }
   &--classic {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -39,7 +45,6 @@
       min-width: 100%;
       padding: 1.5rem;
       box-sizing: border-box;
-
       &.active {
         display: block;
       }
@@ -88,6 +93,12 @@
       }
     }
   }
+}
+
+.carousel--item__picture__container{
+  max-height: 25rem;
+  overflow: hidden;
+  width: 100%;
 }
 
 .carousel--counter {
