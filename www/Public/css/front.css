@@ -512,7 +512,7 @@ form {
   text-align: center;
 }
 .gallery--image__container {
-  max-height: 6rem;
+  max-height: 10rem;
   overflow: hidden;
 }
 .gallery--classic {
