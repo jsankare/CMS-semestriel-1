@@ -24,7 +24,7 @@ class LoginForm
                     "type"=>"password",
                     "placeholder"=>"Votre mot de passe",
                     "required"=>true,
-                    "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec des lettres et des chiffres"
+                    "error"=>"Les mots de passe ne correspondent pas"
                 ]
             ]
 

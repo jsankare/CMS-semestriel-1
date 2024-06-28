@@ -35,31 +35,50 @@ class ArticleController
         $user = (new User())->findOneById($_SESSION['user_id']);
         $articleForm = new Form("Article");
 
-        if( $articleForm->isSubmitted() && $articleForm->isValid()) {
-            $dbArticle = (new Article())->findOneByTitle($_POST["title"]);
-            if ($dbArticle) {
-                echo "Ce nom d'article est déjà pris";
-                exit;
+        // Initialisation des valeurs des champs
+        $title = "";
+        $description = "";
+        $content = "";
+
+        if ($articleForm->isSubmitted()) {
+            // Récupérer les valeurs des champs soumis
+            $title = $_POST["title"] ?? "";
+            $description = $_POST["description"] ?? "";
+            $content = $_POST["content"] ?? "";
+
+            if ($articleForm->isValid()) {
+                $dbArticle = (new Article())->findOneByTitle($title);
+                if ($dbArticle) {
+                    echo "Ce nom d'article est déjà pris";
+                } else {
+                    $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
+                    $sanitized_content = strip_tags($content, $allowed_tags);
+
+                    $article = new Article();
+                    $article->setTitle($title);
+                    $article->setDescription($description);
+                    $article->setContent($sanitized_content);
+                    $article->setCreatorId($user->getId());
+                    $article->save();
+
+                    header('Location: /article/home');
+                    exit();
+                }
             }
-
-            $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
-            $content = strip_tags($_POST["content"], $allowed_tags);
-
-            $article = new Article();
-            $article->setTitle($_POST["title"]);
-            $article->setDescription($_POST["description"]);
-            $article->setContent($content);
-            $article->setCreatorId($user->getId());
-            $article->save();
-
-            header('Location: /article/home');
-            exit();
         }
+
+        // Ajouter les valeurs des champs au formulaire pour les réafficher en cas d'erreur
+        $articleForm->setValues([
+            "title" => $title,
+            "description" => $description,
+            "content" => $content,
+        ]);
 
         $view = new View("Article/create", "Back");
         $view->assign('articleForm', $articleForm->build());
         $view->render();
     }
+
 
     public function list(): void
     {
