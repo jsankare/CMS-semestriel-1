@@ -37,6 +37,14 @@ class PageForm
                     "label"=>"Contenu",
                     "required"=>true,
                     "value" => $data['content'] ?? ''
+                ],
+                "is_main" => [
+                    "type" => "checkbox",
+                    "label" => "Définir comme page principale",
+                    "value" => 0,
+                    "required" => false,
+                    "checked" => isset($data['is_main']) && $data['is_main']
+                    
                 ]
             ]
         ];

@@ -30,13 +30,11 @@ class PageController
     $uriSegments = explode('/', $_SERVER['REQUEST_URI']);
     if (isset($uriSegments[2])) {
         $slug = $uriSegments[2];
-        $page = (new Page())->findOneBySlug($slug);
-        if ($page) {
-          
+        $currentpage = (new Page())->findOneBySlug($slug);
+        if ($currentpage) {
             $pages = (new Page())->findAllExcept($slug);
-
             $view = new View("Page/showPage", "front");
-            $view->assign('page', $page);
+            $view->assign('currentpage', $currentpage);
             $view->assign('pages', $pages); 
             $view->render();
         } else {
