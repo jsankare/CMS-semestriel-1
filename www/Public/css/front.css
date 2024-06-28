@@ -744,9 +744,9 @@ input[type=color] {
   padding-left: 20rem;
 }
 .page--wrappe h1 {
-  font-size: 2em;
+  font-size: 2rem;
   text-align: left;
-  padding-left: 0rem;
+  padding-left: 0;
 }
 
 /*# sourceMappingURL=front.css.map */

@@ -177,18 +177,14 @@ class Form
 
         //Pour les champs de type checkbox
         foreach ($this->config["inputs"] as $name => $input) {
-            if ($input["type"] == "checkbox") {
-                if (isset($input["required"]) && $input["required"] && !isset($_POST[$name])) {
-                    $this->errors[] = $input["error"];
-                }
-                //les checkboxes non cochées n'envoient pas de valeur
-                if (!isset($_POST[$name])) {
-                    $_POST[$name] = 0;
-                } else {
-                    $_POST[$name] = 1;
-                }
+        if ($input["type"] == "checkbox") {
+            if (isset($input["required"]) && $input["required"] && !isset($_POST[$name])) {
+                $this->errors[] = $input["error"];
             }
+            //les checkboxes non cochées n'envoient pas de valeur
+            $_POST[$name] = isset($_POST[$name]) ? 1 : 0;
         }
+    }
 
         return empty($this->errors); // Si vrai, retourne true
     }

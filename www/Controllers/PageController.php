@@ -16,7 +16,7 @@ class PageController
 
         if ($mainPage) {
             $view = new View("Main/home", "front");
-            $view->assign('page', $mainPage);
+            $view->assign('mainPage', $mainPage);
             $view->assign('pages', $pages);
             $view->render();
         } else {
@@ -30,11 +30,11 @@ class PageController
     $uriSegments = explode('/', $_SERVER['REQUEST_URI']);
     if (isset($uriSegments[2])) {
         $slug = $uriSegments[2];
-        $currentpage = (new Page())->findOneBySlug($slug);
-        if ($currentpage) {
+        $currentPage = (new Page())->findOneBySlug($slug);
+        if ($currentPage) {
             $pages = (new Page())->findAllExcept($slug);
             $view = new View("Page/showPage", "front");
-            $view->assign('currentpage', $currentpage);
+            $view->assign('currentPage', $currentPage);
             $view->assign('pages', $pages); 
             $view->render();
         } else {
