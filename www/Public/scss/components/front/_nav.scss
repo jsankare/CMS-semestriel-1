@@ -3,26 +3,41 @@
 .navbar {
   overflow: hidden;
   background-color: $navColor;
-
-
-  a {
-    float: left;
-    display: block;
-    color: var(--white);
-    text-align: center;
-    padding: 0.875rem 1.25rem;
-    text-decoration: none;
-
-    &:hover {
-      background-color: var(--grey);
-      color: var(--black);
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  &--divLeft {
+    width: 100%;
+    a {
+      float: left;
+      display: block;
+      color: var(--white);
+      text-align: center;
+      padding: 0.875rem 1.25rem;
+      text-decoration: none;
+  
+      &:hover {
+        background-color: var(--grey);
+        color: var(--black);
+      }
     }
   }
-
-  .logout .login .register {
-    float: right;
+  &--divRight {
+    width: 100%;
+    a {
+      float: right;
+      display: block;
+      color: var(--white);
+      text-align: center;
+      padding: 0.875rem 1.25rem;
+      text-decoration: none;
+  
+      &:hover {
+        background-color: var(--grey);
+        color: var(--black);
+      }
+    }
   }
-
 }
 
 .dropdown {

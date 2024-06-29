@@ -13,69 +13,106 @@ class SecurityController
 
     public function login(): void
     {
+        // Crée un nouveau formulaire
         $form = new Form("Login");
-        if( $form->isSubmitted() && $form->isValid() ) {
-            $user = (new User())->findOneByEmail($_POST["email"]);
-            if ($user) {
-                if ($user->getStatus() == 0) {
-                    echo "Vous devez valider votre compte avant de vous connecter";
-                // Compare le password saisi par l'user et celui correspondant au mail en DB
-                } elseif (password_verify($_POST["password"], $user->getPassword())) {
-                   // on store le user ID dans la session
-                   $_SESSION['user_id'] = $user->getId();
-                   $_SESSION['user_status'] = $user->getStatus();
-                   header('Location: ' . $_ENV['BASE_URL'] . '/');
+        // Initialisation des valeurs des champs
+        $email = "";
+
+        if ($form->isSubmitted()) {
+            // Récupérer les valeurs des champs soumis
+            $email = $_POST["email"] ?? "";
+
+            if ($form->isValid()) {
+                // Instancie un nouvel user avec la methode du model
+                $user = (new User())->findOneByEmail($email);
+                if ($user) {
+                    // Verification du status
+                    if ($user->getStatus() == 0) {
+                        echo "Vous devez valider votre compte avant de vous connecter";
+                    } elseif (password_verify($_POST["password"], $user->getPassword())) {
+                        // On store le user ID & le status dans la session
+                        $_SESSION['user_id'] = $user->getId();
+                        $_SESSION['user_status'] = $user->getStatus();
+                        // Redirection
+                        header('Location: ' . $_ENV['BASE_URL'] . '/');
+                        exit;
+                    } else {
+                        echo "Invalid email or password";
+                    }
+                } else {
+                    echo "Invalid email or password";
                 }
-            } else {
-                echo "Invalid email or password";
             }
         }
+
+        // Ajouter les valeurs des champs au formulaire pour les réafficher en cas d'erreur
+        $form->setValues([
+            "email" => $email,
+        ]);
+
         $view = new View("Security/login"); // instantiation
-        $view->assign("form", $form->build());
-        $view->render();
-
-
+        $view->assign("form", $form->build()); // Assignation + build du formulaire avec la methode de Form
+        $view->render(); // Rendu de la vue
     }
+
     public function register(): void
     {
-        $form = new Form("Register"); // Crée un formulaire
+        $form = new Form("Register");
 
-        if( $form->isSubmitted() && $form->isValid() ) {
-            $dbUser = (new User())->findOneByEmail($_POST["email"]);
-            if ($dbUser) {
-                echo "Un user existe déjà avec cette adresse email";
-                exit;
+        $firstname = "";
+        $lastname = "";
+        $email = "";
+
+        if ($form->isSubmitted()) {
+
+            $firstname = $_POST["firstname"] ?? "";
+            $lastname = $_POST["lastname"] ?? "";
+            $email = $_POST["email"] ?? "";
+
+            if ($form->isValid()) {
+                $dbUser = (new User())->findOneByEmail($email);
+                if ($dbUser) {
+                    echo "Un user existe déjà avec cette adresse email";
+                } else {
+                    $existingUsers = (new User())->findAll();
+                    $status = count($existingUsers) === 0 ? 4 : 0;
+                    $validation_code = count($existingUsers) === 0 ? null : md5(uniqid(rand(), true));
+
+                    $user = new User();
+                    $user->setFirstname($firstname);
+                    $user->setLastname($lastname);
+                    $user->setEmail($email);
+                    $user->setPassword($_POST["password"]);
+                    $user->setStatus($status);
+                    $user->setValidationCode($validation_code);
+                    $user->save();
+
+                    count($existingUsers) === 0 ? '' : $this->emailValidation($user);
+
+                    header('Location: ' . $_ENV['BASE_URL'] . '/login');
+                    exit;
+                }
             }
-
-            $existingUsers = (new User())->findAll();
-            $status = count($existingUsers) === 0 ? 4 : 0;
-            $validation_code = count($existingUsers) === 0 ? null : md5(uniqid(rand(), true));
-
-            $user = new User(); // Initialisation d'un nouveau UserController
-            $user->setFirstname($_POST["firstname"]);
-            $user->setLastname($_POST["lastname"]);
-            $user->setEmail($_POST["email"]);
-            $user->setPassword($_POST["password"]);
-            $user->setStatus($status);
-            $user->setValidationCode($validation_code);
-            $user->save();
-
-            count($existingUsers) === 0 ? '' : $this->emailValidation($user);
-
-            header('Location: ' . $_ENV['BASE_URL'] . '/login');
         }
 
-        $view = new View("Security/register"); // Création de la vue (page HTML)
-        $view->assign("form", $form->build()); // Passe le form à la vue
-        $view->render(); // Render de la page HTML
+        $form->setValues([
+            "firstname" => $firstname,
+            "lastname" => $lastname,
+            "email" => $email,
+        ]);
+
+        $view = new View("Security/register");
+        $view->assign("form", $form->build());
+        $view->render();
     }
+
     public function logout(): void
-{
-    unset($_SESSION['user_id']);
-    session_destroy();
-    header('Location: ' . $_ENV['BASE_URL'] . '/login');
-    exit();
-}
+    {
+        unset($_SESSION['user_id']);
+        session_destroy();
+        header('Location: ' . $_ENV['BASE_URL'] . '/login');
+        exit();
+    }
 
     public function profile(): void
     {
@@ -248,7 +285,6 @@ class SecurityController
         }
     }
 
-
     public function accountVerification(): void {
         if (isset($_GET['email']) && isset($_GET['code'])) {
             $email = $_GET['email'];
@@ -257,8 +293,7 @@ class SecurityController
 
             if ($user && $user->getValidationCode() === $validation_code) {
                 if ($user->getStatus() !== 0) {
-                    echo "Votre compte est déjà vérifié.";
-                    die();
+                    header('Location: /');
                 }
                 $user->setStatus(1);
                 $user->setValidationCode(null);

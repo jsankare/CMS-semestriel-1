@@ -35,56 +35,74 @@ class PageController
             $pages = (new Page())->findAllExcept($slug);
             $view = new View("Page/showPage", "front");
             $view->assign('currentPage', $currentPage);
-            $view->assign('pages', $pages); 
+            $view->assign('pages', $pages);
             $view->render();
         } else {
-            echo "Page non trouvée";
+            header('Location: /page/404');
+            exit();
         }
     } else {
-        echo "Slug non spécifié dans l'URL";
+        header('Location: /page/500');
+        exit();
     }
 }
 
 
     public function add(): void
-{
-    $user = (new User())->findOneById($_SESSION['user_id']);
-    $pageForm = new Form("Page");
+    {
+        $user = (new User())->findOneById($_SESSION['user_id']);
+        $pageForm = new Form("Page");
 
-    if ($pageForm->isSubmitted() && $pageForm->isValid()) {
-        $dbPage = (new Page())->findOneByTitle($_POST["title"]);
-        if ($dbPage) {
-            echo "Ce nom de page est déjà pris";
-            exit;
+        $title = "";
+        $description = "";
+        $content = "";
+
+        if ($pageForm->isSubmitted()) {
+
+            $title = $_POST["title"] ?? "";
+            $description = $_POST["description"] ?? "";
+            $content = $_POST["content"] ?? "";
+
+            if ($pageForm->isValid()) {
+                $dbPage = (new Page())->findOneByTitle($title);
+                if ($dbPage) {
+                    echo "Ce nom de page est déjà pris";
+                } else {
+                    $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
+                    $sanitized_content = strip_tags($content, $allowed_tags);
+
+                    $page = new Page();
+                    $page->setTitle($title);
+                    $page->setDescription($description);
+                    $page->setContent($sanitized_content);
+                    $page->setCreatorId($user->getId());
+                    $page->setSlug($this->generateSlug($_POST["title"]));
+
+                    if (isset($_POST['is_main']) && $_POST['is_main'] == '1') {
+                        (new Page())->resetMainPage();
+                        $page->setIsMain(true);
+                    } else {
+                        $page->setIsMain(false);
+                    }
+
+                    $page->save();
+
+                    header('Location: /page/home');
+                    exit();
+                }
+            }
         }
 
-        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
-        $content = strip_tags($_POST["content"], $allowed_tags);
+        $pageForm->setValues([
+            "title" => $title,
+            "description" => $description,
+            "content" => $content,
+        ]);
 
-        $page = new Page();
-        $page->setTitle($_POST["title"]);
-        $page->setDescription($_POST["description"]);
-        $page->setContent($content);
-        $page->setSlug($this->generateSlug($_POST["title"]));
-        $page->setCreatorId($user->getId());
-
-        if (isset($_POST['is_main']) && $_POST['is_main'] == '1') {
-            (new Page())->resetMainPage();
-            $page->setIsMain(true);
-        } else {
-            $page->setIsMain(false);
-        }
-
-        $page->save();
-
-        header('Location: /page/home');
-        exit();
+        $view = new View("Page/create", "back");
+        $view->assign('pageForm', $pageForm->build());
+        $view->render();
     }
-
-    $view = new View("Page/create", "back");
-    $view->assign('pageForm', $pageForm->build());
-    $view->render();
-}
 
 
     private function generateSlug(string $title): string
@@ -183,6 +201,30 @@ class PageController
         } else {
             echo "ID page non spécifié !";
         }
+    }
+
+    public function misdirection(): void {
+        $pages = (new Page())->findAll();
+
+        $view = new View("Error/misdirection", "front");
+        $view->assign('pages', $pages);
+        $view->render();
+    }
+
+    public function serverError(): void {
+        $pages = (new Page())->findAll();
+
+        $view = new View("Error/server", "front");
+        $view->assign('pages', $pages);
+        $view->render();
+    }
+
+    public function unauthorized(): void {
+        $pages = (new Page())->findAll();
+
+        $view = new View("Error/unauthorized", "front");
+        $view->assign('pages', $pages);
+        $view->render();
     }
 
 }
