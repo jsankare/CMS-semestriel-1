@@ -150,6 +150,7 @@ class PageController
                 $pageForm->setValues([
                     'title' => $page->getTitle(),
                     'description' => $page->getDescription(),
+                    'edit-slug' => $page->getSlug(),
                     'content' => $page->getContent(),
                     'is_main' => $page->getIsMain()
                 ]);
@@ -157,6 +158,7 @@ class PageController
                 if ($pageForm->isSubmitted() && $pageForm->isValid()) {
                     $page->setTitle($_POST['title']);
                     $page->setDescription($_POST['description']);
+                    $page->setSlug($_POST['edit-slug']);
                     $page->setContent($_POST['content']);
 
                     if (isset($_POST['is_main']) && $_POST['is_main'] == '1') {

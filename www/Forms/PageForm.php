@@ -31,6 +31,14 @@ class PageForm
                     "error" => "La description ne peut pas faire plus de 50 caractères",
                     "value" => $data['description'] ?? ''
                 ],
+                "edit-slug" => [
+                    "type" => "text",
+                    "max" => 50,
+                    "placeholder" => "Slug personnalisé",
+                    "label" => "Mon Slug personnalisé",
+                    "required" => false,
+                    "value" => $data['edit-slug'] ?? ''
+                ],
                 "content"=>[
                     "type"=>"textarea",
                     "placeholder"=>"Entrez ici le contenu de la page",
