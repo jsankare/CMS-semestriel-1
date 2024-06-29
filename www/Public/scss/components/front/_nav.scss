@@ -3,37 +3,26 @@
 .navbar {
   overflow: hidden;
   background-color: $navColor;
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // width: 100%;
-  // z-index: 1000;
+
 
   a {
     float: left;
     display: block;
-    color: white;
+    color: var(--white);
     text-align: center;
     padding: 0.875rem 1.25rem;
     text-decoration: none;
 
     &:hover {
-      background-color: grey;
-      color: black;
+      background-color: var(--grey);
+      color: var(--black);
     }
   }
 
-  .logout {
+  .logout .login .register {
     float: right;
   }
 
-  .login {
-    float: right;
-  }
-
-  .register {
-    float: right;
-  }
 }
 
 .dropdown {
@@ -44,35 +33,35 @@
     font-size: 1rem;
     border: none;
     outline: none;
-    color: white;
+    color: var(--white);
     padding: 0.875rem 1rem;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
 
     &:hover {
-      background-color: grey;
+      background-color: var(--grey);
     }
   }
 
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: grey;
+    background-color: var(--grey);
     min-width: 10rem;
     box-shadow: 0rem 0.5rem 1rem 0rem rgba(0, 0, 0, 0.2);
     z-index: 1;
 
     a {
       float: none;
-      color: black;
+      color: var(--black);
       padding: 0.75rem 1rem;
       text-decoration: none;
       display: block;
       text-align: left;
 
       &:hover {
-        background-color: grey;
+        background-color: var(--grey);
       }
     }
   }

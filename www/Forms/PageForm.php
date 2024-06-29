@@ -36,7 +36,6 @@ class PageForm
                     "max" => 50,
                     "placeholder" => "Slug personnalisé",
                     "label" => "Mon Slug personnalisé",
-                    "required" => false,
                     "value" => $data['edit-slug'] ?? ''
                 ],
                 "content"=>[
