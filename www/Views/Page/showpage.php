@@ -1,3 +1,3 @@
-<div class="page--wrapper" >
+<section class="page--wrapper" >
     <?=$currentPage->getContent()?>
-</div>
+</section>

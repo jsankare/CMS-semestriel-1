@@ -27,7 +27,7 @@ class PageForm
                     "max" => 50,
                     "placeholder" => "Description de la page",
                     "label" => "Description",
-                    "required" => false,
+                    "required" => true,
                     "error" => "La description ne peut pas faire plus de 50 caractères",
                     "value" => $data['description'] ?? ''
                 ],
@@ -50,7 +50,6 @@ class PageForm
                     "type" => "checkbox",
                     "label" => "Définir comme page principale",
                     "value" => 0,
-                    "required" => false,
                     "checked" => isset($data['is_main']) && $data['is_main']
                     
                 ]

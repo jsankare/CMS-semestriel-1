@@ -446,7 +446,7 @@ input[type=color] {
   display: none;
   position: absolute;
   background-color: grey;
-  min-width: 160px;
+  min-width: 10rem;
   box-shadow: 0rem 0.5rem 1rem 0rem rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
@@ -463,26 +463,6 @@ input[type=color] {
 }
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-.navbar {
-  overflow: hidden;
-  background-color: blue;
-}
-.navbar a {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none;
-}
-.navbar a:hover {
-  background-color: grey;
-  color: black;
-}
-.navbar .logout {
-  float: right;
 }
 
 .page--wrapper {
