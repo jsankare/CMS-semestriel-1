@@ -14,9 +14,9 @@ Use a better box model (opinionated).
 
 html {
   /* Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3) */
-  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: Roboto, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   line-height: 1.15; /* 1. Correct the line height in all browsers. */
-  -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
+  -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font.php size after orientation changes in iOS. */
   -moz-tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
   tab-size: 4; /* 3 */
 }
@@ -54,7 +54,7 @@ abbr[title] {
 }
 
 /**
-Add the correct font weight in Edge and Safari.
+Add the correct font.php weight in Edge and Safari.
 */
 b,
 strong {
@@ -63,7 +63,7 @@ strong {
 
 /**
 1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
-2. Correct the odd 'em' font sizing in all browsers.
+2. Correct the odd 'em' font.php sizing in all browsers.
 */
 code,
 kbd,
@@ -74,7 +74,7 @@ pre {
 }
 
 /**
-Add the correct font size in all browsers.
+Add the correct font.php size in all browsers.
 */
 small {
   font-size: 80%;
@@ -117,7 +117,7 @@ Forms
 =====
 */
 /**
-1. Change the font styles in all browsers.
+1. Change the font.php styles in all browsers.
 2. Remove the margin in Firefox and Safari.
 */
 button,
@@ -212,7 +212,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 
 /**
 1. Correct the inability to style clickable types in iOS and Safari.
-2. Change font properties to 'inherit' in Safari.
+2. Change font.php properties to 'inherit' in Safari.
 */
 ::-webkit-file-upload-button {
   -webkit-appearance: button; /* 1 */
@@ -387,30 +387,100 @@ form {
   font-size: 1.25rem;
 }
 
+input[type=color] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  padding: 1rem;
+  cursor: pointer;
+  height: 10rem;
+  width: 15rem;
+}
+
 .navbar {
   overflow: hidden;
-  background-color: blue;
+  background-color: #171D2A;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
-.navbar a {
+.navbar--divLeft {
+  width: 100%;
+}
+.navbar--divLeft a {
   float: left;
   display: block;
-  color: white;
+  color: var(--white);
   text-align: center;
-  padding: 14px 20px;
+  padding: 0.875rem 1.25rem;
   text-decoration: none;
 }
-.navbar a:hover {
-  background-color: grey;
-  color: black;
+.navbar--divLeft a:hover {
+  background-color: var(--grey);
+  color: var(--black);
 }
-.navbar .logout {
+.navbar--divRight {
+  width: 100%;
+}
+.navbar--divRight a {
   float: right;
+  display: block;
+  color: var(--white);
+  text-align: center;
+  padding: 0.875rem 1.25rem;
+  text-decoration: none;
+}
+.navbar--divRight a:hover {
+  background-color: var(--grey);
+  color: var(--black);
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+.dropdown .dropbtn {
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  color: var(--white);
+  padding: 0.875rem 1rem;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.dropdown .dropbtn:hover {
+  background-color: var(--grey);
+}
+.dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--grey);
+  min-width: 10rem;
+  box-shadow: 0rem 0.5rem 1rem 0rem rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown .dropdown-content a {
+  float: none;
+  color: var(--black);
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown .dropdown-content a:hover {
+  background-color: var(--grey);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .page--wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 5rem;
 }
 
 .profile {
@@ -494,6 +564,7 @@ form {
   height: 100%;
   min-height: 3rem;
   border-radius: 0.25rem;
+  cursor: pointer;
   border: none;
   color: var(--white);
   background-color: var(--grey);
@@ -511,6 +582,10 @@ form {
   width: 80%;
   margin: 1.5rem auto;
   text-align: center;
+}
+.gallery--image__container {
+  max-height: 10rem;
+  overflow: hidden;
 }
 .gallery--classic {
   display: grid;
@@ -585,6 +660,12 @@ form {
   z-index: 1;
 }
 
+.carousel--item__picture__container {
+  max-height: 25rem;
+  overflow: hidden;
+  width: 100%;
+}
+
 .carousel--counter {
   position: absolute;
   top: 8rem;
@@ -656,6 +737,27 @@ form {
   color: var(--white-hover);
   text-decoration: none;
   cursor: pointer;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.page--wrappe {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding-left: 20rem;
+}
+.page--wrappe h1 {
+  font-size: 2rem;
+  text-align: left;
+  padding-left: 0;
 }
 
 /*# sourceMappingURL=front.css.map */

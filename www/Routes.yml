@@ -1,5 +1,5 @@
 /:
-  Controller: MainController
+  Controller: PageController
   Action: "home"
   Security: false
   Role: "Guest"
@@ -124,21 +124,39 @@
   Security: true
   Role: "Editor"
 
-/show-page:
-  Controller: PageController
-  Action: "show"
-  Security: True
-  Role: ""
-
 /page/edit:
   Controller: PageController
   Action: "edit"
   Security: true
   Role: "Editor"
 
-/page/showPage:
+/page/{slug}:
   Controller: PageController
   Action: "show"
+  Security: false
+  Role: "Guest"
+
+/401:
+  Controller: ErrorController
+  Action: "unauthorized"
+  Security: false
+  Role: "Guest"
+
+/404:
+  Controller: ErrorController
+  Action: "misdirection"
+  Security: false
+  Role: "Guest"
+
+/500:
+  Controller: ErrorController
+  Action: "serverError"
+  Security: false
+  Role: "Guest"
+
+/501:
+  Controller: ErrorController
+  Action: "notImplemented"
   Security: false
   Role: "Guest"
 

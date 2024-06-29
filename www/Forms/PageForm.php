@@ -27,9 +27,16 @@ class PageForm
                     "max" => 50,
                     "placeholder" => "Description de la page",
                     "label" => "Description",
-                    "required" => false,
+                    "required" => true,
                     "error" => "La description ne peut pas faire plus de 50 caractères",
                     "value" => $data['description'] ?? ''
+                ],
+                "edit-slug" => [
+                    "type" => "text",
+                    "max" => 50,
+                    "placeholder" => "Slug personnalisé",
+                    "label" => "Mon Slug personnalisé",
+                    "value" => $data['edit-slug'] ?? ''
                 ],
                 "content"=>[
                     "type"=>"textarea",
@@ -37,6 +44,13 @@ class PageForm
                     "label"=>"Contenu",
                     "required"=>true,
                     "value" => $data['content'] ?? ''
+                ],
+                "is_main" => [
+                    "type" => "checkbox",
+                    "label" => "Définir comme page principale",
+                    "value" => 0,
+                    "checked" => isset($data['is_main']) && $data['is_main']
+                    
                 ]
             ]
         ];

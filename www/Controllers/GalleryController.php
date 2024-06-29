@@ -93,8 +93,23 @@ class GalleryController
             $image = (new Image())->findOneById($imageId);
 
             if ($image) {
+                $imagePath = $image->getLink();
+
+                if (file_exists($imagePath)) {
+                    if (unlink($imagePath)) {
+                        echo "File $imagePath has been deleted.\n";
+                    } else {
+                        header("Internal Server Error", true, 500);
+                        header('Location: /500');
+                        exit();
+                    }
+                } else {
+                    header("File does not exist", true, 404);
+                    header('Location: /404');
+                    exit();
+                }
+
                 $image->delete();
-                // Supprimer l'image du dossier upload
                 header('Location: /gallery/list');
                 exit();
             } else {
