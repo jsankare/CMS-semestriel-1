@@ -105,9 +105,9 @@ class PageController
     }
 
 
-    private function generateSlug(string $title): string
+    private function generateSlug(string $input): string
     {
-        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $input)));
     }
 
     public function list(): void
@@ -176,7 +176,8 @@ class PageController
                 if ($pageForm->isSubmitted() && $pageForm->isValid()) {
                     $page->setTitle($_POST['title']);
                     $page->setDescription($_POST['description']);
-                    $page->setSlug($_POST['edit-slug']);
+                    $page->setSlug($this->generateSlug($_POST["title"]));
+                    $page->setSlug($this->generateSlug($_POST['edit-slug']));
                     $page->setContent($_POST['content']);
 
                     if (isset($_POST['is_main']) && $_POST['is_main'] == '1') {
