@@ -9,25 +9,42 @@ use App\Core\View;
 class PageController
 {
 
-    public function show(): void
+    public function home(): void
     {
-        if (isset($_GET['id'])) {
-            $pageId = intval($_GET['id']);
-            $currentpage = (new Page())->findOneById($pageId);
-            $pages = (new Page())->findAll();
+        $mainPage = (new Page())->findMainPage();
+        $pages = (new Page())->findAll();
 
-            if ($currentpage) {
-                $view = new View("Page/showPage", "front");
-                $view->assign('currentpage', $currentpage);
-                $view->assign('pages', $pages);
-                $view->render();
-            } else {
-                echo "Page non trouvée";
-            }
+        if ($mainPage) {
+            $view = new View("Main/home", "front");
+            $view->assign('mainPage', $mainPage);
+            $view->assign('pages', $pages);
+            $view->render();
         } else {
-            echo "ID page non spécifié";
+            echo "Aucune page principale définie.";
         }
     }
+
+
+    public function show(): void
+{
+    $uriSegments = explode('/', $_SERVER['REQUEST_URI']);
+    if (isset($uriSegments[2])) {
+        $slug = $uriSegments[2];
+        $currentPage = (new Page())->findOneBySlug($slug);
+        if ($currentPage) {
+            $pages = (new Page())->findAllExcept($slug);
+            $view = new View("Page/showPage", "front");
+            $view->assign('currentPage', $currentPage);
+            $view->assign('pages', $pages); 
+            $view->render();
+        } else {
+            echo "Page non trouvée";
+        }
+    } else {
+        echo "Slug non spécifié dans l'URL";
+    }
+}
+
 
     public function add(): void
 {
@@ -48,7 +65,16 @@ class PageController
         $page->setTitle($_POST["title"]);
         $page->setDescription($_POST["description"]);
         $page->setContent($content);
+        $page->setSlug($this->generateSlug($_POST["title"]));
         $page->setCreatorId($user->getId());
+
+        if (isset($_POST['is_main']) && $_POST['is_main'] == '1') {
+            (new Page())->resetMainPage();
+            $page->setIsMain(true);
+        } else {
+            $page->setIsMain(false);
+        }
+
         $page->save();
 
         header('Location: /page/home');
@@ -59,6 +85,12 @@ class PageController
     $view->assign('pageForm', $pageForm->build());
     $view->render();
 }
+
+
+    private function generateSlug(string $title): string
+    {
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
+    }
 
     public function list(): void
     {
@@ -118,13 +150,24 @@ class PageController
                 $pageForm->setValues([
                     'title' => $page->getTitle(),
                     'description' => $page->getDescription(),
-                    'content' => $page->getContent()
+                    'edit-slug' => $page->getSlug(),
+                    'content' => $page->getContent(),
+                    'is_main' => $page->getIsMain()
                 ]);
 
                 if ($pageForm->isSubmitted() && $pageForm->isValid()) {
                     $page->setTitle($_POST['title']);
                     $page->setDescription($_POST['description']);
+                    $page->setSlug($_POST['edit-slug']);
                     $page->setContent($_POST['content']);
+
+                    if (isset($_POST['is_main']) && $_POST['is_main'] == '1') {
+                        (new Page())->resetMainPage();
+                        $page->setIsMain(true);
+                    } else {
+                        $page->setIsMain(false);
+                    }
+
                     $page->save();
 
                     header('Location: /page/home');

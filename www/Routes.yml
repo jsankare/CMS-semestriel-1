@@ -1,5 +1,5 @@
 /:
-  Controller: MainController
+  Controller: PageController
   Action: "home"
   Security: false
   Role: "Guest"
@@ -124,11 +124,11 @@
   Security: true
   Role: "Editor"
 
-/show-page:
+/page/showPage:
   Controller: PageController
   Action: "show"
   Security: True
-  Role: ""
+  Role: "Guest"
 
 /page/edit:
   Controller: PageController
@@ -136,7 +136,7 @@
   Security: true
   Role: "Editor"
 
-/page/showPage:
+/page/{slug}:
   Controller: PageController
   Action: "show"
   Security: false

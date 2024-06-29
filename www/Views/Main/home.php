@@ -1,1 +1,3 @@
-<h2>Welcome projet CMS</h2>
+<section class="page--wrappe" >
+     <?=$mainPage->getContent()?>
+</section>

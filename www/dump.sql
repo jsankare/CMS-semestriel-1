@@ -10,6 +10,7 @@
 BEGIN;
 SET TIME ZONE 'UTC';
 
+-- Table esgi_user
 DROP TABLE IF EXISTS public.esgi_user CASCADE;
 CREATE TABLE public.esgi_user (
     id SERIAL PRIMARY KEY,
@@ -25,18 +26,22 @@ CREATE TABLE public.esgi_user (
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Table esgi_page
 DROP TABLE IF EXISTS public.esgi_page CASCADE;
 CREATE TABLE public.esgi_page (
     id SERIAL PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    content VARCHAR NOT NULL,
+    content TEXT NOT NULL,
     creator_id INT NOT NULL,
+    slug VARCHAR(20) UNIQUE NOT NULL,
+    is_main BOOLEAN DEFAULT FALSE,
     CONSTRAINT fk_user FOREIGN KEY (creator_id) REFERENCES public.esgi_user(id),
     date_inserted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Table esgi_article
 DROP TABLE IF EXISTS public.esgi_article CASCADE;
 CREATE TABLE public.esgi_article (
     id SERIAL PRIMARY KEY,
@@ -49,6 +54,7 @@ CREATE TABLE public.esgi_article (
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Table esgi_comment
 DROP TABLE IF EXISTS public.esgi_comment CASCADE;
 DROP TYPE IF EXISTS comment_status CASCADE;
 CREATE TABLE esgi_comment (
@@ -61,7 +67,8 @@ CREATE TABLE esgi_comment (
     FOREIGN KEY (user_id) REFERENCES public.esgi_user(id)
 );
 
-DROP TABLE IF EXISTS public.esgi_image;
+-- Table esgi_image
+DROP TABLE IF EXISTS public.esgi_image CASCADE;
 CREATE TABLE esgi_image (
     id SERIAL PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
@@ -71,7 +78,8 @@ CREATE TABLE esgi_image (
     date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS public.esgi_settings;
+-- Table esgi_settings
+DROP TABLE IF EXISTS public.esgi_settings CASCADE;
 CREATE TABLE esgi_settings(
     id SERIAL PRIMARY KEY,
     background_color VARCHAR(7) NOT NULL,
