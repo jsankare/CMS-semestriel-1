@@ -14,7 +14,9 @@
             <button class="dropbtn">Pages</button>
             <div class="dropdown-content">
                 <?php foreach ($pages as $page): ?>
-                    <a href="/page/<?= htmlspecialchars($page->getSlug()) ?>"><?= htmlspecialchars($page->getTitle()) ?></a>
+                    <?php if (!$page->getIsMain()): ?>
+                            <a href="/page/<?= htmlspecialchars($page->getSlug()) ?>"><?= htmlspecialchars($page->getTitle()) ?></a>
+                        <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>
