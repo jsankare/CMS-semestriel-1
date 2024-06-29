@@ -124,12 +124,6 @@
   Security: true
   Role: "Editor"
 
-/page/showPage:
-  Controller: PageController
-  Action: "show"
-  Security: True
-  Role: "Guest"
-
 /page/edit:
   Controller: PageController
   Action: "edit"

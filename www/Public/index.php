@@ -62,17 +62,10 @@ if (!$requestedRoute || empty($listOfRoutes[$requestedRoute])) {
     exit();
 }
 
-// !isset() pour les bool, empty() considere vide si bool:false
-if(
-    empty($listOfRoutes[$uri]["Controller"]) ||
-    empty($listOfRoutes[$uri]["Action"]) ||
-    !isset($listOfRoutes[$uri]["Security"]) ||
-    empty($listOfRoutes[$uri]["Role"])
-) {
-    header("Internal Server Error", true, 500);
-    header('Location: /500');
+if (!$requestedRoute || empty($listOfRoutes[$requestedRoute])) {
+    header("Status 404 Not Found", true, 404);
+    header('Location: /404');
     exit();
-//    die("Le fichier routes.yml ne contient pas de controller, d'action, de sécurité ou de role pour l'uri :".$uri);
 }
 
 $controller = $listOfRoutes[$requestedRoute]["Controller"];
