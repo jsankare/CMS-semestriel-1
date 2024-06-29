@@ -107,7 +107,8 @@ class Page extends SQL
      */
     public function setSlug(string $slug): void
     {
-        $this->slug = $slug;
+        $this->slug = $this->generateSlug($slug);
+
     }
 
     /**
@@ -213,6 +214,11 @@ class Page extends SQL
             $queryPrepared = $this->pdo->prepare($sql);
             $queryPrepared->execute([':id' => $this->getId()]);
         }
+    }
+
+    public function generateSlug(string $input): string
+    {
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $input)));
     }
 
     public function save(): void
