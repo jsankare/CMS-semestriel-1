@@ -53,13 +53,12 @@ class PageController
         $user = (new User())->findOneById($_SESSION['user_id']);
         $pageForm = new Form("Page");
 
-        // Initialisation des valeurs des champs
         $title = "";
         $description = "";
         $content = "";
 
         if ($pageForm->isSubmitted()) {
-            // Récupérer les valeurs des champs soumis
+
             $title = $_POST["title"] ?? "";
             $description = $_POST["description"] ?? "";
             $content = $_POST["content"] ?? "";
@@ -94,7 +93,6 @@ class PageController
             }
         }
 
-        // Ajouter les valeurs des champs au formulaire pour les réafficher en cas d'erreur
         $pageForm->setValues([
             "title" => $title,
             "description" => $description,

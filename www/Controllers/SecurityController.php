@@ -13,7 +13,9 @@ class SecurityController
 
     public function login(): void
     {
+        // Crée un nouveau formulaire
         $form = new Form("Login");
+        // Initialisation des valeurs des champs
         $email = "";
 
         if ($form->isSubmitted()) {
@@ -21,14 +23,17 @@ class SecurityController
             $email = $_POST["email"] ?? "";
 
             if ($form->isValid()) {
+                // Instancie un nouvel user avec la methode du model
                 $user = (new User())->findOneByEmail($email);
                 if ($user) {
+                    // Verification du status
                     if ($user->getStatus() == 0) {
                         echo "Vous devez valider votre compte avant de vous connecter";
                     } elseif (password_verify($_POST["password"], $user->getPassword())) {
-                        // On store le user ID dans la session
+                        // On store le user ID & le status dans la session
                         $_SESSION['user_id'] = $user->getId();
                         $_SESSION['user_status'] = $user->getStatus();
+                        // Redirection
                         header('Location: ' . $_ENV['BASE_URL'] . '/');
                         exit;
                     } else {
@@ -46,21 +51,20 @@ class SecurityController
         ]);
 
         $view = new View("Security/login"); // instantiation
-        $view->assign("form", $form->build());
-        $view->render();
+        $view->assign("form", $form->build()); // Assignation + build du formulaire avec la methode de Form
+        $view->render(); // Rendu de la vue
     }
 
     public function register(): void
     {
-        $form = new Form("Register"); // Crée un formulaire
+        $form = new Form("Register");
 
-        // Initialiser les valeurs des champs avec des chaînes vides
         $firstname = "";
         $lastname = "";
         $email = "";
 
         if ($form->isSubmitted()) {
-            // Récupérer les valeurs des champs soumis
+
             $firstname = $_POST["firstname"] ?? "";
             $lastname = $_POST["lastname"] ?? "";
             $email = $_POST["email"] ?? "";
@@ -74,7 +78,7 @@ class SecurityController
                     $status = count($existingUsers) === 0 ? 4 : 0;
                     $validation_code = count($existingUsers) === 0 ? null : md5(uniqid(rand(), true));
 
-                    $user = new User(); // Initialisation d'un nouveau UserController
+                    $user = new User();
                     $user->setFirstname($firstname);
                     $user->setLastname($lastname);
                     $user->setEmail($email);
@@ -91,16 +95,15 @@ class SecurityController
             }
         }
 
-        // Ajouter les valeurs des champs au formulaire pour les réafficher en cas d'erreur
         $form->setValues([
             "firstname" => $firstname,
             "lastname" => $lastname,
             "email" => $email,
         ]);
 
-        $view = new View("Security/register"); // Création de la vue (page HTML)
-        $view->assign("form", $form->build()); // Passe le form à la vue
-        $view->render(); // Render de la page HTML
+        $view = new View("Security/register");
+        $view->assign("form", $form->build());
+        $view->render();
     }
 
     public function logout(): void
