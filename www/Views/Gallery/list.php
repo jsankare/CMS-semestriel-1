@@ -10,7 +10,7 @@
                     <h3 class="gallery--item__title" ><?php echo htmlspecialchars($image->getTitle()); ?></h3>
                     <?php
                     $link = $image->getLink();
-                    $relativeLink = str_replace('/var/www/html/Public', '', $link);
+                    $relativeLink = str_replace('/var/www/html/www/Public', '', $link);
                     ?>
                     <img class="gallery--item__picture" src="<?php echo htmlspecialchars($relativeLink); ?>" alt="<?php echo htmlspecialchars($image->getDescription()); ?>">
                     <p class="gallery--item__description"><?php echo htmlspecialchars($image->getDescription()); ?></p>
