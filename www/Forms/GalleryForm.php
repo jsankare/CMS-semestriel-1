@@ -33,7 +33,13 @@ class GalleryForm
                     "type" => "file",
                     "label" => "Image",
                     "required" => true
+                ],
+                "is_logo" => [
+                    "type" => "checkbox",
+                    "label" => "definir comme Logo",
+                    "value" => $data['is_logo'] ?? ''
                 ]
+
             ]
         ];
     }

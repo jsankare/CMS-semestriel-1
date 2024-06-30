@@ -55,6 +55,14 @@ class GalleryController
             $image->setTitle($_POST['title']);
             $image->setDescription($_POST['description']);
             $image->setLink($uploadFile);
+
+            if (isset($_POST['is_logo']) && $_POST['is_logo'] == '1') {
+                (new Image())->resetLogo();
+                $image->setIsLogo(true);
+            } else {
+                $image->setIsLogo(false); 
+            }
+
             $image->save();
 
             header('Location: /gallery/list');
@@ -156,6 +164,7 @@ class GalleryController
                     'title' => $image->getTitle(),
                     'description' => $image->getDescription(),
                     'image' => $image->getLink(),
+                    'is_logo' => $image->getIsLogo(),
                 ]);
 
                 if ($imageForm->isSubmitted() && $imageForm->isValid()) {
@@ -199,6 +208,13 @@ class GalleryController
                     $image->setTitle($_POST['title']);
                     $image->setDescription($_POST['description']);
                     $image->setLink($uploadFile);
+                    if (isset($_POST['is_logo']) && $_POST['is_logo'] == '1') {
+                        (new Image())->resetLogo();
+                        $image->setIsLogo(true);
+                    } else {
+                        $image->setIsLogo(false); 
+                    }
+        
                     $image->save();
                     header("Image editée", true, 200);
                     header('Location: /gallery/list');
