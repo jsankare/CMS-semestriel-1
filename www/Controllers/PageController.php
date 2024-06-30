@@ -62,6 +62,7 @@ class PageController
             $title = $_POST["title"] ?? "";
             $description = $_POST["description"] ?? "";
             $content = $_POST["content"] ?? "";
+            $editSlug = $_POST['edit-slug'] ?? null;
 
             if ($pageForm->isValid()) {
                 $dbPage = (new Page())->findOneByTitle($title);
@@ -76,7 +77,7 @@ class PageController
                     $page->setDescription($description);
                     $page->setContent($sanitized_content);
                     $page->setCreatorId($user->getId());
-                    $page->setSlug($_POST["title"]);
+                    $page->formatSlug($title, $editSlug);
 
                     if (isset($_POST['is_main']) && $_POST['is_main'] == '1') {
                         (new Page())->resetMainPage();
@@ -171,9 +172,10 @@ class PageController
                 ]);
 
                 if ($pageForm->isSubmitted() && $pageForm->isValid()) {
+                
                     $page->setTitle($_POST['title']);
                     $page->setDescription($_POST['description']);
-                    $page->setSlug($_POST["title"]);
+                    $page->formatSlug($_POST['title'],$_POST['edit-slug']);
                     $page->setContent($_POST['content']);
 
                     if (isset($_POST['is_main']) && $_POST['is_main'] == '1') {

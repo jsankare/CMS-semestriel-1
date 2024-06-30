@@ -128,6 +128,16 @@ class Page extends SQL
     }
 
     /**
+     * @param string $title
+     * @param string|null $editSlug
+     */
+    public function formatSlug(string $title, ?string $editSlug): void
+    {
+        $slug = $editSlug ? $editSlug : $title;
+        $this->slug = $this->generateSlug($slug);
+    }
+
+    /**
      * @return bool|null
      */
     public function getIsMain(): ?bool
