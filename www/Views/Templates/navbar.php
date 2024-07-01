@@ -5,18 +5,23 @@ use App\Models\Image;
 $logoImage = (new Image())->findOneByLogo();
 ?>
 
+
+
 <div class="navbar" style="background-color: <?= $backgroundColor ?? ''; ?>; font-family: <?= $fontStyle ?? ''; ?>">
     <div class="navbar--divLeft">
         <?php if ($_SERVER['REQUEST_URI'] != '/login' && $_SERVER['REQUEST_URI'] != '/register'): ?>
-            <?php if ($logoImage): ?>
-                <div class="navbar-logo">
-                    <?php
-                        $link = $logoImage->getLink();
-                        $relativeLink = str_replace('/var/www/html/Public', '', $link);
-                    ?>
+            <div class="navbar-logo">
+            <?php
+                $link = $logoImage->getLink();
+                $relativeLink = str_replace('/var/www/html/Public', '', $link);
+            ?>
+                <?php if ($logoImage): ?>
                     <a href="/"><img src="<?= htmlspecialchars($relativeLink); ?>" alt="CMS Logo"></a>
-                </div>
-            <?php endif; ?>
+                <?php else: ?>
+                    <a href="/"><img src="path/to/your/default/logo.png" alt="CMS Logo"></a>
+                <?php endif; ?>
+
+            </div>
         <?php endif; ?>
         
         <a href="/">Accueil</a>

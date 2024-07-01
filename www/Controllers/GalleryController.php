@@ -65,8 +65,14 @@ class GalleryController
                 $image->setIsLogo($isLogo);
 
             $image->setLink($uploadFile);
-                        
-            
+
+            if (isset($_POST['is_logo']) && $_POST['is_logo'] == '1') {
+                (new Image())->resetLogo();
+                $image->setIsLogo(true);
+            } else {
+                $image->setIsLogo(false); 
+            }
+
             $image->save();
 
             header('Location: /gallery/list');
@@ -216,7 +222,6 @@ class GalleryController
                     $image->setTitle($_POST['title']);
                     $image->setDescription($_POST['description']);
                     $image->setLink($uploadFile);
-
                     if (isset($_POST['is_logo']) && $_POST['is_logo'] == '1') {
                         (new Image())->resetLogo();
                         $image->setIsLogo(true);
