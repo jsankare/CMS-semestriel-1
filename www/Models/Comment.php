@@ -12,7 +12,7 @@ class Comment extends SQL
     protected string $content;
 
     protected int $status = 0;
-    protected string $created_at;
+    protected ?string $created_at = null;
 
     public function getId(): ?int
     {
@@ -149,7 +149,7 @@ class Comment extends SQL
                 return 'Date invalide';
             }
         } else {
-            return 'Date non définie';
+            return 'Date nonff définie';
         }
     }
 
