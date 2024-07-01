@@ -55,10 +55,12 @@ class ArticleController
                 } else {
                     $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
                     $sanitized_content = strip_tags($content, $allowed_tags);
+                    $sanitized_title = strip_tags($title, $allowed_tags);
+                    $sanitized_description = strip_tags($description, $allowed_tags);
 
                     $article = new Article();
-                    $article->setTitle($title);
-                    $article->setDescription($description);
+                    $article->setTitle($sanitized_title);
+                    $article->setDescription($sanitized_description);
                     $article->setContent($sanitized_content);
                     $article->setCreatorId($user->getId());
                     $article->save();
