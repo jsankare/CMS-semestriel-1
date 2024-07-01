@@ -16,7 +16,7 @@ class PageForm
                     "type"=>"text",
                     "min"=>2,
                     "max"=>50,
-                    "placeholder"=>"Titre de la page",
+                    "placeholder"=>"Titre de la page*",
                     "label"=>"Titre",
                     "required"=>true,
                     "error"=>"Le titre de la page doit faire entre 2 et 50 caractères",
@@ -25,7 +25,7 @@ class PageForm
                 "description" => [
                     "type" => "text",
                     "max" => 50,
-                    "placeholder" => "Description de la page",
+                    "placeholder" => "Description de la page*",
                     "label" => "Description",
                     "required" => true,
                     "error" => "La description ne peut pas faire plus de 50 caractères",
@@ -40,7 +40,7 @@ class PageForm
                 ],
                 "content"=>[
                     "type"=>"textarea",
-                    "placeholder"=>"Entrez ici le contenu de la page",
+                    "placeholder"=>"Entrez ici le contenu de la page*",
                     "label"=>"Contenu",
                     "required"=>true,
                     "value" => $data['content'] ?? ''

@@ -18,6 +18,18 @@
                                 <h3>Commentaire</h3>
                                 <p><?= htmlspecialchars($comment->getContent()); ?></p>
                             </li>
+                            <li class="comment--value">
+                                <h3>Status</h3>
+                                <?php if($comment->getStatus() == 0): ?>
+                                <p>Non validé</p>
+                                <?php else: ?>
+                                <p>validé</p>
+                                <?php endif ?>
+                            </li>
+                            <li class="comment--item">
+                                <h3>Modérer</h3>
+                                <p><a href="/comment/moderate?id=<?= $comment->getId(); ?>">Changer</a></p>
+                            </li>
                             <li class="comment--item">
                                 <a class="comment--icon__link" href="/comment/delete?id=<?= $comment->getId(); ?>">
                                     <img class="comment--icon comment--icon__trash" src="/assets/trash.svg">

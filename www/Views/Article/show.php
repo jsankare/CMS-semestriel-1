@@ -20,10 +20,12 @@
                     <?php if ($article->comments): ?>
                         <h4>Commentaires</h4>
                         <?php foreach ($article->comments as $comment): ?>
+                            <?php if ($comment->getStatus() == 1): ?>
                             <div class="article--commentSection">
                                 <p>Par <strong><?= $comment->getUserName(); ?></strong> le <?= $comment->getFormattedDate(); ?></p>
                                 <p><?= $comment->getContent(); ?></p>
                             </div>
+                            <?php endif ?>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <h4>Cet article n'a pas de commentaire pour le moment</h4>

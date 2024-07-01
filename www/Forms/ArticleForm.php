@@ -16,7 +16,7 @@ class ArticleForm
                     "type" => "text",
                     "min" => 2,
                     "max" => 50,
-                    "placeholder" => "Titre de l&apos;article",
+                    "placeholder" => "Titre de l&apos;article*",
                     "label" => "Titre",
                     "required" => true,
                     "error" => "Le titre de l'article doit faire entre 2 et 50 caractères",
@@ -27,13 +27,12 @@ class ArticleForm
                     "max" => 50,
                     "placeholder" => "Description de l'article",
                     "label" => "Description",
-                    "required" => false,
                     "error" => "La description ne peut pas faire plus de 50 caractères",
                     "value" => $data['description'] ?? ''
                 ],
                 "content" => [
                     "type" => "textarea",
-                    "placeholder" => "Entrez ici le contenu de l'article",
+                    "placeholder" => "Entrez ici le contenu de l'article*",
                     "label" => "Contenu",
                     "required" => true,
                     "error" => "La description de la page ne peut pas faire plus de 255 caractères",

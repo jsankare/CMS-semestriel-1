@@ -226,6 +226,12 @@
   Security: true
   Role: "Moderator"
 
+/comment/moderate:
+  Controller: CommentController
+  Action: "moderate"
+  Security: true
+  Role: "Moderator"
+
 /comments/home:
   Controller: CommentController
   Action: "list"

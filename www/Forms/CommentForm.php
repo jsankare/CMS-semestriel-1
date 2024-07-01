@@ -14,7 +14,7 @@ class CommentForm
             "inputs" => [
                 "content" => [
                     "type" => "textarea",
-                    "placeholder" => "Entrez votre commentaire ici",
+                    "placeholder" => "Entrez votre commentaire ici*",
                     "label" => "Commentaire",
                     "required" => true,
                     "error" => "Le commentaire ne peut pas être vide",

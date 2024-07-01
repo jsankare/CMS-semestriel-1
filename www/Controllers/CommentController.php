@@ -28,6 +28,7 @@ class CommentController
                     $comment->setArticleId($articleId);
                     $comment->setUserId($userId);
                     $comment->setContent($sanitized_content);
+                    $comment->setStatus(0);
                     $comment->save();
                     header("Commentaire posté", true, 404);
                     header('Location: /articles');
@@ -81,6 +82,32 @@ class CommentController
         $view = new View("Comment/home", "back");
         $view->assign('comments', $comments);
         $view->render();
+    }
+
+    public function moderate() {
+        $userRole = $_SESSION['user_status'];
+        if (isset($_GET['id'])) {
+            $commentModel = new Comment();
+            $comment = $commentModel->findOneById($_GET['id']);
+            if($userRole > 2 && $comment) {
+                if($comment->getStatus() == 0) {
+                    $comment->setStatus(1);
+                } else {
+                    $comment->setStatus(0);
+                }
+                $comment->save();
+                header('Location: /comments/home');
+                exit();
+            } else {
+                header("Commentaire non trouvé", true, 404);
+                header('Location: /404');
+                exit();
+            }
+        } else {
+            header("ID Utilisateur non trouvé", true, 500);
+            header('Location: /500');
+            exit();
+        }
     }
 
     public function show(): void
