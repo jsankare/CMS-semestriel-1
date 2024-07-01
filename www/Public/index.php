@@ -27,6 +27,14 @@ function myAutoloader($class){
     }
 }
 
+if(!file_exists('/www/config/cms-config.php')) {
+    if(!fopen('/www/config/cms-config.php', "w")) {
+        echo"impossible de créer le fichier";
+        die("toto");
+    }
+    exit();
+}
+
 // Function to map URI slug to route
 function mapSlugToRoute($uri, $routes) {
     foreach ($routes as $route => $data) {
