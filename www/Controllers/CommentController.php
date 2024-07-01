@@ -18,17 +18,24 @@ class CommentController
                 $content = trim($_POST['content']);
 
                 if (isset($_SESSION['user_id'])) {
+
+                    $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
+                    $sanitized_content = strip_tags($content, $allowed_tags);
+
                     $userId = (int)$_SESSION['user_id'];
 
                     $comment = new Comment();
                     $comment->setArticleId($articleId);
                     $comment->setUserId($userId);
-                    $comment->setContent($content);
+                    $comment->setContent($sanitized_content);
                     $comment->save();
-
+                    header("Commentaire posté", true, 404);
                     header('Location: /articles');
                     exit();
                 } else {
+                    unset($_SESSION['user_id']);
+                    session_destroy();
+                    header("Utilisateur non connecté", true, 403);
                     header('Location: /login');
                     exit();
                 }
@@ -51,14 +58,16 @@ class CommentController
             if ($comment) {
                 $comment->delete();
             } else {
-                echo 'Commentaire non trouvé.';
+                header("Commentaire non trouvé", true, 404);
+                header('Location: /404');
                 exit();
             }
         } else {
-            echo 'ID de commentaire non spécifié.';
+            header("ID Utilisateur non trouvé", true, 500);
+            header('Location: /500');
             exit();
         }
-
+        header("Comment deleted", true, 200);
         header('Location: /comments/home');
         exit();
     }
@@ -88,11 +97,13 @@ class CommentController
                 $view->assign('comments', $comments);
                 $view->render();
             } else {
-                echo "Article non trouvé";
+                header("Article non trouvé", true, 404);
+                header('Location: /404');
                 exit();
             }
         } else {
-            echo "ID de l'article non spécifié";
+            header("ID Article non spécifié", true, 500);
+            header('Location: /500');
             exit();
         }
     }
