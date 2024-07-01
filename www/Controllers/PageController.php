@@ -20,7 +20,9 @@ class PageController
             $view->assign('pages', $pages);
             $view->render();
         } else {
-            echo "Aucune page principale définie.";
+            header("Aucune page principale définie.", true, 404);
+            header('Location: /404');
+            exit();
         }
     }
 
@@ -67,7 +69,9 @@ class PageController
             if ($pageForm->isValid()) {
                 $dbPage = (new Page())->findOneByTitle($title);
                 if ($dbPage) {
-                    echo "Ce nom de page est déjà pris";
+                    header("Ce nom de page est déjà pris", true, 500);
+                    header('Location: /500');
+                    exit();
                 } else {
                     $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
                     $sanitized_content = strip_tags($content, $allowed_tags);
@@ -128,7 +132,8 @@ class PageController
             $pageId = intval($_GET['id']);
             $page = (new Page())->findOneById($pageId);
         } else {
-            echo "impossible de récupérer la page";
+            header("impossible de récupérer la page", true, 404);
+            header('Location: /404');
             exit();
         }
 
@@ -148,10 +153,14 @@ class PageController
                 header('Location: /page/home');
                 exit();
             } else {
-                echo "Page non trouvée";
+                header("Page non trouvée", true, 404);
+                header('Location: /404');
+                exit();
             }
         } else {
-            echo "ID page non spécifié";
+            header("ID page non spécifié", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
 
@@ -195,10 +204,14 @@ class PageController
                 $view->assign('pageForm', $pageForm->build());
                 $view->render();
             } else {
-                echo "Page non trouvé !";
+                header("Page non trouvée", true, 404);
+                header('Location: /404');
+                exit();
             }
         } else {
-            echo "ID page non spécifié !";
+            header("ID page non spécifié", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
 

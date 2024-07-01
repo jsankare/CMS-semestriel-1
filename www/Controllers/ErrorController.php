@@ -38,4 +38,11 @@ class ErrorController
         $view->render();
     }
 
+    public function conflict(): void {
+        $pages = (new Page())->findAll();
+
+        $view = new View("Error/conflict", "front");
+        $view->assign('pages', $pages);
+        $view->render();
+    }
 }

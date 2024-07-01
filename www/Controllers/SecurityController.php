@@ -28,7 +28,9 @@ class SecurityController
                 if ($user) {
                     // Verification du status
                     if ($user->getStatus() == 0) {
-                        echo "Vous devez valider votre compte avant de vous connecter";
+                        header("Vous devez valider votre compte avant de vous connecter", true, 403);
+                        header('Location: /403');
+                        exit();
                     } elseif (password_verify($_POST["password"], $user->getPassword())) {
                         // On store le user ID & le status dans la session
                         $_SESSION['user_id'] = $user->getId();
@@ -76,7 +78,9 @@ class SecurityController
             if ($form->isValid()) {
                 $dbUser = (new User())->findOneByEmail($email);
                 if ($dbUser) {
-                    echo "Un user existe déjà avec cette adresse email";
+                    header("Un user existe déjà avec cette adresse email", true, 500);
+                    header('Location: /500');
+                    exit();
                 } else {
                     $existingUsers = (new User())->findAll();
                     $status = count($existingUsers) === 0 ? 4 : 0;
@@ -170,7 +174,8 @@ class SecurityController
             $userId = intval($_GET['id']);
             $user = (new User())->findOneById($userId);
         } else {
-            echo "impossible de récupérer l'user";
+            header("impossible de récupérer l'user", true, 500);
+            header('Location: /500');
             exit();
         }
 
@@ -256,7 +261,9 @@ class SecurityController
                     $view->assign('updatePasswordForm', $updatePasswordForm->build());
                     $view->render();
                 } else {
-                    echo "Le code de réinitialisation a expiré, veuillez demander un nouveau lien.";
+                    header("Le code de réinitialisation a expiré, veuillez demander un nouveau lien", true, 403);
+                    header('Location: /403');
+                    exit();
                 }
             } else {
                 header("Votre code de changement de mot de passe n'est pas valide", true, 403);

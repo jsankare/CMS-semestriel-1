@@ -160,6 +160,12 @@
   Security: false
   Role: "Guest"
 
+/409:
+  Controller: ErrorController
+  Action: "conflict"
+  Security: false
+  Role: "Guest"
+
 /500:
   Controller: ErrorController
   Action: "serverError"
