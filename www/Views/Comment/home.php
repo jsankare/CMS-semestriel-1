@@ -17,7 +17,7 @@
                         </li>
                         <li class="comment--value">
                             <h3>Article</h3>
-                            <p><?php echo $comment->getTitle(); ?></p>
+                            <p><?php htmlspecialchars($comment->getTitle()); ?></p>
                         </li>
                         <li class="comment--value">
                             <h3>date </h3>
@@ -25,7 +25,7 @@
                         </li>
                         <li class="comment--value">
                             <h3>Commentaire</h3>
-                            <p><?php echo $comment->getContent(); ?></p>
+                            <p><?php htmlspecialchars($comment->getContent()); ?></p>
                         </li>
                         <li class="comment--value">
                             <a class="comment--icon__link" href="/comment/delete?id=<?php echo $comment->getId(); ?>">

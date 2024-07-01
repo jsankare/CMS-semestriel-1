@@ -15,7 +15,8 @@ class UserController
             $userId = intval($_GET['id']);
             $user = (new User())->findOneById($userId);
         } else {
-            echo "impossible de récupérer cet utilisateur";
+            header("Impossible de récupérer cet utilisateur", true, 500);
+            header('Location: /500');
             exit();
         }
 
@@ -35,15 +36,15 @@ class UserController
                 header('Location: /users/home');
                 exit();
             } else {
-                echo "Utilisateur non trouvé";
+                header("Utilisateur non trouvé", true, 500);
+                header('Location: /500');
+                exit();
             }
         } else {
-            echo "ID utilisateur non spécifié";
+            header("Id utilisateur non trouvé", true, 500);
+            header('Location: /500');
+            exit();
         }
-    }
-    public function show(): void
-    {
-        echo "Affichage d'un user";
     }
 
     public function add(): void
@@ -54,8 +55,9 @@ class UserController
         if( $userForm->isSubmitted() && $userForm->isValid()) {
             $dbUser = (new User())->findOneByEmail($_POST["email"]);
             if ($dbUser) {
-                echo "Ce nom de user est déjà pris";
-                exit;
+                header("Username already taken", true, 500);
+                header('Location: /500');
+                exit();
             }
 
             $validation_code = md5(uniqid(rand(), true));
@@ -119,11 +121,14 @@ class UserController
                 $view->assign('userForm', $userForm->build());
                 $view->render();
             } else {
-                echo "User non trouvé !";
+                header("User not found", true, 500);
+                header('Location: /500');
+                exit();
             }
         } else {
-            echo "ID user non spécifié !";
+            header("ID user non spécifié !", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
-
 }
