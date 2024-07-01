@@ -234,6 +234,7 @@ class Page extends SQL
     public function save(): void
     {
         $isMain = $this->isMain() ? 'TRUE' : 'FALSE';
+        
 
         if (!empty($this->getId())) {
             $sql = "UPDATE {$this->table} SET title = :title, description = :description, content = :content, slug = :slug, is_main = :is_main, creator_id = :creator_id WHERE id = :id";

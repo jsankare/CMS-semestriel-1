@@ -33,7 +33,14 @@ class GalleryForm
                     "type" => "file",
                     "label" => "Image*",
                     "required" => true
+                ],
+                "is_logo" => [
+                    "type" => "checkbox",
+                    "label" => "Definir comme Logo",
+                    "value" => 0,
+                    "checked" => isset($data['is_logo']) && $data['is_logo']
                 ]
+
             ]
         ];
     }

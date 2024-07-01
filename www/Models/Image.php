@@ -10,6 +10,7 @@ class Image extends SQL
     protected string $title;
     protected string $description;
     protected string $link;
+    protected bool $is_logo = false;
 
     /**
      * @return int
@@ -66,7 +67,6 @@ class Image extends SQL
     {
         return $this->link;
     }
-
     /**
      * @param string $link
      */
@@ -74,6 +74,31 @@ class Image extends SQL
     {
         $this->link = $link;
     }
+
+
+    /**
+     * @return bool|null
+     */
+    public function isLogo(): ?bool
+    {
+        return $this->is_logo;
+    }
+
+  
+ /**
+     * @param bool $is_logo
+     */
+    public function setIsLogo(bool $isLogo): void
+    {
+        $this->is_logo = $isLogo;
+    }
+
+    public function getIsLogo(): ?bool
+    {
+        return (bool)$this->is_logo;
+    }
+
+
 
     public function findOneByTitle(string $title) {
         $sql = "SELECT * FROM {$this->table} WHERE title = :title";
@@ -93,6 +118,22 @@ class Image extends SQL
         return $queryPrepared->fetch();
     }
 
+    public function findOneByLogo()
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE is_logo = true";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute();
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Image');
+        return $queryPrepared->fetch();
+    }
+
+    public function resetLogo(): void
+    {
+        $sql = "UPDATE {$this->table} SET is_logo = FALSE";
+        $this->pdo->exec($sql);
+    }
+
+    
     public function findAll() {
         $sql = "SELECT * FROM {$this->table}";
 

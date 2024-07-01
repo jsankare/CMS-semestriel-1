@@ -407,7 +407,18 @@ input[type=color] {
   justify-content: space-between;
 }
 .navbar--divLeft {
+  display: flex;
   width: 100%;
+  align-items: center;
+}
+.navbar--divLeft .navbar-logo {
+  display: flex;
+  align-items: center;
+}
+.navbar--divLeft .navbar-logo img {
+  width: 20px;
+  height: auto;
+  border-radius: 50%;
 }
 .navbar--divLeft a {
   float: left;
