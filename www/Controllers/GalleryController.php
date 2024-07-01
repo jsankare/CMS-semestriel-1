@@ -110,6 +110,7 @@ class GalleryController
                 } else {
                     header("File does not exist", true, 404);
                     header('Location: /404');
+                    // Redirige ici par defaut en local a cause du changement de pathing
                     exit();
                 }
 

@@ -22,8 +22,10 @@
                                 <h3>Status</h3>
                                 <?php if($comment->getStatus() == 0): ?>
                                 <p>Non validé</p>
+                                <div class="comment--value__no"></div>
                                 <?php else: ?>
                                 <p>validé</p>
+                                <div class="comment--value__yes"></div>
                                 <?php endif ?>
                             </li>
                             <li class="comment--item">
