@@ -381,41 +381,4 @@ class SecurityController
         }
     }
 
-    public function predelete(): void {
-
-        if (isset($_GET['id'])) {
-            $userId = intval($_GET['id']);
-            $user = (new User())->findOneById($userId);
-        } else {
-            echo "impossible de récupérer l'utilisateur";
-            exit();
-        }
-
-        $view = new View('Security/delete', 'front');
-        $view->assign('user', $user);
-        $view->render();
-    }
-
-    public function delete(): void
-    {
-        if (isset($_GET['id'])) {
-            $userIdToDelete = intval($_GET['id']);
-            $userToDelete = (new User())->findOneById($userIdToDelete);
-            
-            if ($_SESSION['user_id'] == $userIdToDelete ) {
-                if ($userToDelete) {
-                    $userToDelete->delete();
-                    unset($_SESSION['user_id']);
-                    session_destroy();
-                    header('Location: /');
-                    exit();
-                } else {
-                    echo "Utilisateur non trouvé trouvée";
-                }
-            }
-        } else {
-            echo "ID utilisateur non spécifié";
-        }
-    }
-
 }
