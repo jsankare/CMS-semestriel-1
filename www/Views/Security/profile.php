@@ -12,7 +12,7 @@
                         <?php foreach ($userComments as $comment): ?>
                         <?php if ($comment['status'] == 1): ?>
                             <li>
-                                <strong><?= htmlspecialchars($comment['article_title'], ENT_QUOTES, 'UTF-8') ?></strong> le <?= htmlspecialchars($comment['formatted_date'], ENT_QUOTES, 'UTF-8') ?>
+                                <strong><?= htmlspecialchars($comment['article_title'], ENT_QUOTES, 'UTF-8') ?></strong> :
                                 <?= htmlspecialchars($comment['content'], ENT_QUOTES, 'UTF-8') ?>
                             </li>
                         <?php endif ?>
