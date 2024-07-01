@@ -19,6 +19,11 @@ class Comment extends SQL
         return $this->id;
     }
 
+    public function getCreationDate(): ?string
+    {
+        return $this->created_at;
+    }
+
     public function getArticleId(): int
     {
         return $this->article_id;
@@ -136,8 +141,16 @@ class Comment extends SQL
 
     public function getFormattedDate(): string
     {
-        $date = new \DateTime();
-        return $date->format('d/m/Y à H:i');
+        if ($this->created_at) {
+            try {
+                $date = new \DateTime($this->created_at);
+                return $date->format('d/m/Y à H:i');
+            } catch (\Exception $e) {
+                return 'Date invalide';
+            }
+        } else {
+            return 'Date non définie';
+        }
     }
 
     public function findArticleWithId(int $articleId)

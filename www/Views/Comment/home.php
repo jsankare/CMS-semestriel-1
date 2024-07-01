@@ -30,9 +30,11 @@
                         <li class="comment--value">
                             <h3>Status</h3>
                             <?php if($comment->getStatus() == 0): ?>
-                            <p>Non validé</p>
+                                <p>Non validé</p>
+                                <div class="comment--value__globalno"></div>
                             <?php else: ?>
-                            <p>validé</p>
+                                <p>validé</p>
+                                <div class="comment--value__globalyes"></div>
                             <?php endif ?>
                         </li>
                         <li class="comment--item">
