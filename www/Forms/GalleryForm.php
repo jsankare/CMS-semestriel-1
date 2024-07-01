@@ -36,8 +36,9 @@ class GalleryForm
                 ],
                 "is_logo" => [
                     "type" => "checkbox",
-                    "label" => "definir comme Logo",
-                    "value" => $data['is_logo'] ?? ''
+                    "label" => "Definir comme Logo",
+                    "value" => 0,
+                    "checked" => isset($data['is_logo']) && $data['is_logo']
                 ]
 
             ]

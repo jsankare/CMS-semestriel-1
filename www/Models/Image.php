@@ -67,7 +67,6 @@ class Image extends SQL
     {
         return $this->link;
     }
-
     /**
      * @param string $link
      */
@@ -76,23 +75,29 @@ class Image extends SQL
         $this->link = $link;
     }
 
-    public function isLogo(): bool
+
+    /**
+     * @return bool|null
+     */
+    public function isLogo(): ?bool
     {
         return $this->is_logo;
     }
 
+  
+ /**
+     * @param bool $is_logo
+     */
     public function setIsLogo(bool $isLogo): void
     {
         $this->is_logo = $isLogo;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsLogo(): ?bool
     {
-        return (bool) $this->is_logo;
+        return (bool)$this->is_logo;
     }
+
 
 
     public function findOneByTitle(string $title) {

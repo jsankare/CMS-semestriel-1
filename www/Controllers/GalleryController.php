@@ -8,6 +8,9 @@ use App\Models\Image;
 
 class GalleryController
 {
+
+  
+
     public function create(): void
     {
         $pages = (new Page())->findAll();
@@ -18,7 +21,7 @@ class GalleryController
             $ext = (new \SplFileInfo($_FILES["image"]["name"]))->getExtension();
 
             // might be error with creating folder rights, fixed using "chmod -R 777 www/Public"
-            $uploadDir = '/var/www/html/www/Public/uploads/';
+            $uploadDir = '/var/www/html/Public/uploads/';
             if(is_dir($uploadDir)) {
             } else {
                 if (!mkdir($uploadDir, 0777, true)) {
@@ -54,15 +57,16 @@ class GalleryController
             $image = new Image();
             $image->setTitle($_POST['title']);
             $image->setDescription($_POST['description']);
+
+            $isLogo = isset($_POST['is_logo']) && $_POST['is_logo'] === '1';
+                if ($isLogo) {
+                    (new Image())->resetLogo();
+                }
+                $image->setIsLogo($isLogo);
+
             $image->setLink($uploadFile);
-
-            if (isset($_POST['is_logo']) && $_POST['is_logo'] == '1') {
-                (new Image())->resetLogo();
-                $image->setIsLogo(true);
-            } else {
-                $image->setIsLogo(false); 
-            }
-
+                        
+            
             $image->save();
 
             header('Location: /gallery/list');
@@ -80,6 +84,8 @@ class GalleryController
 
         $imageModel = new Image();
         $images = $imageModel->findAll();
+        
+        
 
         $view = new View('Gallery/home', 'front');
         $view->assign('images', $images);
@@ -98,6 +104,8 @@ class GalleryController
         $view->assign('pages', $pages);
         $view->render();
     }
+
+   
 
     public function delete(): void {
         if (isset($_GET['id'])) {
@@ -172,7 +180,7 @@ class GalleryController
                     $ext = (new \SplFileInfo($_FILES["image"]["name"]))->getExtension();
 
                     // might be error with creating folder rights, fixed using "chmod -R 777 www/Public"
-                    $uploadDir = '/var/www/html/www/Public/uploads/';
+                    $uploadDir = '/var/www/html/Public/uploads/';
                     if(is_dir($uploadDir)) {
                     } else {
                         if (!mkdir($uploadDir, 0777, true)) {
@@ -208,6 +216,7 @@ class GalleryController
                     $image->setTitle($_POST['title']);
                     $image->setDescription($_POST['description']);
                     $image->setLink($uploadFile);
+
                     if (isset($_POST['is_logo']) && $_POST['is_logo'] == '1') {
                         (new Image())->resetLogo();
                         $image->setIsLogo(true);

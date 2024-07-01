@@ -15,7 +15,7 @@
                         <h3 class="gallery--item__title"><?php echo htmlspecialchars($image->getTitle()); ?></h3>
                         <?php
                         $link = $image->getLink();
-                        $relativeLink = str_replace('/var/www/html/www/Public', '', $link);
+                        $relativeLink = str_replace('/var/www/html/Public', '', $link);
                         ?>
                         <div class="carousel--item__picture__container">
                             <img class="gallery--item__picture" src="<?php echo htmlspecialchars($relativeLink); ?>" alt="<?php echo htmlspecialchars($image->getDescription()); ?>">
@@ -33,7 +33,8 @@
                     <h3 class="gallery--classic__item__title"><?php echo htmlspecialchars($image->getTitle()); ?></h3>
                     <?php
                     $link = $image->getLink();
-                    $relativeLink = str_replace('/var/www/html/www/Public', '', $link);
+                    $relativeLink = str_replace('/var/www/html/Public', '', $link);
+                    var_dump($relativeLink)
                     ?>
                     <div class="gallery--image__container">
                         <img class="gallery--classic__item__picture" src="<?php echo htmlspecialchars($relativeLink); ?>" alt="<?php echo htmlspecialchars($image->getDescription()); ?>">

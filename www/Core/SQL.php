@@ -24,10 +24,18 @@ class SQL
 
     public function save()
     {
+        
         //Ne pas ecrire en dur le nom de la table ou des colonnes à inserer en bdd
         $columnsAll = get_object_vars($this);
         $columnsToDelete = get_class_vars(get_class());
         $columns = array_diff_key($columnsAll, $columnsToDelete);
+
+        //C'est pour convertir les booléen
+        foreach ($columns as $key => $value) {
+            if (is_bool($value)) {
+                $columns[$key] = $value ? 'true' : 'false';
+            }
+        }
 
         if( empty($this->getId()) ) {
             $sql = "INSERT INTO ".$this->table. " (". implode(', ', array_keys($columns) ) .")  

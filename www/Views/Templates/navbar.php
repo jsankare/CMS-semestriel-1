@@ -5,23 +5,18 @@ use App\Models\Image;
 $logoImage = (new Image())->findOneByLogo();
 ?>
 
-
-
 <div class="navbar" style="background-color: <?= $backgroundColor ?? ''; ?>; font-family: <?= $fontStyle ?? ''; ?>">
     <div class="navbar--divLeft">
         <?php if ($_SERVER['REQUEST_URI'] != '/login' && $_SERVER['REQUEST_URI'] != '/register'): ?>
-            <div class="navbar-logo">
-            <?php
-                $link = $logoImage->getLink();
-                $relativeLink = str_replace('/var/www/html/Public', '', $link);
-            ?>
-                <?php if ($logoImage): ?>
+            <?php if ($logoImage): ?>
+                <div class="navbar-logo">
+                    <?php
+                        $link = $logoImage->getLink();
+                        $relativeLink = str_replace('/var/www/html/Public', '', $link);
+                    ?>
                     <a href="/"><img src="<?= htmlspecialchars($relativeLink); ?>" alt="CMS Logo"></a>
-                <?php else: ?>
-                    <a href="/"><img src="path/to/your/default/logo.png" alt="CMS Logo"></a>
-                <?php endif; ?>
-
-            </div>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
         
         <a href="/">Accueil</a>
@@ -34,8 +29,8 @@ $logoImage = (new Image())->findOneByLogo();
                 <div class="dropdown-content">
                     <?php foreach ($pages as $page): ?>
                         <?php if (!$page->getIsMain()): ?>
-                                <a href="/page/<?= htmlspecialchars($page->getSlug()) ?>"><?= htmlspecialchars($page->getTitle()) ?></a>
-                            <?php endif; ?>
+                            <a href="/page/<?= htmlspecialchars($page->getSlug()) ?>"><?= htmlspecialchars($page->getTitle()) ?></a>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             </div>
