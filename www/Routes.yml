@@ -46,6 +46,18 @@
   Security: true
   Role: "User"
 
+/profile/predelete:
+  Controller: SecurityController
+  Action: "predelete"
+  Security: true
+  Role: "User"
+
+/profile/delete:
+  Controller: SecurityController
+  Action: "delete"
+  Security: true
+  Role: "User"
+
 /users/home:
   Controller: UserController
   Action: "list"
