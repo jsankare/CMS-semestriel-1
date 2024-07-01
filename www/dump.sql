@@ -62,6 +62,7 @@ CREATE TABLE esgi_comment (
     article_id INT NOT NULL,
     user_id INT NOT NULL,
     content TEXT NOT NULL,
+    status SMALLINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (article_id) REFERENCES public.esgi_article(id),
     FOREIGN KEY (user_id) REFERENCES public.esgi_user(id)

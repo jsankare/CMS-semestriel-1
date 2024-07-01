@@ -13,14 +13,14 @@ class ResetPasswordForm
             "inputs"=>[
                 "password"=>[
                     "type"=>"password",
-                    "placeholder"=>"Entrez le mot de passe",
+                    "placeholder"=>"Entrez le mot de passe*",
                     "required"=>true,
                     "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec des lettres minscules, majuscules et des chiffres",
                     "value" => ''
                 ],
                 "passwordConfirm"=>[
                     "type"=>"password",
-                    "placeholder"=>"Confirmation",
+                    "placeholder"=>"Confirmation*",
                     "required"=>true,
                     "confirm"=>"password",
                     "error"=>"La confirmation ne correspond pas",

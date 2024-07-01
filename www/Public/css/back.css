@@ -668,6 +668,11 @@ input[type=color] {
   content: url("/assets/arrow-right.svg");
 }
 
+.comment--value__icon {
+  position: absolute;
+  top: 70%;
+  right: 0;
+}
 .comment--wrapper__unit {
   position: relative;
 }
@@ -675,7 +680,7 @@ input[type=color] {
   width: 100%;
   display: grid;
   gap: 1rem;
-  grid-template-columns: 2fr 3fr 1fr 8fr;
+  grid-template-columns: 2fr 2fr 1fr 8fr 2fr 2fr;
   justify-content: center;
   align-items: flex-start;
   border-bottom: 1px solid black;
@@ -707,7 +712,7 @@ input[type=color] {
 }
 .comment--container__wrapper {
   display: grid;
-  grid-template-columns: 2fr 2fr 8fr;
+  grid-template-columns: 2fr 2fr 8fr 2fr 2fr;
   gap: 1rem;
   border-bottom: 1px solid black;
   position: relative;

@@ -17,7 +17,7 @@
                         </li>
                         <li class="comment--value">
                             <h3>Article</h3>
-                            <p><?php htmlspecialchars($comment->getTitle()); ?></p>
+                            <p><?php echo $comment->getTitle(); ?></p>
                         </li>
                         <li class="comment--value">
                             <h3>date </h3>
@@ -25,9 +25,21 @@
                         </li>
                         <li class="comment--value">
                             <h3>Commentaire</h3>
-                            <p><?php htmlspecialchars($comment->getContent()); ?></p>
+                            <p><?php echo $comment->getContent(); ?></p>
                         </li>
                         <li class="comment--value">
+                            <h3>Status</h3>
+                            <?php if($comment->getStatus() == 0): ?>
+                            <p>Non validé</p>
+                            <?php else: ?>
+                            <p>validé</p>
+                            <?php endif ?>
+                        </li>
+                        <li class="comment--item">
+                                <h3>Modérer</h3>
+                                <p><a href="/comment/moderate?id=<?= $comment->getId(); ?>">Changer</a></p>
+                            </li>
+                        <li class="comment--value comment--value__icon">
                             <a class="comment--icon__link" href="/comment/delete?id=<?php echo $comment->getId(); ?>">
                                 <img class="comment--icon comment--icon__trash" src="/assets/trash.svg" >
                             </a>

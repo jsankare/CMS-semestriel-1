@@ -1,4 +1,11 @@
 .comment {
+  &--value {
+    &__icon {
+      position: absolute;
+      top: 70%;
+      right: 0;
+    }
+  }
   &--wrapper {
     &__unit {
       position: relative;
@@ -8,7 +15,7 @@
     width: 100%;
     display: grid;
     gap: 1rem;
-    grid-template-columns: 2fr 3fr 1fr 8fr;
+    grid-template-columns: 2fr 2fr 1fr 8fr 2fr 2fr;
     justify-content: center;
     align-items: flex-start;
     border-bottom: 1px solid black;
@@ -18,8 +25,6 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-  }
-  &--value {
   }
   &--icon {
     width: 100%;
@@ -42,7 +47,7 @@
     }
     &__wrapper {
       display: grid;
-      grid-template-columns: 2fr 2fr 8fr;
+      grid-template-columns: 2fr 2fr 8fr 2fr 2fr;
       gap: 1rem;
       border-bottom: 1px solid black;
       position: relative;

@@ -15,7 +15,7 @@ class GalleryForm
             "inputs" => [
                 "title" => [
                     "type" => "text",
-                    "label" => "Title",
+                    "label" => "Titre*",
                     "required" => true,
                     "min" => 2,
                     "max" => 50,
@@ -23,7 +23,7 @@ class GalleryForm
                 ],
                 "description" => [
                     "type" => "text",
-                    "label" => "Description",
+                    "label" => "Description*",
                     "required" => true,
                     "min" => 2,
                     "max" => 100,
@@ -31,7 +31,7 @@ class GalleryForm
                 ],
                 "image" => [
                     "type" => "file",
-                    "label" => "Image",
+                    "label" => "Image*",
                     "required" => true
                 ]
             ]

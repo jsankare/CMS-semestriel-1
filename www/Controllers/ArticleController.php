@@ -35,13 +35,12 @@ class ArticleController
         $user = (new User())->findOneById($_SESSION['user_id']);
         $articleForm = new Form("Article");
 
-        // Initialisation des valeurs des champs
         $title = "";
         $description = "";
         $content = "";
 
         if ($articleForm->isSubmitted()) {
-            // Récupérer les valeurs des champs soumis
+
             $title = $_POST["title"] ?? "";
             $description = $_POST["description"] ?? "";
             $content = $_POST["content"] ?? "";
@@ -53,7 +52,7 @@ class ArticleController
                     header('Location: /409');
                     exit();
                 } else {
-                    $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
+                    $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
                     $sanitized_content = strip_tags($content, $allowed_tags);
                     $sanitized_title = strip_tags($title, $allowed_tags);
                     $sanitized_description = strip_tags($description, $allowed_tags);
@@ -71,7 +70,6 @@ class ArticleController
             }
         }
 
-        // Ajouter les valeurs des champs au formulaire pour les réafficher en cas d'erreur
         $articleForm->setValues([
             "title" => $title,
             "description" => $description,
@@ -117,6 +115,11 @@ class ArticleController
             $article = (new Article())->findOneById($articleId);
 
             if ($article) {
+                $commentModel = new Comment();
+                $comments = $commentModel->findCommentsByArticleId($articleId);
+                foreach ($comments as $comment) {
+                    $comment->delete();
+                }
                 $article->delete();
                 header('Location: /article/home');
                 exit();
@@ -147,9 +150,11 @@ class ArticleController
                 ]);
 
                 if ($articleForm->isSubmitted() && $articleForm->isValid()) {
-                    $article->setTitle($_POST['title']);
-                    $article->setDescription($_POST['description']);
-                    $article->setContent($_POST['content']);
+                    $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+
+                    $article->setTitle(strip_tags($_POST['title'], $allowed_tags));
+                    $article->setDescription(strip_tags($_POST['description'], $allowed_tags));
+                    $article->setContent(strip_tags($_POST['content'], $allowed_tags));
                     $article->save();
 
                     header('Location: /article/home');

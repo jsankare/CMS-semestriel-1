@@ -15,7 +15,7 @@ class UserForm
                     "type"=>"text",
                     "min"=>2,
                     "max"=>50,
-                    "placeholder"=>"Entrez le prénom",
+                    "placeholder"=>"Entrez le prénom*",
                     "required"=>true,
                     "error"=>"Votre prénom doit faire entre 2 et 50 caractères",
                     "value" => $data['title'] ?? ''
@@ -24,7 +24,7 @@ class UserForm
                     "type"=>"text",
                     "min"=>2,
                     "max"=>50,
-                    "placeholder"=>"Entrez le nom",
+                    "placeholder"=>"Entrez le nom*",
                     "required"=>true,
                     "error"=>"Votre nom doit faire entre 2 et 50 caractères",
                     "value" => $data['title'] ?? ''
@@ -33,21 +33,21 @@ class UserForm
                     "type"=>"email",
                     "min"=>8,
                     "max"=>320,
-                    "placeholder"=>"Entre l&apos;email",
+                    "placeholder"=>"Entre l&apos;email*",
                     "required"=>true,
                     "error"=>"Votre email doit faire entre 8 et 320 caractères",
                     "value" => $data['title'] ?? ''
                 ],
                 "password"=>[
                     "type"=>"password",
-                    "placeholder"=>"Entrez le mot de passe",
+                    "placeholder"=>"Entrez le mot de passe*",
                     "required"=>true,
                     "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec des lettres minscules, majuscules et des chiffres",
                     "value" => $data['title'] ?? ''
                 ],
                 "passwordConfirm"=>[
                     "type"=>"password",
-                    "placeholder"=>"Confirmation",
+                    "placeholder"=>"Confirmation*",
                     "required"=>true,
                     "confirm"=>"password",
                     "error"=>"La confirmation ne correspond pas",

@@ -10,6 +10,8 @@ class Comment extends SQL
     protected int $article_id;
     protected int $user_id;
     protected string $content;
+
+    protected int $status = 0;
     protected string $created_at;
 
     public function getId(): ?int
@@ -47,6 +49,24 @@ class Comment extends SQL
         $this->content = $content;
     }
 
+    
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
+
+
     public function getTitle(): string
     {
         $article = (new Article())->findOneById($this->article_id);
@@ -82,31 +102,9 @@ class Comment extends SQL
         }
     }
 
-    public function save(): void
-    {
-        if (!empty($this->getId())) {
-            $sql = "UPDATE {$this->table} SET article_id = :article_id, user_id = :user_id, content = :content WHERE id = :id";
-            $queryPrepared = $this->pdo->prepare($sql);
-            $queryPrepared->execute([
-                ':article_id' => $this->getArticleId(),
-                ':user_id' => $this->getUserId(),
-                ':content' => $this->getContent(),
-                ':id' => $this->getId(),
-            ]);
-        } else {
-            $sql = "INSERT INTO {$this->table} (article_id, user_id, content) VALUES (:article_id, :user_id, :content)";
-            $queryPrepared = $this->pdo->prepare($sql);
-            $queryPrepared->execute([
-                ':article_id' => $this->getArticleId(),
-                ':user_id' => $this->getUserId(),
-                ':content' => $this->getContent(),
-            ]);
-            $this->id = $this->pdo->lastInsertId();
-        }
-    }
 
     public function findCommentsByUserId(int $userId): array
-    {
+    {   
         $sql = "SELECT c.*, a.title AS article_title FROM esgi_comment c INNER JOIN esgi_article a ON c.article_id = a.id WHERE c.user_id = :user_id";
         $queryPrepared = $this->pdo->prepare($sql);
         $queryPrepared->execute(['user_id' => $userId]);
@@ -140,5 +138,14 @@ class Comment extends SQL
     {
         $date = new \DateTime();
         return $date->format('d/m/Y à H:i');
+    }
+
+    public function findArticleWithId(int $articleId)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+        $queryPrepared = $this->pdo->prepare($sql);
+        $queryPrepared->execute([':id' => $articleId]);
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, 'App\Models\Article');
+        return $queryPrepared->fetch();
     }
 }
