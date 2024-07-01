@@ -25,12 +25,12 @@
     </div>
     <div class="navbar--divRight">
         <?php if (isset($_SESSION['user_status']) && $_SESSION['user_status'] > 1): ?>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/profile">Profil</a>
             <a href="/logout">Déconnexion</a>
+            <a href="/profile">Profil</a>
+            <a href="/dashboard">Dashboard</a>
         <?php else: ?>
-            <a href="/register">Inscription</a>
             <a href="/login">Connexion</a>
+            <a href="/register">Inscription</a>
         <?php endif; ?>
     </div>
 </div>
