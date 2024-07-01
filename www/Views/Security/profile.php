@@ -23,8 +23,17 @@
             <div class="profile--update__form">
                 <h2>Pour modifier vos informations</h2>
                 <?= $updateProfileForm ?>
-                <h4>Pour recevoir un mail de modification de mot de passe <a href="/sendResetPassword?id=<?= $authenticatedUser->getId(); ?>">cliquez ici</a></h4>
-                <span>Attention, le mail est à usage unique et expire après 12 heures.</span>
+                <section class="profile--update__dangerZone">
+                    <h3>Attention, zone de danger !</h3>
+                    <div class="profile--update__danger">
+                        <h4>Pour recevoir un mail de modification de mot de passe <a href="/sendResetPassword?id=<?= $authenticatedUser->getId(); ?>">cliquez ici</a></h4>
+                        <span>Attention, le mail est à usage unique et expire après 12 heures.</span>
+                    </div>
+                    <div class="profile--update__danger">
+                        <h4>Pour supprimer votre compte <a href="/profile/predelete?id=<?= $authenticatedUser->getId(); ?>">cliquez ici</a></h4>
+                        <span>Attention, toute suppression de compte est définitive</span>
+                    </div>
+                </section>
             </div>
         </section>
     </section>

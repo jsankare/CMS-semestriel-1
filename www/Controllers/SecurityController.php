@@ -28,7 +28,9 @@ class SecurityController
                 if ($user) {
                     // Verification du status
                     if ($user->getStatus() == 0) {
-                        echo "Vous devez valider votre compte avant de vous connecter";
+                        header("Vous devez valider votre compte avant de vous connecter", true, 403);
+                        header('Location: /403');
+                        exit();
                     } elseif (password_verify($_POST["password"], $user->getPassword())) {
                         // On store le user ID & le status dans la session
                         $_SESSION['user_id'] = $user->getId();
@@ -37,10 +39,14 @@ class SecurityController
                         header('Location: ' . $_ENV['BASE_URL'] . '/');
                         exit;
                     } else {
-                        echo "Invalid email or password";
+                        header("Invalid email or password", true, 404);
+                        header('Location: /404');
+                        exit();
                     }
                 } else {
-                    echo "Invalid email or password";
+                    header("Invalid email or password", true, 404);
+                        header('Location: /404');
+                        exit();
                 }
             }
         }
@@ -72,7 +78,9 @@ class SecurityController
             if ($form->isValid()) {
                 $dbUser = (new User())->findOneByEmail($email);
                 if ($dbUser) {
-                    echo "Un user existe déjà avec cette adresse email";
+                    header("Un user existe déjà avec cette adresse email", true, 500);
+                    header('Location: /500');
+                    exit();
                 } else {
                     $existingUsers = (new User())->findAll();
                     $status = count($existingUsers) === 0 ? 4 : 0;
@@ -119,8 +127,9 @@ class SecurityController
         $user = (new User())->findOneById($_SESSION['user_id']);
 
         if (!$user) {
-            echo 'erreur user not found';
-            die;
+            header("Error user not found", true, 404);
+            header('Location: /404');
+            exit();
         }
 
         $updateProfileForm = new Form("UpdateProfile");
@@ -135,7 +144,7 @@ class SecurityController
             $user->setLastname($_POST["lastname"]);
             $user->setEmail($_POST["email"]);
             $user->save();
-
+            header("Formulaire soumis", true, 200);
             header('Location: /profile');
             exit();
         }
@@ -165,7 +174,8 @@ class SecurityController
             $userId = intval($_GET['id']);
             $user = (new User())->findOneById($userId);
         } else {
-            echo "impossible de récupérer l'user";
+            header("impossible de récupérer l'user", true, 500);
+            header('Location: /500');
             exit();
         }
 
@@ -180,7 +190,8 @@ class SecurityController
             $userId = intval($_GET['id']);
             $user = (new User())->findOneById($userId);
         } else {
-            echo "impossible de récupérer l'user";
+            header("impossible de récupérer l'user", true, 500);
+            header('Location: /500');
             exit();
         }
 
@@ -211,10 +222,13 @@ class SecurityController
         $phpmailer->AltBody = 'Veuillez activer votre HTML pour accéder au code de changement de mot de passe';
 
         if ($phpmailer->send()) {
+            header("Message successuflly sent", true, 200);
             echo 'Le message a bien été envoyé';
         } else {
-            echo 'Le message n\a pas pu être envoyé';
-            echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
+            header("Le message n\a pas pu être envoyé", true, 500);
+            header('Location: /500');
+            exit();
+            // erreur : echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
         }
     }
 
@@ -247,13 +261,19 @@ class SecurityController
                     $view->assign('updatePasswordForm', $updatePasswordForm->build());
                     $view->render();
                 } else {
-                    echo "Le code de réinitialisation a expiré, veuillez demander un nouveau lien.";
+                    header("Le code de réinitialisation a expiré, veuillez demander un nouveau lien", true, 403);
+                    header('Location: /403');
+                    exit();
                 }
             } else {
-                echo "Votre code de changement de mot de passe n'est pas valide";
+                header("Votre code de changement de mot de passe n'est pas valide", true, 403);
+                header('Location: /403');
+                exit();
             }
         } else {
-            echo "Impossible de récupérer les informations d'utilisateur";
+            header("Impossible de récupérer les informations d'utilisateur", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
 
@@ -278,10 +298,13 @@ class SecurityController
         $phpmailer->AltBody = 'Veuillez activer votre HTML pour accéder au code d\'activation de votre compte';
 
         if ($phpmailer->send()) {
+            header("Message successuflly sent", true, 200);
             echo 'Le message a bien été envoyé';
         } else {
-            echo 'Le message n\a pas pu être envoyé';
-            echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
+            header("Le message n\a pas pu être envoyé", true, 500);
+            header('Location: /500');
+            exit();
+            // Logs erreur : echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
         }
     }
 
@@ -298,12 +321,63 @@ class SecurityController
                 $user->setStatus(1);
                 $user->setValidationCode(null);
                 $user->save();
+                header("Compte validé avec succes", true, 200);
                 echo "Votre compte a été confirmé avec succès! Vous pouvez fermer cette fenêtre et aller sur l'écran de connexion.";
             } else {
-                echo "Code de validation invalide ou adresse email incorrecte.";
+                header("Code de validation invalide ou adresse email incorrecte.", true, 500);
+                header('Location: /500');
+                exit();
             }
         } else {
-            echo "=code de validation ou adresse email non fournis.";
+            header("code de validation ou adresse email non fournis.", true, 500);
+            header('Location: /500');
+            exit();
+        }
+    }
+
+    public function predelete(): void {
+
+        if (isset($_GET['id'])) {
+            $userId = intval($_GET['id']);
+            $user = (new User())->findOneById($userId);
+        } else {
+            header("impossible de récupérer l'utilisateur", true, 500);
+            header('Location: /500');
+            exit();
+        }
+
+        $view = new View('Security/delete', 'front');
+        $view->assign('user', $user);
+        $view->render();
+    }
+
+    public function delete(): void
+    {
+        if (isset($_GET['id'])) {
+            $userIdToDelete = intval($_GET['id']);
+            $userToDelete = (new User())->findOneById($userIdToDelete);
+            
+            if ($_SESSION['user_id'] == $userIdToDelete ) {
+                if ($userToDelete) {
+                    $userToDelete->delete();
+                    unset($_SESSION['user_id']);
+                    session_destroy();
+                    header('Location: /');
+                    exit();
+                } else {
+                    header("Utilisateur non trouvé trouvé", true, 500);
+                    header('Location: /500');
+                    exit();
+                }
+            } else {
+                header("UNAUTHORIZED", true, 401);
+                header('Location: /401');
+                exit();
+            }
+        } else {
+            header("ID utilisateur non spécifié", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
 

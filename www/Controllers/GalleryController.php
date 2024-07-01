@@ -22,9 +22,11 @@ class GalleryController
             if(is_dir($uploadDir)) {
             } else {
                 if (!mkdir($uploadDir, 0777, true)) {
-                    echo "pb creating folder";
+                    header("Dossier non créé ", true, 500);
+                    header('Location: /500');
+                    exit();
                 } else {
-                    echo "folder has been created";
+                    header("Dossier créé", true, 200);
                 }
             }
             $uploadFile = $uploadDir . uniqid() . '.' . $ext;
@@ -35,16 +37,18 @@ class GalleryController
 
             $allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
             if (!in_array($mimeType, $allowedMimeTypes)) {
-                echo "Erreur, seulement les PNG, JPEG & JPG sont acceptés.";
-                die;
+                header("Erreur, seulement les PNG, JPEG & JPG sont acceptés", true, 500);
+                header('Location: /500');
+                exit();
             }
 
             // Move file du tmp au dossier uploads
             if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-                echo "File is valid, and was successfully uploaded.\n";
+                header("Fichier uploadé avec succes", true, 200);
             } else {
-                echo "Possible file upload attack!\n";
-                die;
+                header("Fichier non créé", true, 500);
+                header('Location: /500');
+                exit();
             }
 
             $image = new Image();
@@ -97,7 +101,7 @@ class GalleryController
 
                 if (file_exists($imagePath)) {
                     if (unlink($imagePath)) {
-                        echo "File $imagePath has been deleted.\n";
+                        header("Fichier supprimé avec succes", true, 200);
                     } else {
                         header("Internal Server Error", true, 500);
                         header('Location: /500');
@@ -113,10 +117,14 @@ class GalleryController
                 header('Location: /gallery/list');
                 exit();
             } else {
-                echo "Image non trouvée";
+                header("Image non trouvée", true, 404);
+                header('Location: /404');
+                exit();
             }
         } else {
-            echo "ID image non spécifié";
+            header("Image ID non spécifié", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
 
@@ -126,7 +134,8 @@ class GalleryController
             $imageId = intval($_GET['id']);
             $image = (new Image())->findOneById($imageId);
         } else {
-            echo "impossible de récupérer l'image";
+            header("impossible de récupérer l'image", true, 500);
+            header('Location: /500');
             exit();
         }
 
@@ -158,9 +167,11 @@ class GalleryController
                     if(is_dir($uploadDir)) {
                     } else {
                         if (!mkdir($uploadDir, 0777, true)) {
-                            echo "pb creating folder";
+                            header("Problem creating folder", true, 500);
+                            header('Location: /500');
+                            exit();
                         } else {
-                            echo "folder has been created";
+                            header("Folder created", true, 200);
                         }
                     }
                     $uploadFile = $uploadDir . uniqid() . '.' . $ext;
@@ -171,23 +182,25 @@ class GalleryController
 
                     $allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
                     if (!in_array($mimeType, $allowedMimeTypes)) {
-                        echo "Erreur, seulement les PNG, JPEG & JPG sont acceptés.";
-                        die;
+                        header("Erreur, seulement les PNG, JPEG & JPG sont acceptés", true, 500);
+                        header('Location: /500');
+                        exit();
                     }
 
                     // Move file du tmp au dossier uploads
                     if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-                        echo "File is valid, and was successfully uploaded.\n";
+                        header("File is valid, and was successfully uploaded.\n", true, 200);
                     } else {
-                        echo "Possible file upload attack!\n";
-                        die;
+                        header("Impossible de déplacer le fichier dans le bon dossier", true, 500);
+                        header('Location: /500');
+                        exit();
                     }
 
                     $image->setTitle($_POST['title']);
                     $image->setDescription($_POST['description']);
                     $image->setLink($uploadFile);
                     $image->save();
-
+                    header("Image editée", true, 200);
                     header('Location: /gallery/list');
                     exit();
                 }
@@ -197,10 +210,14 @@ class GalleryController
                 $view->assign('image', $image);
                 $view->render();
             } else {
-                echo "Image non trouvée !";
+                header("Image non trouvée", true, 404);
+                header('Location: /404');
+                exit();
             }
         } else {
-            echo "ID image non spécifié !";
+            header("ID Image non spécifié", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
 

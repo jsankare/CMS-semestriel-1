@@ -49,7 +49,9 @@ class ArticleController
             if ($articleForm->isValid()) {
                 $dbArticle = (new Article())->findOneByTitle($title);
                 if ($dbArticle) {
-                    echo "Ce nom d'article est déjà pris";
+                    header("Ce nom d'article est déjà pris", true, 409);
+                    header('Location: /409');
+                    exit();
                 } else {
                     $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><code><ul><ol><li><a><img><div><span><br><strong><em>';
                     $sanitized_content = strip_tags($content, $allowed_tags);
@@ -96,7 +98,8 @@ class ArticleController
             $articleId = intval($_GET['id']);
             $article = (new Article())->findOneById($articleId);
         } else {
-            echo "impossible de récupérer l'article";
+            header("Impossible de récupérer l'article", true, 500);
+            header('Location: /500');
             exit();
         }
 
@@ -116,10 +119,14 @@ class ArticleController
                 header('Location: /article/home');
                 exit();
             } else {
-                echo "Article non trouvé";
+                header("Article non trouvé", true, 404);
+                header('Location: /404');
+                exit();
             }
         } else {
-            echo "ID article non spécifié";
+            header("Article ID non trouvé", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
 
@@ -151,10 +158,14 @@ class ArticleController
                 $view->assign('articleForm', $articleForm->build());
                 $view->render();
             } else {
-                echo "Article non trouvé !";
+                header("Article non trouvé", true, 404);
+                header('Location: /404');
+                exit();
             }
         } else {
-            echo "ID article non spécifié !";
+            header("ID article non spécifié", true, 500);
+            header('Location: /500');
+            exit();
         }
     }
 

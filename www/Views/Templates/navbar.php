@@ -28,6 +28,9 @@
             <a href="/logout">Déconnexion</a>
             <a href="/profile">Profil</a>
             <a href="/dashboard">Dashboard</a>
+            <?php elseif (isset($_SESSION['user_status']) && $_SESSION['user_status'] <= 1): ?>
+            <a href="/logout">Déconnexion</a>
+            <a href="/profile">Profil</a>
         <?php else: ?>
             <a href="/login">Connexion</a>
             <a href="/register">Inscription</a>
