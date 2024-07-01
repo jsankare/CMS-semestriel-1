@@ -50,6 +50,11 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      @media screen and (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
       &:not(:last-child) {
         border-bottom: 1px solid black;
         padding-bottom: 1rem;

@@ -494,10 +494,22 @@ input[type=color] {
   width: 100%;
   justify-content: space-evenly;
 }
+@media screen and (max-width: 1024px) {
+  .profile--content {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+}
 .profile--statistics {
   text-align: center;
   width: 50%;
   margin-bottom: 1rem;
+}
+@media screen and (max-width: 1024px) {
+  .profile--statistics {
+    width: 100%;
+  }
 }
 .profile--statistics ul {
   text-align: left;
@@ -512,9 +524,25 @@ input[type=color] {
   max-width: 20rem;
   margin-right: 10%;
 }
-
-.tochange {
+@media screen and (max-width: 1024px) {
+  .profile--update {
+    position: inherit;
+    width: 100%;
+    max-width: none;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+}
+.profile--update__form {
   position: fixed;
+}
+@media screen and (max-width: 1024px) {
+  .profile--update__form {
+    position: inherit;
+    width: 100%;
+    max-width: 25rem;
+  }
 }
 
 .article {
@@ -592,6 +620,11 @@ input[type=color] {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 2rem;
 }
+@media screen and (max-width: 1500px) {
+  .gallery--classic {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 .gallery--classic__item__picture {
   width: 100%;
   max-width: 20rem;
@@ -655,9 +688,19 @@ input[type=color] {
   left: 20rem;
   z-index: 1;
 }
+@media screen and (max-width: 1500px) {
+  .gallery .carousel .carousel--control.prev {
+    left: 20%;
+  }
+}
 .gallery .carousel .carousel--control.next {
   right: 20rem;
   z-index: 1;
+}
+@media screen and (max-width: 1500px) {
+  .gallery .carousel .carousel--control.next {
+    right: 20%;
+  }
 }
 
 .carousel--item__picture__container {

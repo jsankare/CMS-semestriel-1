@@ -2,10 +2,10 @@
 
 .navbar {
   color: $textColor;
+  background-color: $navColor;
   display: flex;
   flex-direction: column;
-  background-color: $navColor;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   padding: 1rem;
   width: 100%;

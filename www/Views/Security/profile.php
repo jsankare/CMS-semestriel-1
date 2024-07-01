@@ -20,7 +20,7 @@
             </div>
         </section>
         <section class="profile--update">
-            <div class="tochange">
+            <div class="profile--update__form">
                 <h2>Pour modifier vos informations</h2>
                 <?= $updateProfileForm ?>
                 <h4>Pour recevoir un mail de modification de mot de passe <a href="/sendResetPassword?id=<?= $authenticatedUser->getId(); ?>">cliquez ici</a></h4>
