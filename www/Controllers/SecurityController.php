@@ -386,4 +386,32 @@ class SecurityController
         }
     }
 
+    public function xml() {
+        $listOfRoutes = yaml_parse_file("../Routes.yml");
+        $html = '<?xml version="1.0" encoding="UTF-8"?>';
+        $html .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+        $routesToIndex = ["/", "/register", "/login", "/sitemap.xml", "/articles", "/gallery"];
+
+        foreach ($routesToIndex as $routeToIndex) {
+            $html .= '<url>';
+            $html .= '<loc>' . htmlspecialchars($routeToIndex, ENT_XML1, 'UTF-8') . '</loc>';
+            $html .= '</url>';
+        }
+
+        $pageModel = new Page();
+        $pages = $pageModel->findAll();
+
+        foreach ($pages as $page) {
+            $html .= '<url>';
+            $html .= '<loc>/page/' . htmlspecialchars($page->getSlug(), ENT_XML1, 'UTF-8') . '</loc>';
+            $html .= '</url>';
+        }
+        $html .= '</urlset>';
+
+        header('Content-Type: application/xml');
+        echo $html;
+    }
+
+
 }
