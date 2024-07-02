@@ -387,7 +387,21 @@ class SecurityController
     }
 
     public function xml() {
-        echo "toto";
+        $listOfRoutes = yaml_parse_file("../Routes.yml");
+        $html = '<?xml version="1.0" encoding="UTF-8"?>';
+        $html .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+        foreach ($listOfRoutes as $route => $arguments) {
+                $html .= '<url>';
+                $html .= '<loc>' . htmlspecialchars($route, ENT_XML1, 'UTF-8') . '</loc>';
+                $html .= '</url>';
+            }
+
+        $html .= '</urlset>';
+
+        header('Content-Type: application/xml');
+        echo $html;
     }
+
 
 }
