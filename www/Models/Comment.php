@@ -149,7 +149,7 @@ class Comment extends SQL
                 return 'Date invalide';
             }
         } else {
-            return 'Date nonff définie';
+            return 'Date non définie';
         }
     }
 
