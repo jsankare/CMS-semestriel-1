@@ -12,7 +12,7 @@ class SQL
     public function __construct()
     {
         try{
-            $this->pdo = new PDO("pgsql:host=".$_ENV['DB_HOST'].";dbname=".$_ENV['DB_NAME'].";port=".$_ENV['DB_PORT'],$_ENV['DB_USER'],$_ENV['DB_PASSWORD']);
+            $this->pdo = new PDO("pgsql:host=".DB_HOST.";dbname=".DB_NAME.";port=".$_ENV['DB_PORT'],DB_USER,DB_PASS);
         }catch (\Exception $e){
             die("Erreur SQL : ".$e->getMessage());
         }

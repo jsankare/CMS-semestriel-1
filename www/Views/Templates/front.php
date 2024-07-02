@@ -3,8 +3,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Ceci est mon front</title>
-        <meta name="description" content="Super site avec une magnifique intégration">
+        <title><?= SITE_NAME ?></title>
+        <meta name="description" content=<?= SITE_DESCRIPTION ?>>
         <link rel="stylesheet" href="/css/main.css">
         <link rel="stylesheet" href="/css/front.css">
 
