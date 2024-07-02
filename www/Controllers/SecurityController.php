@@ -391,12 +391,22 @@ class SecurityController
         $html = '<?xml version="1.0" encoding="UTF-8"?>';
         $html .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-        foreach ($listOfRoutes as $route => $arguments) {
-                $html .= '<url>';
-                $html .= '<loc>' . htmlspecialchars($route, ENT_XML1, 'UTF-8') . '</loc>';
-                $html .= '</url>';
-            }
+        $routesToIndex = ["/", "/register", "/login", "/sitemap.xml", "/articles", "/gallery"];
 
+        foreach ($routesToIndex as $routeToIndex) {
+            $html .= '<url>';
+            $html .= '<loc>' . htmlspecialchars($routeToIndex, ENT_XML1, 'UTF-8') . '</loc>';
+            $html .= '</url>';
+        }
+
+        $pageModel = new Page();
+        $pages = $pageModel->findAll();
+
+        foreach ($pages as $page) {
+            $html .= '<url>';
+            $html .= '<loc>/page/' . htmlspecialchars($page->getSlug(), ENT_XML1, 'UTF-8') . '</loc>';
+            $html .= '</url>';
+        }
         $html .= '</urlset>';
 
         header('Content-Type: application/xml');
