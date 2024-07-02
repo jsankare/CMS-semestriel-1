@@ -10,13 +10,13 @@
     <body>
         <main class="mainBack" >
             <aside class="navbar" style="" >
-                <a class="navbar--logo__link" href="/dashboard">
+                <a class="navbar--logo__link" href="/">
                     <img class="navbar--logo__picture" src="/assets/logo.svg">
                 </a>
 <!--                <h3>Bonjour --><?php //echo $user->getFirstName(); ?><!--</h3>-->
                 <section class="navbar--list" >
                     <ul class="navbar--list__links">
-                        <li class="navbar--list__link"><a href="/profile">Aller sur le site</a></li>
+                        <li class="navbar--list__link"><a href="/">Aller sur le site</a></li>
                         <li class="navbar--list__link"><a href="/dashboard">Tableau de bord</a></li>
                         <li class="navbar--list__link"><a href="/users/home">Utilisateurs</a></li>
                         <li class="navbar--list__link"><a href="/gallery/list" >Bibliothèque</a></li>

@@ -32,8 +32,8 @@
             <a href="/logout">Déconnexion</a>
             <a href="/profile">Profil</a>
         <?php else: ?>
-            <a href="/login">Connexion</a>
             <a href="/register">Inscription</a>
+            <a href="/login">Connexion</a>
         <?php endif; ?>
     </div>
 </div>

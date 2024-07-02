@@ -39,14 +39,10 @@ class SecurityController
                         header('Location: ' . $_ENV['BASE_URL'] . '/');
                         exit;
                     } else {
-                        header("Invalid email or password", true, 404);
-                        header('Location: /404');
-                        exit();
+                        header("Invalid email or password", true, 403);
                     }
                 } else {
-                    header("Invalid email or password", true, 404);
-                        header('Location: /404');
-                        exit();
+                    header("Aucun user avec cette adresse main", true, 404);
                 }
             }
         }
@@ -79,7 +75,6 @@ class SecurityController
                 $dbUser = (new User())->findOneByEmail($email);
                 if ($dbUser) {
                     header("Un user existe déjà avec cette adresse email", true, 500);
-                    header('Location: /500');
                     exit();
                 } else {
                     $existingUsers = (new User())->findAll();

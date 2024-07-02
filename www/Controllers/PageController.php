@@ -109,9 +109,6 @@ class PageController
         $view->render();
     }
 
-
-   
-
     public function list(): void
     {
         $user = (new User())->findOneById($_SESSION['user_id']);

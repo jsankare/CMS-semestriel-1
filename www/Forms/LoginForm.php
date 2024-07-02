@@ -24,7 +24,7 @@ class LoginForm
                     "type"=>"password",
                     "placeholder"=>"Votre mot de passe",
                     "required"=>true,
-                    "error"=>"Les mots de passe ne correspondent pas"
+                    "error"=>"Combinaison username password inconnue"
                 ]
             ]
 

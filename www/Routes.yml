@@ -62,7 +62,7 @@
   Controller: UserController
   Action: "list"
   Security: true
-  Role: "Admin"
+  Role: "Moderator"
 
 /users/reset-password:
   Controller: SecurityController
@@ -206,7 +206,7 @@
   Controller: ArticleController
   Action: "edit"
   Security: true
-  Role: "Admin"
+  Role: "Moderator"
 
 /articles:
   Controller: ArticleController
