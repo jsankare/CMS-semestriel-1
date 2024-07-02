@@ -1,11 +1,5 @@
 <div class="navbar" style="background-color: <?= $backgroundColor ?? ''; ?>; font-family: <?= $fontStyle ?? ''; ?>">
     <div class="navbar--divLeft">
-        <?php if ($_SERVER['REQUEST_URI'] != '/login' && $_SERVER['REQUEST_URI'] != '/register'): ?>
-            <div class="navbar-logo">
-                <a href="/"><img src="path/to/your/logo.png" alt="CMS Logo"></a>
-            </div>
-        <?php endif; ?>
-        
         <a href="/">Accueil</a>
         <a href="/articles">Articles</a>
         <a href="/gallery">Galerie</a>
