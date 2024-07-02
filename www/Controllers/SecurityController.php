@@ -386,4 +386,8 @@ class SecurityController
         }
     }
 
+    public function xml() {
+        echo "toto";
+    }
+
 }

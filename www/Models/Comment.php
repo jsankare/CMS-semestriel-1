@@ -12,7 +12,7 @@ class Comment extends SQL
     protected string $content;
 
     protected int $status = 0;
-    protected ?string $created_at = null;
+    protected string $created_at;
 
     public function getId(): ?int
     {

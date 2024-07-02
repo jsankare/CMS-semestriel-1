@@ -22,6 +22,12 @@
   Security: true
   Role: "User"
 
+/sitemap.xml:
+  Controller: SecurityController
+  Action: "xml"
+  Security: false
+  Role: "Guest"
+
 /accountVerification:
   Controller: SecurityController
   Action: "accountVerification"
