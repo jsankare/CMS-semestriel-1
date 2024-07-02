@@ -27,6 +27,70 @@ function myAutoloader($class){
     }
 }
 
+if (!file_exists('../config/config.php')) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $db_host = $_POST['db_host'];
+        $db_name = $_POST['db_name'];
+        $db_user = $_POST['db_user'];
+        $db_pass = $_POST['db_pass'];
+        $siteName = $_POST['siteName'];
+        $siteDescription = $_POST['siteDescription'];
+
+        $config_content = "<?php\n";
+        $config_content .= "define('DB_HOST', '$db_host');\n";
+        $config_content .= "define('DB_NAME', '$db_name');\n";
+        $config_content .= "define('DB_USER', '$db_user');\n";
+        $config_content .= "define('DB_PASS', '$db_pass');\n";
+        $config_content .= "define('SITE_NAME', '$siteName');\n";
+        $config_content .= "define('SITE_DESCRIPTION', '$siteDescription');\n";
+
+        if (file_put_contents('../config/config.php', $config_content)) {
+            echo 'Le fichier de configuration a été créé avec succès.';
+        } else {
+            echo 'Une erreur est survenue lors de la création du fichier de configuration.';
+        }
+        exit;
+    } else {
+        ?>
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Installation</title>
+        </head>
+        <body>
+        <h1>Installation</h1>
+        <form method="POST" action="">
+            <label for="db_host">Hôte de la base de données :</label>
+            <input type="text" id="db_host" name="db_host" required><br>
+
+            <label for="db_name">Nom de la base de données :</label>
+            <input type="text" id="db_name" name="db_name" required><br>
+
+            <label for="db_user">Utilisateur de la base de données :</label>
+            <input type="text" id="db_user" name="db_user" required><br>
+
+            <label for="db_pass">Mot de passe de la base de données :</label>
+            <input type="password" id="db_pass" name="db_pass" required><br>
+
+            <label for="siteName">Le nom de votre site :</label>
+            <input type="text" id="sitename" name="siteName" required><br>
+
+            <label for="siteDescription">Une description de votre site :</label>
+            <input type="text" id="siteDescription" name="siteDescription" required><br>
+
+            <input type="submit" value="Installer">
+        </form>
+        </body>
+        </html>
+
+        <?php
+        exit;
+    }
+}
+
+require_once ("../config/config.php");
+
 // Function to map URI slug to route
 function mapSlugToRoute($uri, $routes) {
     foreach ($routes as $route => $data) {
