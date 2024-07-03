@@ -73,6 +73,30 @@ class CommentController
         exit();
     }
 
+    public function deleteSelf(): void
+    {
+        if (isset($_GET['id'])) {
+            $commentModel = new Comment();
+            $comment = $commentModel->findOneById($_GET['id']);
+            $commentAuthorId = $comment->getUserId();
+            echo $commentAuthorId;
+            if($commentAuthorId === $_SESSION['user_id']) {
+                $comment->delete();
+            } else {
+                header("Ce n'est pas votre commentaire", true, 403);
+                header('Location: /403');
+                exit();
+            }
+        } else {
+            header("ID Utilisateur non trouvé", true, 500);
+            header('Location: /500');
+            exit();
+        }
+        header("Comment deleted", true, 200);
+        header('Location: /articles');
+        exit();
+    }
+
     public function list(): void
     {
         $commentModel = new Comment();

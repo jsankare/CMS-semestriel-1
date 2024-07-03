@@ -24,6 +24,9 @@
                             <div class="article--commentSection">
                                 <p>Par <strong><?= $comment->getUserName(); ?></strong> le <?= $comment->getFormattedDate(); ?></p>
                                 <p><?= $comment->getContent(); ?></p>
+                                <?php if (isset($_SESSION['user_id'] ) && $_SESSION['user_id'] == $comment->getUserId()): ?>
+                                <a class="article--icon__link" href="/comment/delete-own?id=<?php echo $comment->getId(); ?>"><img class="article--icon comment--icon__trash" src="/assets/trash.svg" ></a>
+                                <?php endif ?>
                             </div>
                             <?php endif ?>
                         <?php endforeach; ?>

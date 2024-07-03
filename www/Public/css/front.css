@@ -269,6 +269,8 @@ ul li a {
   --grey-hover: #3d4246;
   --red: #dc3545;
   --red-hover: #921925;
+  --green: #489e0a;
+  --green-hover: #1c3e04;
   --black: #000;
   --black-transparent: rgba(0, 0, 0, 0.8);
   --blue: #0d6efd;
@@ -279,6 +281,8 @@ ul li a {
   --grey-transparent: rgba(108, 117, 125, 0.8);
   --red: #dc3545;
   --red-transparent: rgba(220, 53, 69, 0.8);
+  --green: #489e0a;
+  --green-transparent: rgba(72, 158, 10, 0.8);
   --black: #000;
   --black-light: #333333;
   --blue: #0d6efd;
@@ -289,6 +293,8 @@ ul li a {
   --grey-light: #a1a8ae;
   --red: #dc3545;
   --red-light: #eb8c95;
+  --green: #489e0a;
+  --green-light: #76f11d;
   --text-color: var(--black);
   --primary: var(--blue);
   --secondary: var(--grey);
@@ -564,6 +570,13 @@ input[type=color] {
   max-width: 1000px;
   margin: 0 auto;
 }
+.article--icon {
+  width: 100%;
+  max-width: 1.5rem;
+  position: absolute;
+  left: -2rem;
+  bottom: 1rem;
+}
 .article--section {
   display: flex;
   flex-direction: column;
@@ -579,6 +592,7 @@ input[type=color] {
 .article--commentSection {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .article--comment__form {
   flex-direction: row;
