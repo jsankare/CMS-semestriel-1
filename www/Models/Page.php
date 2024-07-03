@@ -110,7 +110,8 @@ class Page extends SQL
      */
     public function setSlug(string $slug): void
     {
-        $this->slug = $this->generateSlug($slug);
+        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+        $this->slug = $this->generateSlug(strip_tags($slug, $allowed_tags));
 
     }
 
