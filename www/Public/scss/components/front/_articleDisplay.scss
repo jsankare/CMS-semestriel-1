@@ -8,6 +8,13 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
+  &--icon {
+    width: 100%;
+    max-width: 1.5rem;
+    position: absolute;
+    left: -2rem;
+    bottom: 1rem;
+  }
   &--section {
     display: flex;
     flex-direction: column;
@@ -23,6 +30,7 @@
   &--commentSection {
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   &--comment__form {
     flex-direction: row;

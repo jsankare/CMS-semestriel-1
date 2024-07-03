@@ -232,6 +232,12 @@
   Security: true
   Role: "Moderator"
 
+/comment/delete-own:
+  Controller: CommentController
+  Action: "deleteSelf"
+  Security: true
+  Role: "User"
+
 /comment/moderate:
   Controller: CommentController
   Action: "moderate"
