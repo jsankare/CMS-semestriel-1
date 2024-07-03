@@ -43,7 +43,8 @@ class Page extends SQL
      */
     public function setTitle(string $title): void
     {
-        $this->title = ucwords(strtolower(($title)));
+        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+        $this->title = ucwords(strtolower(strip_tags($title, $allowed_tags)));
     }
 
     /**
@@ -59,7 +60,8 @@ class Page extends SQL
      */
     public function setDescription(string $description): void
     {
-        $this->description = $description;
+        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+        $this->description = strip_tags($description, $allowed_tags);
     }
 
     /**
@@ -75,7 +77,8 @@ class Page extends SQL
      */
     public function setContent(string $content): void
     {
-        $this->content = $content;
+        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+        $this->content = strip_tags($content, $allowed_tags);
     }
 
     /**

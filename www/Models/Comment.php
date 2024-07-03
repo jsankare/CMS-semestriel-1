@@ -51,7 +51,8 @@ class Comment extends SQL
 
     public function setContent(string $content): void
     {
-        $this->content = $content;
+        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+        $this->content = strip_tags($content, $allowed_tags);
     }
 
     
