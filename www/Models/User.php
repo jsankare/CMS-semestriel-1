@@ -48,7 +48,8 @@ class User extends SQL
      */
     public function setFirstname(string $firstname): void
     {
-        $this->firstname = ucwords(strtolower(trim($firstname)));
+        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+        $this->firstname = ucwords(strtolower(trim(strip_tags($firstname, $allowed_tags))));
     }
 
         /**
@@ -112,7 +113,8 @@ class User extends SQL
      */
     public function setLastname(string $lastname): void
     {
-        $this->lastname = strtoupper(trim($lastname));
+        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+        $this->lastname = strtoupper(trim(strip_tags($lastname, $allowed_tags)));
     }
 
     /**
@@ -128,7 +130,8 @@ class User extends SQL
      */
     public function setEmail(string $email): void
     {
-        $this->email = strtolower(trim($email));
+        $allowed_tags = '<h1><h2><h3><h4><h5><h6><p><b><i><u><strike><s><del><blockquote><center><code><ul><ol><li><a><img><div><span><br><strong><em>';
+        $this->email = strtolower(trim(strip_tags($email, $allowed_tags)));
     }
 
     /**
