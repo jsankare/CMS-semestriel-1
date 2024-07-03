@@ -486,7 +486,8 @@ input[type=color] {
 .page--wrapper {
   display: flex;
   flex-direction: column;
-  padding: 5rem;
+  align-items: center;
+  padding: 2rem 5rem;
 }
 
 .profile {
